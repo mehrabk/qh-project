@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>ir.bank.qh</groupId>
+        <artifactId>qh-productbuilder</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>qh-module-common-rules</artifactId>
+    <packaging>jar</packaging>
+    <name>QH :: Module :: 02 Common Rules</name>
+    <description>Rules shared between Deposit and Loan: Eligibility, Channel/Operation, Org Scope,
+        Required Document/Inquiry, Pricing Rule/Component/Rate Tier. Depends on Core (PRODUCT_VERSION)
+        and Reference (DOCUMENT_TYPE).</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>ir.bank.qh</groupId>
+            <artifactId>qh-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ir.bank.qh</groupId>
+            <artifactId>qh-module-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ir.bank.qh</groupId>
+            <artifactId>qh-module-reference</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+</project>

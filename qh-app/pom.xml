@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>ir.bank.qh</groupId>
+        <artifactId>qh-productbuilder</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>qh-app</artifactId>
+    <packaging>jar</packaging>
+    <name>QH :: App (Runnable Modular Monolith)</name>
+    <description>
+        Assembles every business module (core, reference, common-rules, deposit, loan) into a single
+        runnable Spring Boot application. To add a new module: create a new Maven module that follows
+        the same entity/repository/service/web package shape, add it as a &lt;module&gt; in the root
+        pom.xml and as a &lt;dependency&gt; here - no other wiring is required, component scanning
+        picks it up automatically because everything lives under the ir.bank.qh base package.
+    </description>
+
+    <properties>
+        <start-class>ir.bank.qh.app.QhProductBuilderApplication</start-class>
+    </properties>
+
+    <dependencies>
+        <!-- Business modules - add new ones here as the system grows -->
+        <dependency>
+            <groupId>ir.bank.qh</groupId>
+            <artifactId>qh-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ir.bank.qh</groupId>
+            <artifactId>qh-module-reference</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ir.bank.qh</groupId>
+            <artifactId>qh-module-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ir.bank.qh</groupId>
+            <artifactId>qh-module-common-rules</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ir.bank.qh</groupId>
+            <artifactId>qh-module-deposit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ir.bank.qh</groupId>
+            <artifactId>qh-module-loan</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ir.bank.qh</groupId>
+            <artifactId>qh-module-party</artifactId>
+        </dependency>
+
+        <!-- Runtime -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-hibernate6</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>qh-app</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>ir.bank.qh.app.QhProductBuilderApplication</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

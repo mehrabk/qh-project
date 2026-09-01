@@ -1,0 +1,150 @@
+### متغیرها
+@host = http://localhost:8080
+
+### ============ Reference Data ============
+
+### فهرست انواع عقد (LoanType)
+GET {{host}}/api/v1/product/reference/loan-types
+
+### فهرست انواع طرح (PlanType)
+GET {{host}}/api/v1/product/reference/plan-types
+
+### فهرست موارد مصرف تسهیلات
+GET {{host}}/api/v1/product/reference/loan-usages
+
+### فهرست الگوهای وثیقه
+GET {{host}}/api/v1/product/reference/loan-product-collaterals
+
+### ============ Core: Product / Product Version ============
+
+### مشاهده محصول سپرده قرض‌الحسنه
+GET {{host}}/api/v1/product/core/products/1001
+
+### مشاهده محصول تسهیلات قرض‌الحسنه
+GET {{host}}/api/v1/product/core/products/2001
+
+### مشاهده نسخه محصول سپرده
+GET {{host}}/api/v1/product/core/product-versions/1101
+
+### مشاهده ماژول‌های فعال یک نسخه
+GET {{host}}/api/v1/product/core/product-version-modules
+
+### ایجاد محصول جدید (نمونه: سپرده کوتاه‌مدت)
+POST {{host}}/api/v1/product/core/products
+Content-Type: application/json
+
+{
+  "productCode": "DEP-QH-TERM-001",
+  "productName": "سپرده کوتاه‌مدت قرض‌الحسنه",
+  "productClassCode": "DEPOSIT",
+  "balanceNatureCode": "LIABILITY",
+  "productFamilyCode": "QARD_HASAN",
+  "defaultCurrencyCode": "IRR",
+  "productStatusCode": "DRAFT"
+}
+
+### ایجاد نسخه DRAFT برای محصول بالا (فرض: id ایجادشده = 3001)
+POST {{host}}/api/v1/product/core/product-versions
+Content-Type: application/json
+
+{
+  "product": {"id": 3001},
+  "versionNo": 1,
+  "validFrom": "2026-09-01",
+  "versionStatusCode": "DRAFT",
+  "originationStatusCode": "DISABLED",
+  "servicingStatusCode": "DISABLED",
+  "recordStatusCode": "ACTIVE"
+}
+
+### تصویب نسخه (DRAFT -> APPROVED)
+POST {{host}}/api/v1/product/core/product-versions/3101/approve?approvedBy=PRODUCT_COMMITTEE
+
+### فعال‌سازی افتتاح/اعطا (APPROVED -> ORIGINATION ENABLED)
+POST {{host}}/api/v1/product/core/product-versions/3101/enable-origination
+
+### ============ Common Rules ============
+
+### قواعد اهلیت محصول سپرده
+GET {{host}}/api/v1/product/commonrules/product-eligibility-rules/1
+
+### قواعد اهلیت محصول تسهیلات
+GET {{host}}/api/v1/product/commonrules/product-eligibility-rules/2
+
+### آزمون قاعده کسب‌وکار: MIN_AGE > MAX_AGE باید رد شود (422)
+POST {{host}}/api/v1/product/commonrules/product-eligibility-rules
+Content-Type: application/json
+
+{
+  "productVersion": {"id": 1101},
+  "partyTypeCode": "PERSON",
+  "minAge": 40,
+  "maxAge": 20,
+  "ruleStatusCode": "ACTIVE"
+}
+
+### ============ Deposit Module ============
+
+### پروفایل سپرده قرض‌الحسنه
+GET {{host}}/api/v1/product/deposit/deposit-product-profiles/1
+
+### قواعد افتتاح
+GET {{host}}/api/v1/product/deposit/deposit-product-opening-rules/1
+
+### قواعد بستن حساب
+GET {{host}}/api/v1/product/deposit/deposit-product-closure-rules/1
+
+### ============ Loan Module ============
+
+### پروفایل تسهیلات قرض‌الحسنه (شامل لینک به LoanType/PlanType/LoanUsage)
+GET {{host}}/api/v1/product/loan/loan-product-profiles/1
+
+### قواعد بازپرداخت
+GET {{host}}/api/v1/product/loan/loan-product-repayment-rules/1
+
+### قواعد وثیقه
+GET {{host}}/api/v1/product/loan/loan-product-collateral-rules/1
+
+### ============ Party Module ============
+
+### فهرست همه Party ها (چندریختی: Person + Organization)
+GET {{host}}/api/v1/party/parties
+
+### مشاهده شخص حقیقی نمونه (محمد رضایی)
+GET {{host}}/api/v1/party/persons/1001
+
+### مشاهده شخص حقوقی نمونه (شرکت تعاونی نمونه قرض‌الحسنه)
+GET {{host}}/api/v1/party/organizations/2001
+
+### نام‌های ثبت‌شده برای یک Party
+GET {{host}}/api/v1/party/party-names
+
+### مدارک هویتی
+GET {{host}}/api/v1/party/party-identifiers
+
+### نقش‌های یک Party (از جمله نمایندگی حقوقی)
+GET {{host}}/api/v1/party/party-roles
+
+### گروه مالکیت (UBO)
+GET {{host}}/api/v1/party/party-groups/1
+GET {{host}}/api/v1/party/party-group-members
+
+### استعلام‌های KYC/AML انجام‌شده
+GET {{host}}/api/v1/party/party-inquiries
+
+### ایجاد یک شخص حقیقی جدید (نیازمند ایجاد همزمان چند جدول در سناریوی واقعی؛
+### این نمونه ساده فقط ردیف PARTY+PERSON را می‌سازد)
+POST {{host}}/api/v1/party/persons
+Content-Type: application/json
+X-Institution-Id: 1
+
+{
+  "partyReference": "PTY-0000003001",
+  "verificationStatus": "UNVERIFIED",
+  "dataSource": "DIGITAL_ONBOARDING",
+  "current": true,
+  "birthDate": "1995-03-20",
+  "gender": "FEMALE",
+  "maritalStatus": "SINGLE",
+  "residencyStatus": "RESIDENT"
+}

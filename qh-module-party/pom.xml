@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>ir.bank.qh</groupId>
+        <artifactId>qh-productbuilder</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>qh-module-party</artifactId>
+    <packaging>jar</packaging>
+    <name>QH :: Module :: Party</name>
+    <description>
+        BIAN-style Party subsystem: PARTY (abstract root, JOINED inheritance) with
+        PERSON and ORGANIZATION subtypes, plus addresses, contact points,
+        identifiers, names, roles, group/UBO memberships, signature specimens and
+        compliance inquiries. Intentionally independent of the product-builder
+        modules (core/commonrules/deposit/loan) - it only depends on qh-common,
+        matching the project's SOA-style module independence. Every table lives in
+        its own PARTY database schema and every tenant-scoped entity is isolated
+        per institution via Hibernate's @TenantId discriminator-based multi-tenancy
+        (see ir.bank.qh.common.tenant in qh-common).
+    </description>
+
+    <dependencies>
+        <dependency>
+            <groupId>ir.bank.qh</groupId>
+            <artifactId>qh-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+</project>

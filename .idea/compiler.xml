@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Annotation profile for Qard Hasan Product Builder - Modular Monolith" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
+        </processorPath>
+        <module name="qh-module-core" />
+        <module name="qh-module-loan" />
+        <module name="qh-module-common-rules" />
+        <module name="qh-common" />
+        <module name="qh-app" />
+        <module name="qh-module-reference" />
+        <module name="qh-module-deposit" />
+        <module name="qh-module-party" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="qh-app" options="-parameters" />
+      <module name="qh-common" options="-parameters" />
+      <module name="qh-module-common-rules" options="-parameters" />
+      <module name="qh-module-core" options="-parameters" />
+      <module name="qh-module-deposit" options="-parameters" />
+      <module name="qh-module-loan" options="-parameters" />
+      <module name="qh-module-party" options="-parameters" />
+      <module name="qh-module-reference" options="-parameters" />
+      <module name="qh-productbuilder" options="-parameters" />
+    </option>
+  </component>
+</project>

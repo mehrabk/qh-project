@@ -1,0 +1,64 @@
+spring:
+  application:
+    name: qh-productbuilder
+
+  datasource:
+    url: jdbc:h2:mem:qh_productbuilder;DB_CLOSE_DELAY=-1;NON_KEYWORDS=USER
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: false
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        # Every module maps its @Table(schema = "...") to its own schema
+        # (REFERENCE, CORE, COMMONRULES, DEPOSIT, LOAN, PARTY). This tells
+        # Hibernate to emit "CREATE SCHEMA IF NOT EXISTS ..." for each one
+        # instead of failing because the schema doesn't exist yet.
+        hbm2ddl:
+          create_namespaces: true
+        jdbc:
+          time_zone: UTC
+    open-in-view: true
+    defer-datasource-initialization: true
+
+  sql:
+    init:
+      mode: always
+      encoding: UTF-8
+      # Each bounded context owns its own seed file - product-builder modules
+      # (reference/core/commonrules/deposit/loan) in data-product.sql, the
+      # Party module in data-party.sql. Add a new file here for any new module.
+      data-locations:
+        - classpath:data-product.sql
+        - classpath:data-party.sql
+
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      fail-on-empty-beans: false
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+logging:
+  level:
+    ir.bank.qh: INFO
+    org.hibernate.SQL: DEBUG

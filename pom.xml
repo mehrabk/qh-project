@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ir.bank.qh</groupId>
+    <artifactId>qh-productbuilder</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>Qard Hasan Product Builder - Modular Monolith</name>
+    <description>
+        Modular-monolithic (SOA-style) Core Banking Product Builder for Qard Hasan (Deposit + Loan).
+        Each business capability lives in its own Maven module with its own package, repository,
+        service and REST controller layer, but all modules are deployed together as a single
+        Spring Boot application (qh-app). New modules can be added by creating a new Maven module
+        and wiring it as a dependency of qh-app.
+    </description>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.1.1</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <java.version>21</java.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <lombok.version>1.18.36</lombok.version>
+    </properties>
+
+    <modules>
+        <module>qh-common</module>
+        <module>qh-module-reference</module>
+        <module>qh-module-core</module>
+        <module>qh-module-common-rules</module>
+        <module>qh-module-deposit</module>
+        <module>qh-module-loan</module>
+        <module>qh-module-party</module>
+        <module>qh-app</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>ir.bank.qh</groupId>
+                <artifactId>qh-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ir.bank.qh</groupId>
+                <artifactId>qh-module-reference</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ir.bank.qh</groupId>
+                <artifactId>qh-module-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ir.bank.qh</groupId>
+                <artifactId>qh-module-common-rules</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ir.bank.qh</groupId>
+                <artifactId>qh-module-deposit</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ir.bank.qh</groupId>
+                <artifactId>qh-module-loan</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ir.bank.qh</groupId>
+                <artifactId>qh-module-party</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

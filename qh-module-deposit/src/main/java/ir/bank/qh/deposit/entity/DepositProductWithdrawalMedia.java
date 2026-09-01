@@ -19,35 +19,35 @@ public class DepositProductWithdrawalMedia extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_version_id", nullable = false)
+    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false)
     private ProductVersion productVersion;
 
 
-    @Column(name = "withdrawal_media_code", nullable = false, length = 30)
+    @Column(name = "WITHDRAWAL_MEDIA_CODE", nullable = false, length = 30)
     private String withdrawalMediaCode;
 
 
-    @Column(name = "channel_code", length = 30)
+    @Column(name = "CHANNEL_CODE", length = 30)
     private String channelCode;
 
 
-    @Column(name = "is_allowed", nullable = false)
+    @Column(name = "IS_ALLOWED", nullable = false)
     private Boolean isAllowed = true;
 
 
-    @Column(name = "max_transaction_amount", precision = 20, scale = 4)
+    @Column(name = "MAX_TRANSACTION_AMOUNT", precision = 20, scale = 4)
     private BigDecimal maxTransactionAmount;
 
 
-    @Column(name = "daily_amount_limit", precision = 20, scale = 4)
+    @Column(name = "DAILY_AMOUNT_LIMIT", precision = 20, scale = 4)
     private BigDecimal dailyAmountLimit;
 
 
-    @Column(name = "daily_count_limit")
+    @Column(name = "DAILY_COUNT_LIMIT")
     private Integer dailyCountLimit;
 }

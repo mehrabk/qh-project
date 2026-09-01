@@ -17,19 +17,19 @@ public class LoanUsage extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
 
-    @Column(name = "loan_usage_code", nullable = false, unique = true, length = 30)
+    @Column(name = "LOAN_USAGE_CODE", nullable = false, unique = true, length = 30)
     private String loanUsageCode;
 
 
-    @Column(name = "loan_usage_name", nullable = false, length = 100)
+    @Column(name = "LOAN_USAGE_NAME", nullable = false, length = 100)
     private String loanUsageName;
 
 
-    @Column(name = "record_status_code", nullable = false, length = 20)
+    @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
     private String recordStatusCode = "ACTIVE";
 }

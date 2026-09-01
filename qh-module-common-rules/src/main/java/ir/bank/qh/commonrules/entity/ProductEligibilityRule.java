@@ -19,71 +19,71 @@ public class ProductEligibilityRule extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_version_id", nullable = false)
+    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false)
     private ProductVersion productVersion;
 
 
-    @Column(name = "party_type_code", length = 30)
+    @Column(name = "PARTY_TYPE_CODE", length = 30)
     private String partyTypeCode;
 
 
-    @Column(name = "customer_segment_code", length = 30)
+    @Column(name = "CUSTOMER_SEGMENT_CODE", length = 30)
     private String customerSegmentCode;
 
 
-    @Column(name = "residency_status_code", length = 30)
+    @Column(name = "RESIDENCY_STATUS_CODE", length = 30)
     private String residencyStatusCode;
 
 
-    @Column(name = "nationality_scope_code", length = 30)
+    @Column(name = "NATIONALITY_SCOPE_CODE", length = 30)
     private String nationalityScopeCode;
 
 
-    @Column(name = "gender_code", length = 30)
+    @Column(name = "GENDER_CODE", length = 30)
     private String genderCode;
 
 
-    @Column(name = "kyc_level_code", length = 30)
+    @Column(name = "KYC_LEVEL_CODE", length = 30)
     private String kycLevelCode;
 
 
-    @Column(name = "min_age")
+    @Column(name = "MIN_AGE")
     private Integer minAge;
 
 
-    @Column(name = "max_age")
+    @Column(name = "MAX_AGE")
     private Integer maxAge;
 
 
-    @Column(name = "aml_risk_max_code", length = 30)
+    @Column(name = "AML_RISK_MAX_CODE", length = 30)
     private String amlRiskMaxCode;
 
 
-    @Column(name = "pep_allowed_flag", nullable = false)
+    @Column(name = "PEP_ALLOWED_FLAG", nullable = false)
     private Boolean pepAllowedFlag = false;
 
 
-    @Column(name = "min_customer_tenure_months")
+    @Column(name = "MIN_CUSTOMER_TENURE_MONTHS")
     private Integer minCustomerTenureMonths;
 
 
-    @Column(name = "min_account_tenure_months")
+    @Column(name = "MIN_ACCOUNT_TENURE_MONTHS")
     private Integer minAccountTenureMonths;
 
 
-    @Column(name = "min_average_balance", precision = 20, scale = 4)
+    @Column(name = "MIN_AVERAGE_BALANCE", precision = 20, scale = 4)
     private BigDecimal minAverageBalance;
 
 
-    @Column(name = "priority_no", nullable = false)
+    @Column(name = "PRIORITY_NO", nullable = false)
     private Integer priorityNo = 1;
 
 
-    @Column(name = "rule_status_code", nullable = false, length = 20)
+    @Column(name = "RULE_STATUS_CODE", nullable = false, length = 20)
     private String ruleStatusCode = "ACTIVE";
 }

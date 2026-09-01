@@ -17,39 +17,39 @@ public class FacilityOperationParameter extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
 
-    @Column(name = "overdue_duration")
+    @Column(name = "OVERDUE_DURATION")
     private Integer overdueDuration;
 
 
-    @Column(name = "pastdue_duration")
+    @Column(name = "PASTDUE_DURATION")
     private Integer pastdueDuration;
 
 
-    @Column(name = "doubtful_duration")
+    @Column(name = "DOUBTFUL_DURATION")
     private Integer doubtfulDuration;
 
 
-    @Column(name = "transfer_category_method")
+    @Column(name = "TRANSFER_CATEGORY_METHOD")
     private Integer transferCategoryMethod;
 
 
-    @Column(name = "transfer_principle")
+    @Column(name = "TRANSFER_PRINCIPLE")
     private Integer transferPrinciple;
 
 
-    @Column(name = "transfer_penalty")
+    @Column(name = "TRANSFER_PENALTY")
     private Integer transferPenalty;
 
 
-    @Column(name = "transfer_commission")
+    @Column(name = "TRANSFER_COMMISSION")
     private Integer transferCommission;
 
 
-    @Column(name = "parameter_status_code", nullable = false, length = 20)
+    @Column(name = "PARAMETER_STATUS_CODE", nullable = false, length = 20)
     private String parameterStatusCode = "ACTIVE";
 }

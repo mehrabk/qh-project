@@ -18,27 +18,27 @@ public class EconomicSection extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "plan_type_id", nullable = false)
+    @JoinColumn(name = "PLAN_TYPE_ID", nullable = false)
     private PlanType planType;
 
 
-    @Column(name = "economic_section_code", nullable = false, length = 30)
+    @Column(name = "ECONOMIC_SECTION_CODE", nullable = false, length = 30)
     private String economicSectionCode;
 
 
-    @Column(name = "economic_section_name", nullable = false, length = 100)
+    @Column(name = "ECONOMIC_SECTION_NAME", nullable = false, length = 100)
     private String economicSectionName;
 
 
-    @Column(name = "economic_section_cbi_code", length = 30)
+    @Column(name = "ECONOMIC_SECTION_CBI_CODE", length = 30)
     private String economicSectionCbiCode;
 
 
-    @Column(name = "record_status_code", nullable = false, length = 20)
+    @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
     private String recordStatusCode = "ACTIVE";
 }

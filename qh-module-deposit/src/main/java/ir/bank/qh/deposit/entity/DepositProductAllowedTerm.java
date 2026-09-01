@@ -19,27 +19,27 @@ public class DepositProductAllowedTerm extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "term_rule_id", nullable = false)
+    @JoinColumn(name = "TERM_RULE_ID", nullable = false)
     private DepositProductTermRule termRule;
 
 
-    @Column(name = "term_value", nullable = false)
+    @Column(name = "TERM_VALUE", nullable = false)
     private Integer termValue;
 
 
-    @Column(name = "term_unit_code", nullable = false, length = 20)
+    @Column(name = "TERM_UNIT_CODE", nullable = false, length = 20)
     private String termUnitCode;
 
 
-    @Column(name = "is_default", nullable = false)
+    @Column(name = "IS_DEFAULT", nullable = false)
     private Boolean isDefault = false;
 
 
-    @Column(name = "rate_override", precision = 12, scale = 8)
+    @Column(name = "RATE_OVERRIDE", precision = 12, scale = 8)
     private BigDecimal rateOverride;
 }

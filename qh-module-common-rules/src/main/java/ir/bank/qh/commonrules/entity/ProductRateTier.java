@@ -20,47 +20,47 @@ public class ProductRateTier extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pricing_component_id", nullable = false)
+    @JoinColumn(name = "PRICING_COMPONENT_ID", nullable = false)
     private ProductPricingComponent pricingComponent;
 
 
-    @Column(name = "tier_no", nullable = false)
+    @Column(name = "TIER_NO", nullable = false)
     private Integer tierNo;
 
 
-    @Column(name = "min_amount", precision = 20, scale = 4)
+    @Column(name = "MIN_AMOUNT", precision = 20, scale = 4)
     private BigDecimal minAmount;
 
 
-    @Column(name = "max_amount", precision = 20, scale = 4)
+    @Column(name = "MAX_AMOUNT", precision = 20, scale = 4)
     private BigDecimal maxAmount;
 
 
-    @Column(name = "min_term_value")
+    @Column(name = "MIN_TERM_VALUE")
     private Integer minTermValue;
 
 
-    @Column(name = "max_term_value")
+    @Column(name = "MAX_TERM_VALUE")
     private Integer maxTermValue;
 
 
-    @Column(name = "term_unit_code", length = 20)
+    @Column(name = "TERM_UNIT_CODE", length = 20)
     private String termUnitCode;
 
 
-    @Column(name = "rate_value", precision = 12, scale = 8)
+    @Column(name = "RATE_VALUE", precision = 12, scale = 8)
     private BigDecimal rateValue;
 
 
-    @Column(name = "valid_from")
+    @Column(name = "VALID_FROM")
     private LocalDate validFrom;
 
 
-    @Column(name = "valid_to")
+    @Column(name = "VALID_TO")
     private LocalDate validTo;
 }

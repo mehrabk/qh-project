@@ -19,43 +19,43 @@ public class DepositProductClosureRule extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_version_id", nullable = false)
+    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false)
     private ProductVersion productVersion;
 
 
-    @Column(name = "closure_type_code", nullable = false, length = 30)
+    @Column(name = "CLOSURE_TYPE_CODE", nullable = false, length = 30)
     private String closureTypeCode;
 
 
-    @Column(name = "is_closure_allowed", nullable = false)
+    @Column(name = "IS_CLOSURE_ALLOWED", nullable = false)
     private Boolean isClosureAllowed = true;
 
 
-    @Column(name = "is_partial_closure_allowed", nullable = false)
+    @Column(name = "IS_PARTIAL_CLOSURE_ALLOWED", nullable = false)
     private Boolean isPartialClosureAllowed = false;
 
 
-    @Column(name = "balance_destination_code", length = 30)
+    @Column(name = "BALANCE_DESTINATION_CODE", length = 30)
     private String balanceDestinationCode;
 
 
-    @Column(name = "effective_from_date")
+    @Column(name = "EFFECTIVE_FROM_DATE")
     private LocalDate effectiveFromDate;
 
 
-    @Column(name = "effective_to_date")
+    @Column(name = "EFFECTIVE_TO_DATE")
     private LocalDate effectiveToDate;
 
 
-    @Column(name = "status_code", nullable = false, length = 20)
+    @Column(name = "STATUS_CODE", nullable = false, length = 20)
     private String statusCode = "ACTIVE";
 
 
-    @Column(name = "description", length = 1000)
+    @Column(name = "DESCRIPTION", length = 1000)
     private String description;
 }

@@ -17,27 +17,27 @@ public class LoanProductCollateral extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
 
-    @Column(name = "product_collateral_code", nullable = false, unique = true, length = 30)
+    @Column(name = "PRODUCT_COLLATERAL_CODE", nullable = false, unique = true, length = 30)
     private String productCollateralCode;
 
 
-    @Column(name = "product_collateral_name", nullable = false, length = 150)
+    @Column(name = "PRODUCT_COLLATERAL_NAME", nullable = false, length = 150)
     private String productCollateralName;
 
 
-    @Column(name = "collateral_category_code", length = 30)
+    @Column(name = "COLLATERAL_CATEGORY_CODE", length = 30)
     private String collateralCategoryCode;
 
 
-    @Column(name = "description", length = 500)
+    @Column(name = "DESCRIPTION", length = 500)
     private String description;
 
 
-    @Column(name = "record_status_code", nullable = false, length = 20)
+    @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
     private String recordStatusCode = "ACTIVE";
 }

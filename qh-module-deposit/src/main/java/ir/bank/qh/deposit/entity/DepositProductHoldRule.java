@@ -19,27 +19,27 @@ public class DepositProductHoldRule extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_version_id", nullable = false)
+    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false)
     private ProductVersion productVersion;
 
 
-    @Column(name = "hold_type_code", nullable = false, length = 30)
+    @Column(name = "HOLD_TYPE_CODE", nullable = false, length = 30)
     private String holdTypeCode;
 
 
-    @Column(name = "is_supported", nullable = false)
+    @Column(name = "IS_SUPPORTED", nullable = false)
     private Boolean isSupported = true;
 
 
-    @Column(name = "min_hold_amount", precision = 20, scale = 4)
+    @Column(name = "MIN_HOLD_AMOUNT", precision = 20, scale = 4)
     private BigDecimal minHoldAmount;
 
 
-    @Column(name = "max_hold_amount", precision = 20, scale = 4)
+    @Column(name = "MAX_HOLD_AMOUNT", precision = 20, scale = 4)
     private BigDecimal maxHoldAmount;
 }

@@ -19,31 +19,31 @@ public class ProductChannelRule extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_version_id", nullable = false)
+    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false)
     private ProductVersion productVersion;
 
 
-    @Column(name = "channel_code", nullable = false, length = 30)
+    @Column(name = "CHANNEL_CODE", nullable = false, length = 30)
     private String channelCode;
 
 
-    @Column(name = "is_allowed", nullable = false)
+    @Column(name = "IS_ALLOWED", nullable = false)
     private Boolean isAllowed = true;
 
 
-    @Column(name = "valid_from")
+    @Column(name = "VALID_FROM")
     private LocalDate validFrom;
 
 
-    @Column(name = "valid_to")
+    @Column(name = "VALID_TO")
     private LocalDate validTo;
 
 
-    @Column(name = "rule_status_code", nullable = false, length = 20)
+    @Column(name = "RULE_STATUS_CODE", nullable = false, length = 20)
     private String ruleStatusCode = "ACTIVE";
 }

@@ -19,19 +19,19 @@ public class PatternOperationDetail extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pattern_operation_id", nullable = false)
+    @JoinColumn(name = "PATTERN_OPERATION_ID", nullable = false)
     private PatternOperation patternOperation;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sub_operation_id", nullable = false)
+    @JoinColumn(name = "SUB_OPERATION_ID", nullable = false)
     private SubOperation subOperation;
 
 
-    @Column(name = "record_status_code", nullable = false, length = 20)
+    @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
     private String recordStatusCode = "ACTIVE";
 }

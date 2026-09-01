@@ -18,23 +18,23 @@ public class PatternOperationLoanType extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "loan_type_id", nullable = false)
+    @JoinColumn(name = "LOAN_TYPE_ID", nullable = false)
     private LoanType loanType;
 
 
-    @Column(name = "pattern_operation_version")
+    @Column(name = "PATTERN_OPERATION_VERSION")
     private Integer patternOperationVersion;
 
 
-    @Column(name = "pattern_name", length = 100)
+    @Column(name = "PATTERN_NAME", length = 100)
     private String patternName;
 
 
-    @Column(name = "record_status_code", nullable = false, length = 20)
+    @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
     private String recordStatusCode = "ACTIVE";
 }

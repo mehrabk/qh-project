@@ -20,39 +20,39 @@ public class ProductLegacyMapping extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
+    @JoinColumn(name = "PRODUCT_ID", nullable = false)
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_version_id", nullable = false)
+    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false)
     private ProductVersion productVersion;
 
 
-    @Column(name = "source_domain_code", nullable = false, length = 30)
+    @Column(name = "SOURCE_DOMAIN_CODE", nullable = false, length = 30)
     private String sourceDomainCode;
 
 
-    @Column(name = "source_table_name", nullable = false, length = 100)
+    @Column(name = "SOURCE_TABLE_NAME", nullable = false, length = 100)
     private String sourceTableName;
 
 
-    @Column(name = "source_record_id", length = 100)
+    @Column(name = "SOURCE_RECORD_ID", length = 100)
     private String sourceRecordId;
 
 
-    @Column(name = "source_version_id", length = 100)
+    @Column(name = "SOURCE_VERSION_ID", length = 100)
     private String sourceVersionId;
 
 
-    @Column(name = "migration_batch_id", length = 100)
+    @Column(name = "MIGRATION_BATCH_ID", length = 100)
     private String migrationBatchId;
 
 
-    @Column(name = "migrated_at")
+    @Column(name = "MIGRATED_AT")
     private LocalDateTime migratedAt;
 }

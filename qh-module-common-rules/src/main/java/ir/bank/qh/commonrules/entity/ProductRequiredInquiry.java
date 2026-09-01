@@ -18,31 +18,31 @@ public class ProductRequiredInquiry extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_version_id", nullable = false)
+    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false)
     private ProductVersion productVersion;
 
 
-    @Column(name = "inquiry_type_code", nullable = false, length = 30)
+    @Column(name = "INQUIRY_TYPE_CODE", nullable = false, length = 30)
     private String inquiryTypeCode;
 
 
-    @Column(name = "requirement_stage_code", length = 30)
+    @Column(name = "REQUIREMENT_STAGE_CODE", length = 30)
     private String requirementStageCode;
 
 
-    @Column(name = "max_result_age_minutes")
+    @Column(name = "MAX_RESULT_AGE_MINUTES")
     private Integer maxResultAgeMinutes;
 
 
-    @Column(name = "is_mandatory", nullable = false)
+    @Column(name = "IS_MANDATORY", nullable = false)
     private Boolean isMandatory = true;
 
 
-    @Column(name = "rule_status_code", nullable = false, length = 20)
+    @Column(name = "RULE_STATUS_CODE", nullable = false, length = 20)
     private String ruleStatusCode = "ACTIVE";
 }

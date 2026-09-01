@@ -23,39 +23,39 @@ public class LoanProductProfile extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_version_id", nullable = false, unique = true)
+    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false, unique = true)
     private ProductVersion productVersion;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "loan_type_id", nullable = false)
+    @JoinColumn(name = "LOAN_TYPE_ID", nullable = false)
     private LoanType loanType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "plan_type_id", nullable = false)
+    @JoinColumn(name = "PLAN_TYPE_ID", nullable = false)
     private PlanType planType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "loan_usage_id", nullable = false)
+    @JoinColumn(name = "LOAN_USAGE_ID", nullable = false)
     private LoanUsage loanUsage;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "economic_sub_section_id")
+    @JoinColumn(name = "ECONOMIC_SUB_SECTION_ID")
     private EconomicSubSection economicSubSection;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "operation_parameter_id")
+    @JoinColumn(name = "OPERATION_PARAMETER_ID")
     private FacilityOperationParameter facilityOperationParameter;
 
 
-    @Column(name = "party_nature_code", length = 30)
+    @Column(name = "PARTY_NATURE_CODE", length = 30)
     private String partyNatureCode;
 
 
-    @Column(name = "currency_type_code", length = 3)
+    @Column(name = "CURRENCY_TYPE_CODE", length = 3)
     private String currencyTypeCode;
 }

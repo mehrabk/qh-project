@@ -17,27 +17,27 @@ public class Operation extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
 
-    @Column(name = "operation_code", nullable = false, unique = true, length = 30)
+    @Column(name = "OPERATION_CODE", nullable = false, unique = true, length = 30)
     private String operationCode;
 
 
-    @Column(name = "operation_name", nullable = false, length = 150)
+    @Column(name = "OPERATION_NAME", nullable = false, length = 150)
     private String operationName;
 
 
-    @Column(name = "operation_type_code", length = 30)
+    @Column(name = "OPERATION_TYPE_CODE", length = 30)
     private String operationTypeCode;
 
 
-    @Column(name = "facility_step")
+    @Column(name = "FACILITY_STEP")
     private Integer facilityStep;
 
 
-    @Column(name = "record_status_code", nullable = false, length = 20)
+    @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
     private String recordStatusCode = "ACTIVE";
 }

@@ -18,31 +18,31 @@ public class DepositProductClosurePrecheck extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "closure_rule_id", nullable = false)
+    @JoinColumn(name = "CLOSURE_RULE_ID", nullable = false)
     private DepositProductClosureRule closureRule;
 
 
-    @Column(name = "check_type_code", nullable = false, length = 40)
+    @Column(name = "CHECK_TYPE_CODE", nullable = false, length = 40)
     private String checkTypeCode;
 
 
-    @Column(name = "is_mandatory", nullable = false)
+    @Column(name = "IS_MANDATORY", nullable = false)
     private Boolean isMandatory = true;
 
 
-    @Column(name = "failure_action_code", length = 30)
+    @Column(name = "FAILURE_ACTION_CODE", length = 30)
     private String failureActionCode;
 
 
-    @Column(name = "sequence_no", nullable = false)
+    @Column(name = "SEQUENCE_NO", nullable = false)
     private Integer sequenceNo = 1;
 
 
-    @Column(name = "description", length = 500)
+    @Column(name = "DESCRIPTION", length = 500)
     private String description;
 }

@@ -20,47 +20,47 @@ public class LoanProductCollateralRule extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_version_id", nullable = false)
+    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false)
     private ProductVersion productVersion;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "loan_product_collateral_id", nullable = false)
+    @JoinColumn(name = "LOAN_PRODUCT_COLLATERAL_ID", nullable = false)
     private LoanProductCollateral loanProductCollateral;
 
 
-    @Column(name = "is_required", nullable = false)
+    @Column(name = "IS_REQUIRED", nullable = false)
     private Boolean isRequired = true;
 
 
-    @Column(name = "min_coverage_percent", precision = 7, scale = 4)
+    @Column(name = "MIN_COVERAGE_PERCENT", precision = 7, scale = 4)
     private BigDecimal minCoveragePercent;
 
 
-    @Column(name = "max_coverage_percent", precision = 7, scale = 4)
+    @Column(name = "MAX_COVERAGE_PERCENT", precision = 7, scale = 4)
     private BigDecimal maxCoveragePercent;
 
 
-    @Column(name = "substitution_allowed", nullable = false)
+    @Column(name = "SUBSTITUTION_ALLOWED", nullable = false)
     private Boolean substitutionAllowed = false;
 
 
-    @Column(name = "third_party_allowed", nullable = false)
+    @Column(name = "THIRD_PARTY_ALLOWED", nullable = false)
     private Boolean thirdPartyAllowed = true;
 
 
-    @Column(name = "currency_match_required", nullable = false)
+    @Column(name = "CURRENCY_MATCH_REQUIRED", nullable = false)
     private Boolean currencyMatchRequired = true;
 
 
-    @Column(name = "priority_no", nullable = false)
+    @Column(name = "PRIORITY_NO", nullable = false)
     private Integer priorityNo = 1;
 
 
-    @Column(name = "record_status_code", nullable = false, length = 20)
+    @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
     private String recordStatusCode = "ACTIVE";
 }

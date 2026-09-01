@@ -18,27 +18,27 @@ public class ProductChannelOperation extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "channel_rule_id", nullable = false)
+    @JoinColumn(name = "CHANNEL_RULE_ID", nullable = false)
     private ProductChannelRule channelRule;
 
 
-    @Column(name = "operation_code", nullable = false, length = 40)
+    @Column(name = "OPERATION_CODE", nullable = false, length = 40)
     private String operationCode;
 
 
-    @Column(name = "is_allowed", nullable = false)
+    @Column(name = "IS_ALLOWED", nullable = false)
     private Boolean isAllowed = true;
 
 
-    @Column(name = "requires_additional_auth", nullable = false)
+    @Column(name = "REQUIRES_ADDITIONAL_AUTH", nullable = false)
     private Boolean requiresAdditionalAuth = false;
 
 
-    @Column(name = "record_status_code", nullable = false, length = 20)
+    @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
     private String recordStatusCode = "ACTIVE";
 }

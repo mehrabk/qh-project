@@ -20,31 +20,31 @@ public class LoanFinancialExtension extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_version_id", nullable = false, unique = true)
+    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false, unique = true)
     private ProductVersion productVersion;
 
 
-    @Column(name = "min_facility_amount", precision = 20, scale = 2)
+    @Column(name = "MIN_FACILITY_AMOUNT", precision = 20, scale = 2)
     private BigDecimal minFacilityAmount;
 
 
-    @Column(name = "max_facility_amount", precision = 20, scale = 2)
+    @Column(name = "MAX_FACILITY_AMOUNT", precision = 20, scale = 2)
     private BigDecimal maxFacilityAmount;
 
 
-    @Column(name = "valid_from")
+    @Column(name = "VALID_FROM")
     private LocalDate validFrom;
 
 
-    @Column(name = "valid_to")
+    @Column(name = "VALID_TO")
     private LocalDate validTo;
 
 
-    @Column(name = "rule_status_code", nullable = false, length = 20)
+    @Column(name = "RULE_STATUS_CODE", nullable = false, length = 20)
     private String ruleStatusCode = "ACTIVE";
 }

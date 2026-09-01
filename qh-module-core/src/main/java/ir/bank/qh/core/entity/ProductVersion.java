@@ -21,59 +21,59 @@ public class ProductVersion extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
+    @JoinColumn(name = "PRODUCT_ID", nullable = false)
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "source_version_id")
+    @JoinColumn(name = "SOURCE_VERSION_ID")
     private ProductVersion sourceVersion;
 
 
-    @Column(name = "version_no", nullable = false)
+    @Column(name = "VERSION_NO", nullable = false)
     private Integer versionNo;
 
 
-    @Column(name = "valid_from")
+    @Column(name = "VALID_FROM")
     private LocalDate validFrom;
 
 
-    @Column(name = "valid_to")
+    @Column(name = "VALID_TO")
     private LocalDate validTo;
 
 
-    @Column(name = "version_status_code", nullable = false, length = 30)
+    @Column(name = "VERSION_STATUS_CODE", nullable = false, length = 30)
     private String versionStatusCode = "DRAFT";
 
 
-    @Column(name = "is_current", nullable = false)
+    @Column(name = "IS_CURRENT", nullable = false)
     private Boolean isCurrent = false;
 
 
-    @Column(name = "origination_status_code", nullable = false, length = 30)
+    @Column(name = "ORIGINATION_STATUS_CODE", nullable = false, length = 30)
     private String originationStatusCode = "DISABLED";
 
 
-    @Column(name = "servicing_status_code", nullable = false, length = 30)
+    @Column(name = "SERVICING_STATUS_CODE", nullable = false, length = 30)
     private String servicingStatusCode = "DISABLED";
 
 
-    @Column(name = "change_reason", length = 500)
+    @Column(name = "CHANGE_REASON", length = 500)
     private String changeReason;
 
 
-    @Column(name = "approved_at")
+    @Column(name = "APPROVED_AT")
     private LocalDateTime approvedAt;
 
 
-    @Column(name = "approved_by", length = 100)
+    @Column(name = "APPROVED_BY", length = 100)
     private String approvedBy;
 
 
-    @Column(name = "record_status_code", nullable = false, length = 20)
+    @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
     private String recordStatusCode = "ACTIVE";
 }

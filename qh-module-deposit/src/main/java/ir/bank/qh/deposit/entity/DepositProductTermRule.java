@@ -18,39 +18,39 @@ public class DepositProductTermRule extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_version_id", nullable = false)
+    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false)
     private ProductVersion productVersion;
 
 
-    @Column(name = "min_term_value")
+    @Column(name = "MIN_TERM_VALUE")
     private Integer minTermValue;
 
 
-    @Column(name = "max_term_value")
+    @Column(name = "MAX_TERM_VALUE")
     private Integer maxTermValue;
 
 
-    @Column(name = "term_unit_code", length = 20)
+    @Column(name = "TERM_UNIT_CODE", length = 20)
     private String termUnitCode;
 
 
-    @Column(name = "auto_renewal_allowed", nullable = false)
+    @Column(name = "AUTO_RENEWAL_ALLOWED", nullable = false)
     private Boolean autoRenewalAllowed = false;
 
 
-    @Column(name = "renewal_method_code", length = 30)
+    @Column(name = "RENEWAL_METHOD_CODE", length = 30)
     private String renewalMethodCode;
 
 
-    @Column(name = "grace_period_days")
+    @Column(name = "GRACE_PERIOD_DAYS")
     private Integer gracePeriodDays;
 
 
-    @Column(name = "rule_status_code", nullable = false, length = 20)
+    @Column(name = "RULE_STATUS_CODE", nullable = false, length = 20)
     private String ruleStatusCode = "ACTIVE";
 }

@@ -19,19 +19,19 @@ public class LoanTypePlanType extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "loan_type_id", nullable = false)
+    @JoinColumn(name = "LOAN_TYPE_ID", nullable = false)
     private LoanType loanType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "plan_type_id", nullable = false)
+    @JoinColumn(name = "PLAN_TYPE_ID", nullable = false)
     private PlanType planType;
 
 
-    @Column(name = "record_status_code", nullable = false, length = 20)
+    @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
     private String recordStatusCode = "ACTIVE";
 }

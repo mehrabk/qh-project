@@ -17,41 +17,41 @@ public class Product extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
-    @Column(name = "is_deleted", nullable = false)
+    @Column(name = "IS_DELETED", nullable = false)
     private Boolean deleted = Boolean.FALSE;
 
 
-    @Column(name = "product_code", nullable = false, unique = true, length = 30)
+    @Column(name = "PRODUCT_CODE", nullable = false, unique = true, length = 30)
     private String productCode;
 
 
-    @Column(name = "product_name", nullable = false, length = 200)
+    @Column(name = "PRODUCT_NAME", nullable = false, length = 200)
     private String productName;
 
 
-    @Column(name = "product_class_code", nullable = false, length = 30)
+    @Column(name = "PRODUCT_CLASS_CODE", nullable = false, length = 30)
     private String productClassCode;
 
 
-    @Column(name = "balance_nature_code", nullable = false, length = 20)
+    @Column(name = "BALANCE_NATURE_CODE", nullable = false, length = 20)
     private String balanceNatureCode;
 
 
-    @Column(name = "product_family_code", length = 30)
+    @Column(name = "PRODUCT_FAMILY_CODE", length = 30)
     private String productFamilyCode;
 
 
-    @Column(name = "default_currency_code", nullable = false, length = 3)
+    @Column(name = "DEFAULT_CURRENCY_CODE", nullable = false, length = 3)
     private String defaultCurrencyCode;
 
 
-    @Column(name = "description", length = 1000)
+    @Column(name = "DESCRIPTION", length = 1000)
     private String description;
 
 
-    @Column(name = "product_status_code", nullable = false, length = 30)
+    @Column(name = "PRODUCT_STATUS_CODE", nullable = false, length = 30)
     private String productStatusCode = "DRAFT";
 }

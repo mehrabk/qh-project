@@ -19,43 +19,43 @@ public class DepositProductDormancyRule extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_version_id", nullable = false)
+    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false)
     private ProductVersion productVersion;
 
 
-    @Column(name = "inactivity_period_value")
+    @Column(name = "INACTIVITY_PERIOD_VALUE")
     private Integer inactivityPeriodValue;
 
 
-    @Column(name = "inactivity_period_unit_code", length = 30)
+    @Column(name = "INACTIVITY_PERIOD_UNIT_CODE", length = 30)
     private String inactivityPeriodUnitCode;
 
 
-    @Column(name = "warning_period_value")
+    @Column(name = "WARNING_PERIOD_VALUE")
     private Integer warningPeriodValue;
 
 
-    @Column(name = "warning_period_unit_code", length = 30)
+    @Column(name = "WARNING_PERIOD_UNIT_CODE", length = 30)
     private String warningPeriodUnitCode;
 
 
-    @Column(name = "reactivation_method_code", length = 30)
+    @Column(name = "REACTIVATION_METHOD_CODE", length = 30)
     private String reactivationMethodCode;
 
 
-    @Column(name = "auto_reactivation_allowed", nullable = false)
+    @Column(name = "AUTO_REACTIVATION_ALLOWED", nullable = false)
     private Boolean autoReactivationAllowed = false;
 
 
-    @Column(name = "valid_from")
+    @Column(name = "VALID_FROM")
     private LocalDate validFrom;
 
 
-    @Column(name = "valid_to")
+    @Column(name = "VALID_TO")
     private LocalDate validTo;
 }

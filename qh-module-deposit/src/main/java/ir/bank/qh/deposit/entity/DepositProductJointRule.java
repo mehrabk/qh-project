@@ -18,31 +18,31 @@ public class DepositProductJointRule extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_version_id", nullable = false)
+    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false)
     private ProductVersion productVersion;
 
 
-    @Column(name = "ownership_type_code", length = 30)
+    @Column(name = "OWNERSHIP_TYPE_CODE", length = 30)
     private String ownershipTypeCode;
 
 
-    @Column(name = "min_joint_owner_count")
+    @Column(name = "MIN_JOINT_OWNER_COUNT")
     private Integer minJointOwnerCount;
 
 
-    @Column(name = "max_joint_owner_count")
+    @Column(name = "MAX_JOINT_OWNER_COUNT")
     private Integer maxJointOwnerCount;
 
 
-    @Column(name = "signing_rule_code", length = 30)
+    @Column(name = "SIGNING_RULE_CODE", length = 30)
     private String signingRuleCode;
 
 
-    @Column(name = "min_required_signer_count")
+    @Column(name = "MIN_REQUIRED_SIGNER_COUNT")
     private Integer minRequiredSignerCount;
 }

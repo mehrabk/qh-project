@@ -17,31 +17,31 @@ public class LoanType extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
 
-    @Column(name = "loan_type_code", nullable = false, unique = true, length = 30)
+    @Column(name = "LOAN_TYPE_CODE", nullable = false, unique = true, length = 30)
     private String loanTypeCode;
 
 
-    @Column(name = "loan_type_name", nullable = false, length = 50)
+    @Column(name = "LOAN_TYPE_NAME", nullable = false, length = 50)
     private String loanTypeName;
 
 
-    @Column(name = "loan_type_cbi_code", length = 30)
+    @Column(name = "LOAN_TYPE_CBI_CODE", length = 30)
     private String loanTypeCbiCode;
 
 
-    @Column(name = "loan_group")
+    @Column(name = "LOAN_GROUP")
     private Integer loanGroup;
 
 
-    @Column(name = "obligation_type")
+    @Column(name = "OBLIGATION_TYPE")
     private Integer obligationType;
 
 
-    @Column(name = "record_status_code", nullable = false, length = 20)
+    @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
     private String recordStatusCode = "ACTIVE";
 }

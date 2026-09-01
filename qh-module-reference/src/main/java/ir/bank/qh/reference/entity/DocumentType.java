@@ -17,19 +17,19 @@ public class DocumentType extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
 
-    @Column(name = "document_type_code", nullable = false, unique = true, length = 30)
+    @Column(name = "DOCUMENT_TYPE_CODE", nullable = false, unique = true, length = 30)
     private String documentTypeCode;
 
 
-    @Column(name = "document_type_name", nullable = false, length = 100)
+    @Column(name = "DOCUMENT_TYPE_NAME", nullable = false, length = 100)
     private String documentTypeName;
 
 
-    @Column(name = "record_status_code", nullable = false, length = 20)
+    @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
     private String recordStatusCode = "ACTIVE";
 }

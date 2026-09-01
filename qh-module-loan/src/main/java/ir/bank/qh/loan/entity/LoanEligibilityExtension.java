@@ -19,43 +19,43 @@ public class LoanEligibilityExtension extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "eligibility_rule_id", nullable = false, unique = true)
+    @JoinColumn(name = "ELIGIBILITY_RULE_ID", nullable = false, unique = true)
     private ProductEligibilityRule eligibilityRule;
 
 
-    @Column(name = "min_income_amount", precision = 20, scale = 2)
+    @Column(name = "MIN_INCOME_AMOUNT", precision = 20, scale = 2)
     private BigDecimal minIncomeAmount;
 
 
-    @Column(name = "min_credit_score")
+    @Column(name = "MIN_CREDIT_SCORE")
     private Integer minCreditScore;
 
 
-    @Column(name = "max_risk_grade_code", length = 30)
+    @Column(name = "MAX_RISK_GRADE_CODE", length = 30)
     private String maxRiskGradeCode;
 
 
-    @Column(name = "required_guarantor_count", nullable = false)
+    @Column(name = "REQUIRED_GUARANTOR_COUNT", nullable = false)
     private Integer requiredGuarantorCount = 0;
 
 
-    @Column(name = "employment_type_code", length = 30)
+    @Column(name = "EMPLOYMENT_TYPE_CODE", length = 30)
     private String employmentTypeCode;
 
 
-    @Column(name = "cbi_tracking_required", nullable = false)
+    @Column(name = "CBI_TRACKING_REQUIRED", nullable = false)
     private Boolean cbiTrackingRequired = false;
 
 
-    @Column(name = "credit_inquiry_required", nullable = false)
+    @Column(name = "CREDIT_INQUIRY_REQUIRED", nullable = false)
     private Boolean creditInquiryRequired = false;
 
 
-    @Column(name = "aml_check_required", nullable = false)
+    @Column(name = "AML_CHECK_REQUIRED", nullable = false)
     private Boolean amlCheckRequired = false;
 }

@@ -20,43 +20,43 @@ public class ProductRelationship extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "source_product_version_id", nullable = false)
+    @JoinColumn(name = "SOURCE_PRODUCT_VERSION_ID", nullable = false)
     private ProductVersion sourceProductVersion;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "target_product_id", nullable = false)
+    @JoinColumn(name = "TARGET_PRODUCT_ID", nullable = false)
     private Product targetProduct;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "target_product_version_id")
+    @JoinColumn(name = "TARGET_PRODUCT_VERSION_ID")
     private ProductVersion targetProductVersion;
 
 
-    @Column(name = "relationship_type_code", nullable = false, length = 30)
+    @Column(name = "RELATIONSHIP_TYPE_CODE", nullable = false, length = 30)
     private String relationshipTypeCode;
 
 
-    @Column(name = "priority_no", nullable = false)
+    @Column(name = "PRIORITY_NO", nullable = false)
     private Integer priorityNo = 1;
 
 
-    @Column(name = "is_mandatory", nullable = false)
+    @Column(name = "IS_MANDATORY", nullable = false)
     private Boolean isMandatory = false;
 
 
-    @Column(name = "min_relation_amount", precision = 20, scale = 4)
+    @Column(name = "MIN_RELATION_AMOUNT", precision = 20, scale = 4)
     private BigDecimal minRelationAmount;
 
 
-    @Column(name = "max_relation_amount", precision = 20, scale = 4)
+    @Column(name = "MAX_RELATION_AMOUNT", precision = 20, scale = 4)
     private BigDecimal maxRelationAmount;
 
 
-    @Column(name = "record_status_code", nullable = false, length = 20)
+    @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
     private String recordStatusCode = "ACTIVE";
 }

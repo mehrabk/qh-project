@@ -19,59 +19,59 @@ public class LoanProductProcessRule extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_version_id", nullable = false)
+    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false)
     private ProductVersion productVersion;
 
 
-    @Column(name = "application_validity_days")
+    @Column(name = "APPLICATION_VALIDITY_DAYS")
     private Integer applicationValidityDays;
 
 
-    @Column(name = "approval_validity_days")
+    @Column(name = "APPROVAL_VALIDITY_DAYS")
     private Integer approvalValidityDays;
 
 
-    @Column(name = "contract_validity_days")
+    @Column(name = "CONTRACT_VALIDITY_DAYS")
     private Integer contractValidityDays;
 
 
-    @Column(name = "manual_approval_required", nullable = false)
+    @Column(name = "MANUAL_APPROVAL_REQUIRED", nullable = false)
     private Boolean manualApprovalRequired = false;
 
 
-    @Column(name = "committee_approval_required", nullable = false)
+    @Column(name = "COMMITTEE_APPROVAL_REQUIRED", nullable = false)
     private Boolean committeeApprovalRequired = false;
 
 
-    @Column(name = "multi_level_approval_required", nullable = false)
+    @Column(name = "MULTI_LEVEL_APPROVAL_REQUIRED", nullable = false)
     private Boolean multiLevelApprovalRequired = false;
 
 
-    @Column(name = "cbi_tracking_required", nullable = false)
+    @Column(name = "CBI_TRACKING_REQUIRED", nullable = false)
     private Boolean cbiTrackingRequired = false;
 
 
-    @Column(name = "external_inquiry_required", nullable = false)
+    @Column(name = "EXTERNAL_INQUIRY_REQUIRED", nullable = false)
     private Boolean externalInquiryRequired = false;
 
 
-    @Column(name = "allow_override", nullable = false)
+    @Column(name = "ALLOW_OVERRIDE", nullable = false)
     private Boolean allowOverride = false;
 
 
-    @Column(name = "override_approval_level_code", length = 30)
+    @Column(name = "OVERRIDE_APPROVAL_LEVEL_CODE", length = 30)
     private String overrideApprovalLevelCode;
 
 
-    @Column(name = "valid_from")
+    @Column(name = "VALID_FROM")
     private LocalDate validFrom;
 
 
-    @Column(name = "record_status_code", nullable = false, length = 20)
+    @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
     private String recordStatusCode = "ACTIVE";
 }

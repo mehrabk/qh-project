@@ -19,59 +19,59 @@ public class ProductPricingComponent extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pricing_rule_id", nullable = false)
+    @JoinColumn(name = "PRICING_RULE_ID", nullable = false)
     private ProductPricingRule pricingRule;
 
 
-    @Column(name = "component_type_code", nullable = false, length = 30)
+    @Column(name = "COMPONENT_TYPE_CODE", nullable = false, length = 30)
     private String componentTypeCode;
 
 
-    @Column(name = "calculation_method_code", length = 30)
+    @Column(name = "CALCULATION_METHOD_CODE", length = 30)
     private String calculationMethodCode;
 
 
-    @Column(name = "rate_value", precision = 12, scale = 8)
+    @Column(name = "RATE_VALUE", precision = 12, scale = 8)
     private BigDecimal rateValue;
 
 
-    @Column(name = "min_rate", precision = 12, scale = 8)
+    @Column(name = "MIN_RATE", precision = 12, scale = 8)
     private BigDecimal minRate;
 
 
-    @Column(name = "max_rate", precision = 12, scale = 8)
+    @Column(name = "MAX_RATE", precision = 12, scale = 8)
     private BigDecimal maxRate;
 
 
-    @Column(name = "fixed_amount", precision = 20, scale = 4)
+    @Column(name = "FIXED_AMOUNT", precision = 20, scale = 4)
     private BigDecimal fixedAmount;
 
 
-    @Column(name = "min_amount", precision = 20, scale = 4)
+    @Column(name = "MIN_AMOUNT", precision = 20, scale = 4)
     private BigDecimal minAmount;
 
 
-    @Column(name = "max_amount", precision = 20, scale = 4)
+    @Column(name = "MAX_AMOUNT", precision = 20, scale = 4)
     private BigDecimal maxAmount;
 
 
-    @Column(name = "percentage_base_code", length = 30)
+    @Column(name = "PERCENTAGE_BASE_CODE", length = 30)
     private String percentageBaseCode;
 
 
-    @Column(name = "is_waivable", nullable = false)
+    @Column(name = "IS_WAIVABLE", nullable = false)
     private Boolean isWaivable = false;
 
 
-    @Column(name = "display_order", nullable = false)
+    @Column(name = "DISPLAY_ORDER", nullable = false)
     private Integer displayOrder = 1;
 
 
-    @Column(name = "record_status_code", nullable = false, length = 20)
+    @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
     private String recordStatusCode = "ACTIVE";
 }

@@ -17,23 +17,23 @@ public class SubOperation extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
 
-    @Column(name = "sub_operation_code", nullable = false, unique = true, length = 30)
+    @Column(name = "SUB_OPERATION_CODE", nullable = false, unique = true, length = 30)
     private String subOperationCode;
 
 
-    @Column(name = "sub_operation_name", nullable = false, length = 100)
+    @Column(name = "SUB_OPERATION_NAME", nullable = false, length = 100)
     private String subOperationName;
 
 
-    @Column(name = "sub_operation_type")
+    @Column(name = "SUB_OPERATION_TYPE")
     private Integer subOperationType;
 
 
-    @Column(name = "record_status_code", nullable = false, length = 20)
+    @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
     private String recordStatusCode = "ACTIVE";
 }

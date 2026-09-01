@@ -18,43 +18,43 @@ public class PlanType extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id;
 
 
 
-    @Column(name = "plan_type_code", nullable = false, unique = true, length = 30)
+    @Column(name = "PLAN_TYPE_CODE", nullable = false, unique = true, length = 30)
     private String planTypeCode;
 
 
-    @Column(name = "plan_type_name", nullable = false, length = 50)
+    @Column(name = "PLAN_TYPE_NAME", nullable = false, length = 50)
     private String planTypeName;
 
 
-    @Column(name = "plan_type_cbi_code", length = 30)
+    @Column(name = "PLAN_TYPE_CBI_CODE", length = 30)
     private String planTypeCbiCode;
 
 
-    @Column(name = "min_commission_rate", precision = 5, scale = 2)
+    @Column(name = "MIN_COMMISSION_RATE", precision = 5, scale = 2)
     private BigDecimal minCommissionRate;
 
 
-    @Column(name = "max_commission_rate", precision = 5, scale = 2)
+    @Column(name = "MAX_COMMISSION_RATE", precision = 5, scale = 2)
     private BigDecimal maxCommissionRate;
 
 
-    @Column(name = "min_penalty_rate", precision = 5, scale = 2)
+    @Column(name = "MIN_PENALTY_RATE", precision = 5, scale = 2)
     private BigDecimal minPenaltyRate;
 
 
-    @Column(name = "max_penalty_rate", precision = 5, scale = 2)
+    @Column(name = "MAX_PENALTY_RATE", precision = 5, scale = 2)
     private BigDecimal maxPenaltyRate;
 
 
-    @Column(name = "max_penalty_forgiveness_rate", precision = 5, scale = 2)
+    @Column(name = "MAX_PENALTY_FORGIVENESS_RATE", precision = 5, scale = 2)
     private BigDecimal maxPenaltyForgivenessRate;
 
 
-    @Column(name = "record_status_code", nullable = false, length = 20)
+    @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
     private String recordStatusCode = "ACTIVE";
 }

@@ -1,6 +1,6 @@
 package ir.bank.qh.core.entity;
 
-import ir.bank.qh.common.entity.SoftDeletableEntity;
+import ir.bank.qh.common.entity.TenantAwareEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,12 +13,15 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(schema = "CORE", name = "product")
-public class Product extends SoftDeletableEntity {
+public class Product extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean deleted = Boolean.FALSE;
 
 
     @Column(name = "product_code", nullable = false, unique = true, length = 30)

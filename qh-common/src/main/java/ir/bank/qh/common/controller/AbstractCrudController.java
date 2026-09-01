@@ -1,6 +1,6 @@
 package ir.bank.qh.common.controller;
 
-import ir.bank.qh.common.entity.BaseAuditableEntity;
+import ir.bank.qh.common.entity.BaseEntity;
 import ir.bank.qh.common.service.AbstractCrudService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -23,7 +23,7 @@ import java.util.List;
  * @param <T> entity type
  * @param <S> concrete service type
  */
-public abstract class AbstractCrudController<T extends BaseAuditableEntity, S extends AbstractCrudService<T>> {
+public abstract class AbstractCrudController<T extends BaseEntity, S extends AbstractCrudService<T>> {
 
     protected abstract S service();
 

@@ -1,6 +1,6 @@
 package ir.bank.qh.deposit.entity;
 
-import ir.bank.qh.common.entity.BaseAuditableEntity;
+import ir.bank.qh.common.entity.TenantAwareEntity;
 import ir.bank.qh.deposit.entity.DepositProductTermRule;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
@@ -15,7 +15,13 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(schema = "DEPOSIT", name = "deposit_product_allowed_term")
-public class DepositProductAllowedTerm extends BaseAuditableEntity {
+public class DepositProductAllowedTerm extends TenantAwareEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "term_rule_id", nullable = false)

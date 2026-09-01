@@ -1,6 +1,6 @@
 package ir.bank.qh.reference.entity;
 
-import ir.bank.qh.common.entity.BaseAuditableEntity;
+import ir.bank.qh.common.entity.BaseEntity;
 import ir.bank.qh.reference.entity.LoanType;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -14,7 +14,13 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(schema = "REFERENCE", name = "pattern_operation_loan_type")
-public class PatternOperationLoanType extends BaseAuditableEntity {
+public class PatternOperationLoanType extends BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "loan_type_id", nullable = false)

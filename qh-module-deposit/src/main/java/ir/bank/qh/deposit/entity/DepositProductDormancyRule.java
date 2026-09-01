@@ -1,6 +1,6 @@
 package ir.bank.qh.deposit.entity;
 
-import ir.bank.qh.common.entity.BaseAuditableEntity;
+import ir.bank.qh.common.entity.TenantAwareEntity;
 import ir.bank.qh.core.entity.ProductVersion;
 import jakarta.persistence.*;
 import java.time.LocalDate;
@@ -15,7 +15,13 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(schema = "DEPOSIT", name = "deposit_product_dormancy_rule")
-public class DepositProductDormancyRule extends BaseAuditableEntity {
+public class DepositProductDormancyRule extends TenantAwareEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_version_id", nullable = false)

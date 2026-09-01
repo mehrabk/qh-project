@@ -1,6 +1,6 @@
 package ir.bank.qh.deposit.entity;
 
-import ir.bank.qh.common.entity.BaseAuditableEntity;
+import ir.bank.qh.common.entity.TenantAwareEntity;
 import ir.bank.qh.deposit.entity.DepositProductClosureRule;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -14,7 +14,13 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(schema = "DEPOSIT", name = "deposit_product_closure_settlement_rule")
-public class DepositProductClosureSettlementRule extends BaseAuditableEntity {
+public class DepositProductClosureSettlementRule extends TenantAwareEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "closure_rule_id", nullable = false)

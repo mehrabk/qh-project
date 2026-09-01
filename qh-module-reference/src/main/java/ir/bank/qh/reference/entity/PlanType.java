@@ -1,6 +1,6 @@
 package ir.bank.qh.reference.entity;
 
-import ir.bank.qh.common.entity.BaseAuditableEntity;
+import ir.bank.qh.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import lombok.Getter;
@@ -14,7 +14,13 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(schema = "REFERENCE", name = "plan_type")
-public class PlanType extends BaseAuditableEntity {
+public class PlanType extends BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
 
 
     @Column(name = "plan_type_code", nullable = false, unique = true, length = 30)

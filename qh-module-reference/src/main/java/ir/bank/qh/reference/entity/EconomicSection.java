@@ -1,6 +1,6 @@
 package ir.bank.qh.reference.entity;
 
-import ir.bank.qh.common.entity.BaseAuditableEntity;
+import ir.bank.qh.common.entity.BaseEntity;
 import ir.bank.qh.reference.entity.PlanType;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -14,7 +14,13 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(schema = "REFERENCE", name = "economic_section")
-public class EconomicSection extends BaseAuditableEntity {
+public class EconomicSection extends BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "plan_type_id", nullable = false)

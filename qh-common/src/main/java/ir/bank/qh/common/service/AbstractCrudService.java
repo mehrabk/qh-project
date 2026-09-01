@@ -1,6 +1,6 @@
 package ir.bank.qh.common.service;
 
-import ir.bank.qh.common.entity.BaseAuditableEntity;
+import ir.bank.qh.common.entity.BaseEntity;
 import ir.bank.qh.common.exception.ResourceNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,14 +10,14 @@ import java.util.List;
  * Generic CRUD behaviour shared by every entity's service class across every
  * module (core, reference, common-rules, deposit, loan, ...). Concrete
  * services only need to supply the repository and an entity display-name,
- * and may override {@link #beforeCreate(BaseAuditableEntity)} /
- * {@link #beforeUpdate(BaseAuditableEntity, BaseAuditableEntity)} to enforce
+ * and may override {@link #beforeCreate(BaseEntity)} /
+ * {@link #beforeUpdate(BaseEntity, BaseEntity)} to enforce
  * the CHECK-constraint-equivalent business rules from the original data
  * model (e.g. age ranges, date ranges, mandatory flags).
  *
- * @param <T> the JPA entity type, must extend {@link BaseAuditableEntity}
+ * @param <T> the JPA entity type, must extend {@link BaseEntity}
  */
-public abstract class AbstractCrudService<T extends BaseAuditableEntity> {
+public abstract class AbstractCrudService<T extends BaseEntity> {
 
     protected abstract JpaRepository<T, Long> repository();
 

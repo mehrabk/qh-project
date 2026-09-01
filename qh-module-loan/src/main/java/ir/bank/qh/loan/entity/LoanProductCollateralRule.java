@@ -1,6 +1,6 @@
 package ir.bank.qh.loan.entity;
 
-import ir.bank.qh.common.entity.BaseAuditableEntity;
+import ir.bank.qh.common.entity.TenantAwareEntity;
 import ir.bank.qh.core.entity.ProductVersion;
 import ir.bank.qh.reference.entity.LoanProductCollateral;
 import jakarta.persistence.*;
@@ -16,7 +16,13 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(schema = "LOAN", name = "loan_product_collateral_rule")
-public class LoanProductCollateralRule extends BaseAuditableEntity {
+public class LoanProductCollateralRule extends TenantAwareEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_version_id", nullable = false)

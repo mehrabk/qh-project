@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class SoftDeletableEntity extends BaseAuditableEntity {
+public abstract class SoftDeletableEntity extends TenantAwareEntity {
 
     @Column(name = "is_deleted", nullable = false)
     private Boolean deleted = Boolean.FALSE;

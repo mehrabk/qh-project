@@ -15,6 +15,11 @@ import lombok.Setter;
 @Table(schema = "CORE", name = "product")
 public class Product extends SoftDeletableEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
 
     @Column(name = "product_code", nullable = false, unique = true, length = 30)
     private String productCode;

@@ -1,6 +1,6 @@
 package ir.bank.qh.loan.entity;
 
-import ir.bank.qh.common.entity.BaseAuditableEntity;
+import ir.bank.qh.common.entity.TenantAwareEntity;
 import ir.bank.qh.commonrules.entity.ProductEligibilityRule;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
@@ -15,7 +15,13 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(schema = "LOAN", name = "loan_eligibility_extension")
-public class LoanEligibilityExtension extends BaseAuditableEntity {
+public class LoanEligibilityExtension extends TenantAwareEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "eligibility_rule_id", nullable = false, unique = true)

@@ -1,6 +1,6 @@
 package ir.bank.qh.commonrules.entity;
 
-import ir.bank.qh.common.entity.BaseAuditableEntity;
+import ir.bank.qh.common.entity.TenantAwareEntity;
 import ir.bank.qh.commonrules.entity.ProductChannelRule;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -14,7 +14,13 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(schema = "COMMONRULES", name = "product_channel_operation")
-public class ProductChannelOperation extends BaseAuditableEntity {
+public class ProductChannelOperation extends TenantAwareEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "channel_rule_id", nullable = false)

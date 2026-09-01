@@ -75,17 +75,19 @@ ir.bank.qh.<module>
 
 ### پایه‌های مشترک Entity ها (qh-common)
 
-دو خانواده کلاس پایه در `ir.bank.qh.common.entity` وجود دارد که هر ماژولی (فعلی یا آینده) می‌تواند
-از هرکدام که مناسب‌تر است استفاده کند:
+یک خانواده کلاس پایه در `ir.bank.qh.common.entity` وجود دارد و همه ماژول‌ها (core, commonrules,
+deposit, loan, reference, party) از همین سلسله‌مراتب استفاده می‌کنند:
 
-| کلاس پایه | برای چه مواردی | چه ماژول‌هایی امروز استفاده می‌کنند |
+| کلاس پایه | برای چه مواردی | چه ماژول‌هایی استفاده می‌کنند |
 |---|---|---|
-| `BaseAuditableEntity` / `SoftDeletableEntity` | Audit با `LocalDateTime`، `@Version` روی `Long recordVersion` با مقدار پیش‌فرض جاوایی | core, commonrules, deposit, loan, reference |
-| `BaseEntity` / `TenantAwareEntity` | Audit با `java.util.Date`، `@DynamicUpdate`، و پشتیبانی از Multi-Tenancy (`@TenantId`) برای موجودیت‌های وابسته به یک نهاد بانکی (Institution) | party |
+| `BaseEntity` | Audit (`CREATED_BY/ON`, `MODIFIED_BY/ON`) با `java.util.Date`، `@DynamicUpdate`، و `@Version` روی `Long version` — بدون تنانت | داده‌های مرجع/ثابت مشترک بین همه نهادها: reference (کل ماژول)، و `CountryEntity`/`CityEntity`/`AddressEntity` در party |
+| `TenantAwareEntity extends BaseEntity` | همان Audit به‌علاوه فیلد `institutionId` با انوتیشن `@TenantId` (قابلیت Hibernate 6/7) که به‌صورت خودکار و شفاف هر Query را به تنانت جاری فیلتر می‌کند | موجودیت‌های وابسته به یک نهاد بانکی: core, commonrules, deposit, loan (کل محصول‌ساز) و بیشتر Entity های party (Party, Branch, ContactPoint, ...) |
+| `SoftDeletableEntity extends TenantAwareEntity` | همان `TenantAwareEntity` به‌علاوه فلگ `IS_DELETED` | `Product` (ماژول core) |
 
-`BaseEntity` پایه‌ی عمومی (بدون تنانت) است — مناسب داده‌های مرجع مشترک بین همه‌ی نهادها (مثل `CountryEntity`،
-`CityEntity` در ماژول Party). `TenantAwareEntity` یک فیلد `institutionId` با انوتیشن `@TenantId` (قابلیت
-جدید Hibernate 6/7) اضافه می‌کند که به‌صورت خودکار و شفاف هر Query را به تنانت جاری فیلتر می‌کند.
+هر Entity، فیلد `id` (کلید اصلی) را خودش با `@Id`/`@GeneratedValue` تعریف می‌کند؛ کلاس‌های پایه فقط
+Audit/تنانت را اضافه می‌کنند. قاعده انتخاب پایه: اگر داده‌تان **ثابت/مرجع** و مشترک بین همه نهادهاست از
+`BaseEntity` استفاده کنید؛ اگر داده‌تان **مختص یک نهاد بانکی** (Institution) است از `TenantAwareEntity`
+ارث ببرید.
 
 ### Multi-Tenancy (نهاد بانکی/Institution)
 
@@ -98,7 +100,8 @@ ir.bank.qh.<module>
 ⚠️ **این یک Scaffold پایه‌ی کاربردی است، نه یک پیاده‌سازی امنیتی کامل.** در پروژه واقعی معمولاً تنانت باید
 از Principal احرازهویت‌شده (JWT/Session) استخراج شود، نه از یک هدر خام قابل جعل. همچنین چون امکان `mvn
 compile` واقعی در محیط من نبود، توصیه می‌کنم رفتار `@TenantId` + `MULTI_TENANT_IDENTIFIER_RESOLVER` را در
-اولین اجرای لوکال با دقت تست کنید (لاگ SQL تولیدشده باید `WHERE INSTITUTION_ID = ?` را روی جداول Party نشان
+اولین اجرای لوکال با دقت تست کنید (لاگ SQL تولیدشده باید `WHERE INSTITUTION_ID = ?` را روی جداول هر
+موجودیتی که از `TenantAwareEntity` ارث می‌برد — نه فقط Party، بلکه core/commonrules/deposit/loan هم — نشان
 دهد).
 
 ### Schema جدا برای هر ماژول
@@ -233,9 +236,10 @@ X-Institution-Id: 1
    به `qh-common` و هر ماژولی که نیاز دارید مثلاً `qh-module-core`).
 2. پکیج `ir.bank.qh.card` را با زیرپکیج‌های `entity` / `repository` / `service` / `controller`
    بسازید، دقیقاً با همان الگوی ماژول‌های موجود.
-3. Entity های خود را با `extends BaseAuditableEntity` **یا** `extends BaseEntity`/`TenantAwareEntity`
-   (هر دو در qh-common موجودند) بسازید؛ اگر داده‌تان مختص یک نهاد بانکی است از `TenantAwareEntity`
-   استفاده کنید. برای Schema مستقل، `@Table(schema = "CARD", name = "...")` بگذارید.
+3. Entity های خود را با `extends BaseEntity` **یا** `extends TenantAwareEntity` (هر دو در qh-common
+   موجودند) بسازید؛ اگر داده‌تان مختص یک نهاد بانکی است از `TenantAwareEntity` استفاده کنید، وگرنه
+   (داده مرجع/ثابت مشترک بین همه نهادها) از `BaseEntity`. برای Schema مستقل،
+   `@Table(schema = "CARD", name = "...")` بگذارید.
 4. Repository را `extends JpaRepository<YourEntity, Long>` بسازید.
 5. Service را طبق الگوی A یا B بسازید؛ قواعد کسب‌وکار (معادل CHECK Constraint) را داخلش پیاده کنید.
 6. Controller را طبق همان الگو بسازید و `@RequestMapping("/api/v1/card/your-entities")` بگذارید.
@@ -267,7 +271,8 @@ X-Institution-Id: 1
 احتمالی معمولاً نسخه‌ناسازگاری (مثلاً اگر Spring Boot 4.1.1 هنوز روی ریپازیتوری لوکال شما موجود
 نباشد) هستند که با تغییر نسخه در `pom.xml` والد قابل رفع‌اند.
 
-نکته‌ی اضافه برای ماژول Party: زیرساخت Multi-Tenancy (`@TenantId` + `CurrentTenantIdentifierResolver`)
-بر اساس مستندات رسمی Hibernate 6/7 نوشته شده، اما چون امکان اجرای واقعی نداشتم، **حتماً در اولین اجرا
-بررسی کنید** که کوئری‌های تولیدشده روی جداول Party واقعاً `WHERE INSTITUTION_ID = ?` را اعمال می‌کنند
-(با `show-sql: true` در لاگ قابل مشاهده است).
+نکته‌ی اضافه درباره Multi-Tenancy: زیرساخت آن (`@TenantId` + `CurrentTenantIdentifierResolver`) بر اساس
+مستندات رسمی Hibernate 6/7 نوشته شده و اکنون روی همه ماژول‌هایی که Entity‌شان از `TenantAwareEntity` ارث
+می‌برد (party و همه ماژول‌های محصول‌ساز: core, commonrules, deposit, loan) اعمال می‌شود؛ اما چون امکان
+اجرای واقعی نداشتم، **حتماً در اولین اجرا بررسی کنید** که کوئری‌های تولیدشده روی این جداول واقعاً
+`WHERE INSTITUTION_ID = ?` را اعمال می‌کنند (با `show-sql: true` در لاگ قابل مشاهده است).

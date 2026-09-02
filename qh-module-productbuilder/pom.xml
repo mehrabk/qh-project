@@ -10,25 +10,21 @@
     </parent>
 
     <artifactId>qh-module-productbuilder</artifactId>
-    <packaging>jar</packaging>
-    <name>QH :: Module :: Product Builder</name>
+    <packaging>pom</packaging>
+    <name>QH :: Product Builder (parent)</name>
     <description>
-        The Product Builder domain (47 tables, one bounded context, one PRODUCTBUILDER schema/database
-        - see README's "Domain vs Schema" section): Core (PRODUCT, PRODUCT_VERSION, ...), Common Rules
-        (Eligibility, Channel, Pricing, ...), Deposit, Loan and Reference data all live together here
-        under ir.bank.qh.productbuilder.{core,commonrules,deposit,loan,reference}. They used to be five
-        separate Maven modules; merged into one because they always deploy and version together.
+        Parent/aggregator for the Product Builder domain (47 tables, one bounded context, one
+        PRODUCTBUILDER schema/database - see README's "Domain vs Schema" section). Groups its five
+        sub-domains as Maven sub-modules for easier management, while they still share one Java
+        package root (ir.bank.qh.productbuilder.*) and deploy together as one persistence unit
+        (ProductBuilderPersistenceConfig in qh-app scans "ir.bank.qh.productbuilder" as a whole).
     </description>
 
-    <dependencies>
-        <dependency>
-            <groupId>ir.bank.qh</groupId>
-            <artifactId>qh-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-    </dependencies>
+    <modules>
+        <module>reference</module>
+        <module>core</module>
+        <module>commonrules</module>
+        <module>deposit</module>
+        <module>loan</module>
+    </modules>
 </project>

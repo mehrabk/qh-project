@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>ir.bank.qh</groupId>
+        <artifactId>qh-module-productbuilder</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>qh-module-productbuilder-deposit</artifactId>
+    <packaging>jar</packaging>
+    <name>QH :: Product Builder :: 03 Deposit</name>
+    <description>Deposit-specific lifecycle rules: Profile, Opening, Term/Allowed Term, Transaction, Withdrawal Media,
+        Joint, Hold, Dormancy, Closure (+ Precheck/Settlement/Approval). Depends on Core (PRODUCT_VERSION).</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>ir.bank.qh</groupId>
+            <artifactId>qh-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ir.bank.qh</groupId>
+            <artifactId>qh-module-productbuilder-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+</project>

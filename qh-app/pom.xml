@@ -34,7 +34,23 @@
         </dependency>
         <dependency>
             <groupId>ir.bank.qh</groupId>
-            <artifactId>qh-module-productbuilder</artifactId>
+            <artifactId>qh-module-productbuilder-reference</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ir.bank.qh</groupId>
+            <artifactId>qh-module-productbuilder-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ir.bank.qh</groupId>
+            <artifactId>qh-module-productbuilder-commonrules</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ir.bank.qh</groupId>
+            <artifactId>qh-module-productbuilder-deposit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ir.bank.qh</groupId>
+            <artifactId>qh-module-productbuilder-loan</artifactId>
         </dependency>
         <dependency>
             <groupId>ir.bank.qh</groupId>

@@ -26,27 +26,27 @@ qh-productbuilder (pom والد)
 ├── qh-common                 مشترک: BaseEntity، Auditing، Exception Handler، ApiResponse
 │
 ├── qh-module-reference        05-Reference Data (۱۴ جدول) — بدون وابستگی به ماژول دیگر
-│     ir.bank.qh.reference     DocumentType, LoanType, PlanType, LoanUsage,
-│                              EconomicSection/SubSection, Operation/SubOperation,
-│                              PatternOperation*، LoanProductCollateral، ...
+│     ir.bank.qh.productbuilder.reference     DocumentType, LoanType, PlanType, LoanUsage,
+│                                              EconomicSection/SubSection, Operation/SubOperation,
+│                                              PatternOperation*، LoanProductCollateral، ...
 │
 ├── qh-module-core             01-Core (۵ جدول) — وابسته به qh-common
-│     ir.bank.qh.core          Product, ProductVersion, ProductVersionModule,
-│                              ProductRelationship, ProductLegacyMapping
+│     ir.bank.qh.productbuilder.core          Product, ProductVersion, ProductVersionModule,
+│                                              ProductRelationship, ProductLegacyMapping
 │
 ├── qh-module-common-rules     02-Common Rules (۹ جدول) — وابسته به core + reference
-│     ir.bank.qh.commonrules   ProductEligibilityRule, ProductChannelRule/Operation,
-│                              ProductOrgScope, ProductRequiredDocument/Inquiry,
-│                              ProductPricingRule/Component، ProductRateTier
+│     ir.bank.qh.productbuilder.commonrules   ProductEligibilityRule, ProductChannelRule/Operation,
+│                                              ProductOrgScope, ProductRequiredDocument/Inquiry,
+│                                              ProductPricingRule/Component، ProductRateTier
 │
 ├── qh-module-deposit           03-Deposit Module (۱۳ جدول) — وابسته به core
-│     ir.bank.qh.deposit       DepositProductProfile, OpeningRule, TermRule/AllowedTerm,
-│                              TransactionRule, WithdrawalMedia, JointRule, HoldRule,
-│                              DormancyRule, ClosureRule (+Precheck/Settlement/Approval)
+│     ir.bank.qh.productbuilder.deposit       DepositProductProfile, OpeningRule, TermRule/AllowedTerm,
+│                                              TransactionRule, WithdrawalMedia, JointRule, HoldRule,
+│                                              DormancyRule, ClosureRule (+Precheck/Settlement/Approval)
 │
 ├── qh-module-loan               04-Loan Module (۶ جدول) — وابسته به core + common-rules + reference
-│     ir.bank.qh.loan          LoanProductProfile, EligibilityExtension, FinancialExtension,
-│                              RepaymentRule, ProcessRule, CollateralRule
+│     ir.bank.qh.productbuilder.loan          LoanProductProfile, EligibilityExtension, FinancialExtension,
+│                                              RepaymentRule, ProcessRule, CollateralRule
 │
 ├── qh-module-party             ماژول Party (۱۸ جدول) — فقط وابسته به qh-common (کاملاً مستقل/SOA)
 │     ir.bank.qh.party         PartyEntity (والد JOINED) → PersonEntity/OrganizationEntity،
@@ -56,6 +56,12 @@ qh-productbuilder (pom والد)
 └── qh-app                     اپلیکیشن قابل اجرا؛ همه ماژول‌ها را جمع می‌کند + application.yml + data*.sql
       ir.bank.qh.app
 ```
+
+پنج ماژول محصول‌ساز همگی زیر یک پکیج ریشه مشترک `ir.bank.qh.productbuilder` هستند (`.reference`،
+`.core`، `.commonrules`، `.deposit`، `.loan`) — دقیقاً همان مرز Bounded Context که در بخش
+«Domain vs Schema» پایین توضیح داده شده؛ همین یک ریشه مشترک است که باعث می‌شود
+`ProductBuilderPersistenceConfig` بتواند با یک `basePackages = "ir.bank.qh.productbuilder"`
+همه پنج ماژول را با هم اسکن کند. Party همچنان زیر پکیج مستقل خودش (`ir.bank.qh.party`) است.
 
 هر ماژول یک ساختار پکیج یکسان دارد:
 
@@ -290,8 +296,10 @@ X-Institution-Id: 1
 
 1. یک پوشه Maven جدید بسازید: `qh-module-card/pom.xml` (کپی از یکی از ماژول‌های موجود، وابستگی
    به `qh-common` و هر ماژولی که نیاز دارید مثلاً `qh-module-core`).
-2. پکیج `ir.bank.qh.card` را با زیرپکیج‌های `entity` / `repository` / `service` / `controller`
-   بسازید، دقیقاً با همان الگوی ماژول‌های موجود.
+2. پکیج جاوای خود را با زیرپکیج‌های `entity` / `repository` / `service` / `controller` بسازید،
+   دقیقاً با همان الگوی ماژول‌های موجود — اسم ریشه پکیج به تصمیم مرحله ۱۰ بستگی دارد
+   (`ir.bank.qh.productbuilder.card` اگر بخشی از محصول‌ساز است، یا `ir.bank.qh.card` اگر
+   Bounded Context جدید و مستقلی است).
 3. Entity های خود را با `extends BaseEntity` **یا** `extends TenantAwareEntity` (هر دو در qh-common
    موجودند) بسازید؛ اگر داده‌تان مختص یک نهاد بانکی است از `TenantAwareEntity` استفاده کنید، وگرنه
    (داده مرجع/ثابت مشترک بین همه نهادها) از `BaseEntity`.
@@ -303,12 +311,12 @@ X-Institution-Id: 1
 9. اگر داده نمونه دارید، یک `data-card.sql` بسازید.
 10. **تصمیم مهم: ماژول جدید به کدام Persistence Unit تعلق دارد؟** (نگاه کنید به بخش
     «Domain vs Schema» بالا)
-    - اگر واقعاً بخشی از دامنه محصول‌ساز است (به `ProductVersion`/`Product` وصل می‌شود): از
-      `@Table(schema = "PRODUCTBUILDER", name = "...")` استفاده کنید، پکیج
-      `ir.bank.qh.card.entity`/`ir.bank.qh.card.repository` را به لیست‌های
-      `ProductBuilderPersistenceConfig` (در `qh-app/src/main/java/ir/bank/qh/app/config`) اضافه
-      کنید، و `data-card.sql` را به `data-locations` در `ProductBuilderPersistenceConfig`'s
-      initializer اضافه کنید.
+    - اگر واقعاً بخشی از دامنه محصول‌ساز است (به `ProductVersion`/`Product` وصل می‌شود): پکیج جاوای
+      خود را زیر `ir.bank.qh.productbuilder.card` بسازید و از `@Table(schema = "PRODUCTBUILDER",
+      name = "...")` استفاده کنید — همین کافی است، چون `ProductBuilderPersistenceConfig` (در
+      `qh-app/src/main/java/ir/bank/qh/app/config`) از قبل کل `ir.bank.qh.productbuilder` را
+      اسکن می‌کند و نیازی به اضافه‌کردن پکیج جدید نیست. `data-card.sql` را به `data-locations` در
+      همان کلاس اضافه کنید.
     - اگر یک Bounded Context کاملاً مستقل و جدید است (نه محصول‌ساز، نه Party): یک Schema منطقی
       جدید در `qh.schemas.*` تعریف کنید و یک `CardPersistenceConfig` جدید بسازید (کپی از
       `PartyPersistenceConfig` با پکیج‌ها و نام Bean های خودش) — همراه با یک ورودی جدید در

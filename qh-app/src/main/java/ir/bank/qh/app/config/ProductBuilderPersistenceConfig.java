@@ -29,13 +29,7 @@ import java.util.List;
  */
 @Configuration
 @EnableJpaRepositories(
-        basePackages = {
-                "ir.bank.qh.reference.repository",
-                "ir.bank.qh.core.repository",
-                "ir.bank.qh.commonrules.repository",
-                "ir.bank.qh.deposit.repository",
-                "ir.bank.qh.loan.repository"
-        },
+        basePackages = "ir.bank.qh.productbuilder",
         entityManagerFactoryRef = "productBuilderEntityManagerFactory",
         transactionManagerRef = "productBuilderTransactionManager")
 public class ProductBuilderPersistenceConfig {
@@ -57,12 +51,7 @@ public class ProductBuilderPersistenceConfig {
             EntityManagerFactoryBuilder builder,
             @Qualifier("productBuilderDataSource") DataSource dataSource) {
         return builder.dataSource(dataSource)
-                .packages(
-                        "ir.bank.qh.reference.entity",
-                        "ir.bank.qh.core.entity",
-                        "ir.bank.qh.commonrules.entity",
-                        "ir.bank.qh.deposit.entity",
-                        "ir.bank.qh.loan.entity")
+                .packages("ir.bank.qh.productbuilder")
                 .persistenceUnit("productBuilder")
                 .build();
     }

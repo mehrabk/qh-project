@@ -1,6 +1,7 @@
 package ir.bank.qh.loan.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.core.entity.ProductVersion;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -23,8 +24,9 @@ public class LoanFinancialExtension extends TenantAwareEntity {
     private Long id;
 
 
-    @Column(name = "PRODUCT_VERSION_ID", nullable = false, unique = true)
-    private Long productVersionId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false, unique = true)
+    private ProductVersion productVersion;
 
 
     @Column(name = "MIN_FACILITY_AMOUNT", precision = 20, scale = 2)

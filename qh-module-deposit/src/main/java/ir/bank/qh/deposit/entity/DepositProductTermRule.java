@@ -1,6 +1,7 @@
 package ir.bank.qh.deposit.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.core.entity.ProductVersion;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,8 +22,9 @@ public class DepositProductTermRule extends TenantAwareEntity {
     private Long id;
 
 
-    @Column(name = "PRODUCT_VERSION_ID", nullable = false)
-    private Long productVersionId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false)
+    private ProductVersion productVersion;
 
 
     @Column(name = "MIN_TERM_VALUE")

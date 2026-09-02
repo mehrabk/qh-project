@@ -1,6 +1,8 @@
 package ir.bank.qh.loan.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.core.entity.ProductVersion;
+import ir.bank.qh.reference.entity.LoanProductCollateral;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import lombok.Getter;
@@ -22,11 +24,13 @@ public class LoanProductCollateralRule extends TenantAwareEntity {
     private Long id;
 
 
-    @Column(name = "PRODUCT_VERSION_ID", nullable = false)
-    private Long productVersionId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false)
+    private ProductVersion productVersion;
 
-    @Column(name = "LOAN_PRODUCT_COLLATERAL_ID", nullable = false)
-    private Long loanProductCollateralId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "LOAN_PRODUCT_COLLATERAL_ID", nullable = false)
+    private LoanProductCollateral loanProductCollateral;
 
 
     @Column(name = "IS_REQUIRED", nullable = false)

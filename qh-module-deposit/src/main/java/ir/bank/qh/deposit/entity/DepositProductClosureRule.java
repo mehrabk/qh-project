@@ -1,6 +1,7 @@
 package ir.bank.qh.deposit.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.core.entity.ProductVersion;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import lombok.Getter;
@@ -22,8 +23,9 @@ public class DepositProductClosureRule extends TenantAwareEntity {
     private Long id;
 
 
-    @Column(name = "PRODUCT_VERSION_ID", nullable = false)
-    private Long productVersionId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false)
+    private ProductVersion productVersion;
 
 
     @Column(name = "CLOSURE_TYPE_CODE", nullable = false, length = 30)

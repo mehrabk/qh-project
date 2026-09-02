@@ -1,6 +1,7 @@
 package ir.bank.qh.loan.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.commonrules.entity.ProductEligibilityRule;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import lombok.Getter;
@@ -22,8 +23,9 @@ public class LoanEligibilityExtension extends TenantAwareEntity {
     private Long id;
 
 
-    @Column(name = "ELIGIBILITY_RULE_ID", nullable = false, unique = true)
-    private Long eligibilityRuleId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ELIGIBILITY_RULE_ID", nullable = false, unique = true)
+    private ProductEligibilityRule eligibilityRule;
 
 
     @Column(name = "MIN_INCOME_AMOUNT", precision = 20, scale = 2)

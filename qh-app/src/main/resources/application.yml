@@ -1,3 +1,17 @@
+# Physical schema name for each module's logical @Table(schema = "...") - resolved at
+# Hibernate DDL/SQL-generation time by ConfigurableSchemaNamingStrategy (qh-common).
+# Change a value here (or override it in a profile, e.g. application-oracle.yml) to move a
+# module to a differently named schema without touching any entity. See README for the
+# planned multi-server/Oracle profile.
+qh:
+  schemas:
+    reference: REFERENCE
+    core: CORE
+    commonrules: COMMONRULES
+    deposit: DEPOSIT
+    loan: LOAN
+    party: PARTY
+
 spring:
   application:
     name: qh-productbuilder
@@ -22,10 +36,11 @@ spring:
     properties:
       hibernate:
         format_sql: true
-        # Every module maps its @Table(schema = "...") to its own schema
-        # (REFERENCE, CORE, COMMONRULES, DEPOSIT, LOAN, PARTY). This tells
-        # Hibernate to emit "CREATE SCHEMA IF NOT EXISTS ..." for each one
-        # instead of failing because the schema doesn't exist yet.
+        # Every module maps its @Table(schema = "...") to its own logical schema
+        # (REFERENCE, CORE, COMMONRULES, DEPOSIT, LOAN, PARTY), remapped to the physical
+        # schema names configured under qh.schemas.* above. This tells Hibernate to emit
+        # "CREATE SCHEMA IF NOT EXISTS ..." for each physical schema instead of failing
+        # because the schema doesn't exist yet.
         hbm2ddl:
           create_namespaces: true
         jdbc:

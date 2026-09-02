@@ -103,11 +103,11 @@ compile` واقعی در محیط من نبود، توصیه می‌کنم رف�
 موجودیتی که از `TenantAwareEntity` ارث می‌برد — نه فقط Party، بلکه core/commonrules/deposit/loan هم — نشان
 دهد).
 
-### Schema جدا برای هر ماژول
+### Schema جدا برای هر ماژول — و اسم هر Schema از کانفیگ
 
-هر ماژول جداول خودش را در یک Schema اختصاصی H2 نگه می‌دارد (`@Table(schema = "...")`):
+هر ماژول جداول خودش را در یک Schema اختصاصی نگه می‌دارد (`@Table(schema = "...")`):
 
-| ماژول | Schema |
+| ماژول | Schema منطقی |
 |---|---|
 | qh-module-reference | `REFERENCE` |
 | qh-module-core | `CORE` |
@@ -116,9 +116,42 @@ compile` واقعی در محیط من نبود، توصیه می‌کنم رف�
 | qh-module-loan | `LOAN` |
 | qh-module-party | `PARTY` |
 
-`hibernate.hbm2ddl.create_namespaces=true` در `application.yml` باعث می‌شود Hibernate این Schemaها را
-خودش در H2 بسازد. اگر جدولی از ماژول دیگر را از طریق SQL خام (نه JPA) کوئری می‌گیرید، حتماً نام Schema را
-هم بنویسید، مثلاً `SELECT * FROM CORE.PRODUCT` یا `SELECT * FROM PARTY.PARTY`.
+مقدار `schema` روی `@Table` یک **نام منطقی ثابت** است، نه اسم فیزیکی نهایی — و هرگز از کد حذف نمی‌شود
+(چون Hibernate مقدار این انوتیشن را باید در زمان کامپایل به‌صورت constant بداند، نه از یک property).
+اسم **فیزیکی** واقعی هر Schema از `qh.schemas.*` در `application.yml` خوانده می‌شود:
+
+```yaml
+qh:
+  schemas:
+    reference: REFERENCE
+    core: CORE
+    commonrules: COMMONRULES
+    deposit: DEPOSIT
+    loan: LOAN
+    party: PARTY
+```
+
+این نگاشت را `ir.bank.qh.common.config.ConfigurableSchemaNamingStrategy` (یک `PhysicalNamingStrategy`
+که Spring Boot به‌طور خودکار شناسایی و به Hibernate متصل می‌کند) در لحظه تولید DDL/SQL اعمال می‌کند؛
+یعنی برای انتقال یک ماژول به Schema دیگر فقط کافی است مقدار مربوطه را در `application.yml` (یا یک
+Profile دیگر مثل `application-oracle.yml`) عوض کنید — نیازی به تغییر هیچ Entity نیست.
+
+⚠️ این نگاشت فقط روی چیزهایی اعمال می‌شود که از مسیر Hibernate رد می‌شوند (Entity Mapping، DDL). فایل‌های
+seed خام (`data-product.sql`, `data-party.sql`) نام Schema را به‌صورت متنی دارند (مثلاً
+`INSERT INTO CORE.product ...`) و از این نگاشت عبور نمی‌کنند؛ اگر Schema پیش‌فرض `CORE` را عوض کنید، باید
+seed خام را هم دستی هماهنگ کنید — این محدودیت ذاتی SQL خام است، نه چیزی که این مکانیزم قرار است حل کند.
+
+`hibernate.hbm2ddl.create_namespaces=true` در `application.yml` باعث می‌شود Hibernate این Schemaهای
+فیزیکی را خودش بسازد. اگر جدولی از ماژول دیگر را از طریق SQL خام (نه JPA) کوئری می‌گیرید، حتماً نام Schema
+فیزیکی فعلی را هم بنویسید، مثلاً `SELECT * FROM CORE.PRODUCT` یا `SELECT * FROM PARTY.PARTY`.
+
+**نقشه راه چند سرور (Oracle، جدا برای هر ماژول):** یک Profile نمونه در `application-oracle.yml` آماده
+شده که همین `qh.schemas.*` را روی نام‌گذاری Oracle نشان می‌دهد (فعلاً یک تک‌دیتابیس Oracle با چند Schema،
+هنوز بدون Driver واقعی روی classpath — قبل از استفاده واقعی، `ojdbc11` را به `qh-app/pom.xml` اضافه
+کنید). جدا کردن واقعی هر ماژول روی یک **سرور/دیتابیس مستقل** یک قدم بزرگ‌تر و جداگانه است: هر ماژول به
+یک `DataSource`/`EntityManagerFactory` اختصاصی نیاز دارد و باید Repository هر ماژول به همان مسیر وصل
+شود (Multi-DataSource Routing). این مکانیزم `qh.schemas.*` همان سکوی پرشی است که آن مرحله را بدون
+دست‌زدن به Entity ها ممکن می‌کند، اما خودش هنوز آن جداسازی فیزیکی را انجام نمی‌دهد.
 
 ## اجرای پروژه
 

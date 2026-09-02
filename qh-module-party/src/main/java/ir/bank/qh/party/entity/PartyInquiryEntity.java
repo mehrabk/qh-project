@@ -67,9 +67,4 @@ public class PartyInquiryEntity extends TenantAwareEntity {
 
     @Column(name = "EXPIRATION_DATE")
     private LocalDateTime expirationDate;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "BRANCH_ID", referencedColumnName = "BRANCH_ID",
-            foreignKey = @ForeignKey(name = "PARTY_INQUIRY_FK_BRANCH"))
-    private BranchEntity branch;
 }

@@ -13,11 +13,13 @@
     <packaging>jar</packaging>
     <name>QH :: App (Runnable Modular Monolith)</name>
     <description>
-        Assembles every business module (core, reference, common-rules, deposit, loan) into a single
-        runnable Spring Boot application. To add a new module: create a new Maven module that follows
-        the same entity/repository/service/web package shape, add it as a &lt;module&gt; in the root
-        pom.xml and as a &lt;dependency&gt; here - no other wiring is required, component scanning
-        picks it up automatically because everything lives under the ir.bank.qh base package.
+        Assembles every business module (Product Builder: core/reference/common-rules/deposit/loan,
+        merged into one Maven module qh-module-productbuilder since they always deploy together; and
+        Party) into a single runnable Spring Boot application. To add a new module: create a new Maven
+        module that follows the same entity/repository/service/web package shape, add it as a
+        &lt;module&gt; in the root pom.xml and as a &lt;dependency&gt; here - no other wiring is
+        required, component scanning picks it up automatically because everything lives under the
+        ir.bank.qh base package.
     </description>
 
     <properties>
@@ -32,23 +34,7 @@
         </dependency>
         <dependency>
             <groupId>ir.bank.qh</groupId>
-            <artifactId>qh-module-reference</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ir.bank.qh</groupId>
-            <artifactId>qh-module-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ir.bank.qh</groupId>
-            <artifactId>qh-module-common-rules</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ir.bank.qh</groupId>
-            <artifactId>qh-module-deposit</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ir.bank.qh</groupId>
-            <artifactId>qh-module-loan</artifactId>
+            <artifactId>qh-module-productbuilder</artifactId>
         </dependency>
         <dependency>
             <groupId>ir.bank.qh</groupId>

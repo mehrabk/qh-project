@@ -79,11 +79,6 @@ public class SignatureSpecimenEntity extends TenantAwareEntity {
     @Column(name = "DOCUMENT_ID")
     private Long documentId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "BRANCH_ID", referencedColumnName = "BRANCH_ID",
-            foreignKey = @ForeignKey(name = "SIGNATURE_SPECIMEN_FK_BRANCH"))
-    private BranchEntity branch;
-
     @Column(name = "CAPTURED_BY", length = 100)
     private String capturedBy;
 

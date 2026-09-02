@@ -1,11 +1,14 @@
 # محصول‌ساز یکپارچه قرض‌الحسنه — Modular Monolith (SOA-Style)
 
-پیاده‌سازی Spring Boot برای مدل داده «محصول‌ساز یکپارچه سپرده و تسهیلات قرض‌الحسنه» (۴۷ جدول در ۵ پکیج محصول‌ساز)
-به‌همراه ماژول Party مستقل (۱۸ جدول، معماری BIAN-style) — مجموعاً ۶ ماژول کسب‌وکاری.
-معماری: **Modular Monolith** — هر قابلیت کسب‌وکاری در یک ماژول Maven جدا با پکیج جاوای اختصاصی
-خودش زندگی می‌کند (Entity/Repository/Service/Controller مستقل)، اما همه با هم در یک اپلیکیشن
-Spring Boot واحد (`qh-app`) اجرا می‌شوند. این یعنی می‌توانید هر ماژول را در آینده به یک
-میکروسرویس مستقل تبدیل کنید بدون این‌که لازم باشد کد را از نو بازنویسی کنید.
+پیاده‌سازی Spring Boot برای مدل داده «محصول‌ساز یکپارچه سپرده و تسهیلات قرض‌الحسنه» (۴۷ جدول در ۵ زیرپکیج
+محصول‌ساز: Core, Common Rules, Deposit, Loan, Reference) به‌همراه ماژول Party مستقل (۱۷ جدول، معماری
+BIAN-style) — مجموعاً ۶ قابلیت کسب‌وکاری در ۲ Bounded Context/Persistence Unit واقعی.
+معماری: **Modular Monolith** — هر Bounded Context (محصول‌ساز، Party) در یک ماژول Maven مستقل با
+Schema/دیتابیس اختصاصی خودش زندگی می‌کند (Entity/Repository/Service/Controller مستقل، و در محصول‌ساز
+پنج زیرپکیج جاوا برای پنج قابلیت کسب‌وکاری داخل همان یک ماژول)، اما همه با هم در یک اپلیکیشن Spring Boot
+واحد (`qh-app`) اجرا می‌شوند. این یعنی می‌توانید هر Bounded Context را در آینده به یک میکروسرویس مستقل
+تبدیل کنید بدون این‌که لازم باشد کد را از نو بازنویسی کنید — همان کاری که برای Party (و در آینده برای
+کل محصول‌ساز) با دو دیتابیس مستقل از قبل آماده شده (بخش «Domain vs Schema» را ببینید).
 
 ## پشته فناوری
 
@@ -23,45 +26,44 @@ Spring Boot واحد (`qh-app`) اجرا می‌شوند. این یعنی می�
 ```
 qh-productbuilder (pom والد)
 │
-├── qh-common                 مشترک: BaseEntity، Auditing، Exception Handler، ApiResponse
+├── qh-common                    مشترک: BaseEntity، Auditing، Exception Handler، ApiResponse
 │
-├── qh-module-reference        05-Reference Data (۱۴ جدول) — بدون وابستگی به ماژول دیگر
-│     ir.bank.qh.productbuilder.reference     DocumentType, LoanType, PlanType, LoanUsage,
-│                                              EconomicSection/SubSection, Operation/SubOperation,
-│                                              PatternOperation*، LoanProductCollateral، ...
-│
-├── qh-module-core             01-Core (۵ جدول) — وابسته به qh-common
-│     ir.bank.qh.productbuilder.core          Product, ProductVersion, ProductVersionModule,
-│                                              ProductRelationship, ProductLegacyMapping
-│
-├── qh-module-common-rules     02-Common Rules (۹ جدول) — وابسته به core + reference
-│     ir.bank.qh.productbuilder.commonrules   ProductEligibilityRule, ProductChannelRule/Operation,
-│                                              ProductOrgScope, ProductRequiredDocument/Inquiry,
+├── qh-module-productbuilder     دامنه محصول‌ساز (۴۷ جدول، یک Maven module، یک Schema/دیتابیس)
+│     ir.bank.qh.productbuilder.reference     05-Reference Data (۱۴ جدول): DocumentType, LoanType,
+│                                              PlanType, LoanUsage, EconomicSection/SubSection,
+│                                              Operation/SubOperation, PatternOperation*،
+│                                              LoanProductCollateral، ...
+│     ir.bank.qh.productbuilder.core          01-Core (۵ جدول): Product, ProductVersion,
+│                                              ProductVersionModule, ProductRelationship,
+│                                              ProductLegacyMapping
+│     ir.bank.qh.productbuilder.commonrules   02-Common Rules (۹ جدول): ProductEligibilityRule,
+│                                              ProductChannelRule/Operation, ProductOrgScope,
+│                                              ProductRequiredDocument/Inquiry,
 │                                              ProductPricingRule/Component، ProductRateTier
-│
-├── qh-module-deposit           03-Deposit Module (۱۳ جدول) — وابسته به core
-│     ir.bank.qh.productbuilder.deposit       DepositProductProfile, OpeningRule, TermRule/AllowedTerm,
-│                                              TransactionRule, WithdrawalMedia, JointRule, HoldRule,
-│                                              DormancyRule, ClosureRule (+Precheck/Settlement/Approval)
-│
-├── qh-module-loan               04-Loan Module (۶ جدول) — وابسته به core + common-rules + reference
-│     ir.bank.qh.productbuilder.loan          LoanProductProfile, EligibilityExtension, FinancialExtension,
+│     ir.bank.qh.productbuilder.deposit       03-Deposit Module (۱۳ جدول): DepositProductProfile,
+│                                              OpeningRule, TermRule/AllowedTerm, TransactionRule,
+│                                              WithdrawalMedia, JointRule, HoldRule, DormancyRule,
+│                                              ClosureRule (+Precheck/Settlement/Approval)
+│     ir.bank.qh.productbuilder.loan          04-Loan Module (۶ جدول): LoanProductProfile,
+│                                              EligibilityExtension, FinancialExtension,
 │                                              RepaymentRule, ProcessRule, CollateralRule
 │
-├── qh-module-party             ماژول Party (۱۸ جدول) — فقط وابسته به qh-common (کاملاً مستقل/SOA)
+├── qh-module-party             ماژول Party (۱۷ جدول) — فقط وابسته به qh-common (کاملاً مستقل/SOA)
 │     ir.bank.qh.party         PartyEntity (والد JOINED) → PersonEntity/OrganizationEntity،
 │                              Address, ContactPoint, Identifier, Name, Role, Group/GroupMember,
-│                              SignatureSpecimen, Inquiry, Demographic, Country, City, Branch
+│                              SignatureSpecimen, Inquiry, Demographic, Country, City
 │
 └── qh-app                     اپلیکیشن قابل اجرا؛ همه ماژول‌ها را جمع می‌کند + application.yml + data*.sql
       ir.bank.qh.app
 ```
 
-پنج ماژول محصول‌ساز همگی زیر یک پکیج ریشه مشترک `ir.bank.qh.productbuilder` هستند (`.reference`،
-`.core`، `.commonrules`، `.deposit`، `.loan`) — دقیقاً همان مرز Bounded Context که در بخش
-«Domain vs Schema» پایین توضیح داده شده؛ همین یک ریشه مشترک است که باعث می‌شود
-`ProductBuilderPersistenceConfig` بتواند با یک `basePackages = "ir.bank.qh.productbuilder"`
-همه پنج ماژول را با هم اسکن کند. Party همچنان زیر پکیج مستقل خودش (`ir.bank.qh.party`) است.
+این پنج زیرپکیج محصول‌ساز قبلاً پنج ماژول Maven جدا بودند؛ چون همیشه با هم Deploy/Version می‌شوند (همان
+مرز Bounded Context که در بخش «Domain vs Schema» پایین توضیح داده شده)، در یک ماژول Maven واحد
+(`qh-module-productbuilder`) ادغام شدند تا مدیریتشان ساده‌تر باشد — کد جاوا هنوز زیر پکیج‌های جدا
+(`.reference`، `.core`، `.commonrules`، `.deposit`، `.loan`) سازمان‌دهی شده، فقط دیگر ۵ artifact/pom
+جدا نیستند. همین ریشه مشترک `ir.bank.qh.productbuilder` است که به `ProductBuilderPersistenceConfig`
+اجازه می‌دهد با یک `basePackages = "ir.bank.qh.productbuilder"` همه را با هم اسکن کند. Party همچنان
+ماژول Maven و پکیج مستقل خودش (`ir.bank.qh.party`) است.
 
 هر ماژول یک ساختار پکیج یکسان دارد:
 
@@ -87,7 +89,7 @@ deposit, loan, reference, party) از همین سلسله‌مراتب استف�
 | کلاس پایه | برای چه مواردی | چه ماژول‌هایی استفاده می‌کنند |
 |---|---|---|
 | `BaseEntity` | Audit (`CREATED_BY/ON`, `MODIFIED_BY/ON`) با `java.util.Date`، `@DynamicUpdate`، و `@Version` روی `Long version` — بدون تنانت | داده‌های مرجع/ثابت مشترک بین همه نهادها: reference (کل ماژول)، و `CountryEntity`/`CityEntity`/`AddressEntity` در party |
-| `TenantAwareEntity extends BaseEntity` | همان Audit به‌علاوه فیلد `institutionId` با انوتیشن `@TenantId` (قابلیت Hibernate 6/7) که به‌صورت خودکار و شفاف هر Query را به تنانت جاری فیلتر می‌کند | موجودیت‌های وابسته به یک نهاد بانکی: core, commonrules, deposit, loan (کل محصول‌ساز) و بیشتر Entity های party (Party, Branch, ContactPoint, ...) |
+| `TenantAwareEntity extends BaseEntity` | همان Audit به‌علاوه فیلد `institutionId` با انوتیشن `@TenantId` (قابلیت Hibernate 6/7) که به‌صورت خودکار و شفاف هر Query را به تنانت جاری فیلتر می‌کند | موجودیت‌های وابسته به یک نهاد بانکی: core, commonrules, deposit, loan (کل محصول‌ساز) و بیشتر Entity های party (Party, ContactPoint, ...) |
 
 هر Entity، فیلد `id` (کلید اصلی) را خودش با `@Id`/`@GeneratedValue` تعریف می‌کند؛ کلاس‌های پایه فقط
 Audit/تنانت را اضافه می‌کنند. قاعده انتخاب پایه: اگر داده‌تان **ثابت/مرجع** و مشترک بین همه نهادهاست از
@@ -116,8 +118,8 @@ EntityManagerFactory کاملاً مستقل خودش را دارد:
 
 | دامنه (Persistence Unit) | شامل چه ماژول‌هایی | Schema منطقی |
 |---|---|---|
-| **Product Builder** | qh-module-reference + qh-module-core + qh-module-common-rules + qh-module-deposit + qh-module-loan (همان ۵ پکیج مدل اصلی، ۴۷ جدول) | `PRODUCTBUILDER` |
-| **Party** | qh-module-party (۱۸ جدول، BIAN-style) | `PARTY` |
+| **Product Builder** | qh-module-productbuilder (همان ۵ زیرپکیج مدل اصلی، ۴۷ جدول) | `PRODUCTBUILDER` |
+| **Party** | qh-module-party (۱۷ جدول، BIAN-style) | `PARTY` |
 
 این پنج پکیج محصول‌ساز صرفاً یک تقسیم‌بندی **سازمانی/کدی** (پنج پکیج جاوا زیر یک دامنه) هستند، نه پنج
 Bounded Context جدا — همیشه با هم یک واحد استقرار (Deployment Unit) می‌مانند، پس همه‌شان یک **Schema
@@ -292,39 +294,45 @@ X-Institution-Id: 1
 تمام متدهای CRUD به‌صورت صریح در خود کلاس نوشته می‌شوند. برای ماژولی که قرار است بعداً به یک
 سرویس مجزا (میکروسرویس) جدا شود یا منطق کسب‌وکار پیچیده‌تری دارد مناسب‌تر است.
 
-فرض کنید می‌خواهید ماژول جدید «کارت بانکی» (`qh-module-card`) اضافه کنید:
+فرض کنید می‌خواهید قابلیت جدید «کارت بانکی» را اضافه کنید. **اولین تصمیم:** آیا این واقعاً بخشی از
+دامنه محصول‌ساز است (به `ProductVersion`/`Product` وصل می‌شود) یا یک Bounded Context کاملاً مستقل و
+جدید (نه محصول‌ساز، نه Party)؟ این تصمیم مسیر را کاملاً عوض می‌کند:
 
-1. یک پوشه Maven جدید بسازید: `qh-module-card/pom.xml` (کپی از یکی از ماژول‌های موجود، وابستگی
-   به `qh-common` و هر ماژولی که نیاز دارید مثلاً `qh-module-core`).
-2. پکیج جاوای خود را با زیرپکیج‌های `entity` / `repository` / `service` / `controller` بسازید،
-   دقیقاً با همان الگوی ماژول‌های موجود — اسم ریشه پکیج به تصمیم مرحله ۱۰ بستگی دارد
-   (`ir.bank.qh.productbuilder.card` اگر بخشی از محصول‌ساز است، یا `ir.bank.qh.card` اگر
-   Bounded Context جدید و مستقلی است).
-3. Entity های خود را با `extends BaseEntity` **یا** `extends TenantAwareEntity` (هر دو در qh-common
-   موجودند) بسازید؛ اگر داده‌تان مختص یک نهاد بانکی است از `TenantAwareEntity` استفاده کنید، وگرنه
-   (داده مرجع/ثابت مشترک بین همه نهادها) از `BaseEntity`.
-4. Repository را `extends JpaRepository<YourEntity, Long>` بسازید.
-5. Service را طبق الگوی A یا B بسازید؛ قواعد کسب‌وکار (معادل CHECK Constraint) را داخلش پیاده کنید.
-6. Controller را طبق همان الگو بسازید و `@RequestMapping("/api/v1/card/your-entities")` بگذارید.
-7. در `pom.xml` ریشه، `<module>qh-module-card</module>` را اضافه کنید.
-8. در `qh-app/pom.xml`، `qh-module-card` را به عنوان `<dependency>` اضافه کنید.
-9. اگر داده نمونه دارید، یک `data-card.sql` بسازید.
-10. **تصمیم مهم: ماژول جدید به کدام Persistence Unit تعلق دارد؟** (نگاه کنید به بخش
-    «Domain vs Schema» بالا)
-    - اگر واقعاً بخشی از دامنه محصول‌ساز است (به `ProductVersion`/`Product` وصل می‌شود): پکیج جاوای
-      خود را زیر `ir.bank.qh.productbuilder.card` بسازید و از `@Table(schema = "PRODUCTBUILDER",
-      name = "...")` استفاده کنید — همین کافی است، چون `ProductBuilderPersistenceConfig` (در
-      `qh-app/src/main/java/ir/bank/qh/app/config`) از قبل کل `ir.bank.qh.productbuilder` را
-      اسکن می‌کند و نیازی به اضافه‌کردن پکیج جدید نیست. `data-card.sql` را به `data-locations` در
-      همان کلاس اضافه کنید.
-    - اگر یک Bounded Context کاملاً مستقل و جدید است (نه محصول‌ساز، نه Party): یک Schema منطقی
-      جدید در `qh.schemas.*` تعریف کنید و یک `CardPersistenceConfig` جدید بسازید (کپی از
-      `PartyPersistenceConfig` با پکیج‌ها و نام Bean های خودش) — همراه با یک ورودی جدید در
-      `qh.datasources.*` برای DataSource مستقلش.
+**حالت ۱ — بخشی از محصول‌ساز است (رایج‌ترین حالت):** نیازی به ماژول Maven جدید نیست — فقط داخل
+`qh-module-productbuilder` یک زیرپکیج جدید اضافه کنید:
 
-همین! نیازی به تغییر `QhProductBuilderApplication` نیست (فقط اگر Persistence Unit جدید ساختید، باید
-`OpenSessionInViewConfig` را هم برای آن به‌روزرسانی کنید) چون component-scan روی کل `ir.bank.qh` است
-و Service/Controller ماژول جدید را خودکار پیدا می‌کند.
+1. پکیج `ir.bank.qh.productbuilder.card` را با زیرپکیج‌های `entity` / `repository` / `service` /
+   `controller` بسازید (در `qh-module-productbuilder/src/main/java/...`)، دقیقاً با همان الگوی
+   زیرپکیج‌های موجود (`.reference`, `.core`, `.commonrules`, `.deposit`, `.loan`).
+2. Entity های خود را با `extends BaseEntity` **یا** `extends TenantAwareEntity` (هر دو در qh-common
+   موجودند) و `@Table(schema = "PRODUCTBUILDER", name = "...")` بسازید.
+3. Repository را `extends JpaRepository<YourEntity, Long>` بسازید.
+4. Service را طبق الگوی A یا B بسازید؛ قواعد کسب‌وکار (معادل CHECK Constraint) را داخلش پیاده کنید.
+5. Controller را طبق همان الگو بسازید و `@RequestMapping("/api/v1/card/your-entities")` بگذارید.
+6. اگر داده نمونه دارید، یک `data-card.sql` بسازید و به `data-locations` در
+   `ProductBuilderPersistenceConfig` (`qh-app/src/main/java/ir/bank/qh/app/config`) اضافه کنید.
+
+همین! نه `pom.xml` ریشه نیاز به تغییر دارد نه `qh-app/pom.xml` — چون `qh-module-productbuilder` از
+قبل به هر دو وصل است و `ProductBuilderPersistenceConfig` کل `ir.bank.qh.productbuilder` را اسکن
+می‌کند.
+
+**حالت ۲ — Bounded Context کاملاً مستقل و جدید است:** مثل الگوی Party عمل کنید:
+
+1. یک پوشه Maven جدید بسازید: `qh-module-card/pom.xml` (کپی از `qh-module-party`، وابستگی فقط به
+   `qh-common`).
+2. پکیج `ir.bank.qh.card` را با زیرپکیج‌های `entity` / `repository` / `service` / `controller`
+   بسازید — Service/Controller طبق الگوی B (مستقل، مثل party).
+3. در `pom.xml` ریشه، `<module>qh-module-card</module>` را اضافه کنید.
+4. در `qh-app/pom.xml`، `qh-module-card` را به عنوان `<dependency>` اضافه کنید.
+5. یک Schema منطقی جدید در `qh.schemas.*` و یک ورودی جدید در `qh.datasources.*` تعریف کنید.
+6. یک `CardPersistenceConfig` جدید بسازید (کپی از `PartyPersistenceConfig` با پکیج‌ها و نام
+   Bean‌های خودش)، و `OpenSessionInViewConfig` را برای این Persistence Unit جدید هم به‌روزرسانی
+   کنید.
+7. اگر داده نمونه دارید، یک `data-card.sql` بسازید و آن را در `CardPersistenceConfig`'s
+   initializer اضافه کنید.
+
+در هر دو حالت نیازی به تغییر `QhProductBuilderApplication` نیست، چون component-scan روی کل
+`ir.bank.qh` است و Service/Controller قابلیت جدید را خودکار پیدا می‌کند.
 
 ## نکات فنی مهم (طبق راهنمای اصلی)
 

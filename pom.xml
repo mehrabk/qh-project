@@ -34,11 +34,7 @@
 
     <modules>
         <module>qh-common</module>
-        <module>qh-module-reference</module>
-        <module>qh-module-core</module>
-        <module>qh-module-common-rules</module>
-        <module>qh-module-deposit</module>
-        <module>qh-module-loan</module>
+        <module>qh-module-productbuilder</module>
         <module>qh-module-party</module>
         <module>qh-app</module>
     </modules>
@@ -52,27 +48,7 @@
             </dependency>
             <dependency>
                 <groupId>ir.bank.qh</groupId>
-                <artifactId>qh-module-reference</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>ir.bank.qh</groupId>
-                <artifactId>qh-module-core</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>ir.bank.qh</groupId>
-                <artifactId>qh-module-common-rules</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>ir.bank.qh</groupId>
-                <artifactId>qh-module-deposit</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>ir.bank.qh</groupId>
-                <artifactId>qh-module-loan</artifactId>
+                <artifactId>qh-module-productbuilder</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

@@ -21,8 +21,9 @@ public class DepositProductClosurePrecheck extends TenantAwareEntity {
     private Long id;
 
 
-    @Column(name = "CLOSURE_RULE_ID", nullable = false)
-    private Long closureRuleId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CLOSURE_RULE_ID", nullable = false)
+    private DepositProductClosureRule closureRule;
 
 
     @Column(name = "CHECK_TYPE_CODE", nullable = false, length = 40)

@@ -21,8 +21,9 @@ public class PatternOperationLoanType extends BaseEntity {
     private Long id;
 
 
-    @Column(name = "LOAN_TYPE_ID", nullable = false)
-    private Long loanTypeId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "LOAN_TYPE_ID", nullable = false)
+    private LoanType loanType;
 
 
     @Column(name = "PATTERN_OPERATION_VERSION")

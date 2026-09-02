@@ -23,11 +23,13 @@ public class ProductVersion extends TenantAwareEntity {
     private Long id;
 
 
-    @Column(name = "PRODUCT_ID", nullable = false)
-    private Long productId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PRODUCT_ID", nullable = false)
+    private Product product;
 
-    @Column(name = "SOURCE_VERSION_ID")
-    private Long sourceVersionId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SOURCE_VERSION_ID")
+    private ProductVersion sourceVersion;
 
 
     @Column(name = "VERSION_NO", nullable = false)

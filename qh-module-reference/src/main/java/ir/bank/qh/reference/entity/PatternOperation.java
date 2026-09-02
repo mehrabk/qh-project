@@ -21,11 +21,13 @@ public class PatternOperation extends BaseEntity {
     private Long id;
 
 
-    @Column(name = "PATTERN_OPERATION_LOAN_TYPE_ID", nullable = false)
-    private Long patternOperationLoanTypeId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PATTERN_OPERATION_LOAN_TYPE_ID", nullable = false)
+    private PatternOperationLoanType patternOperationLoanType;
 
-    @Column(name = "OPERATION_ID", nullable = false)
-    private Long operationId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "OPERATION_ID", nullable = false)
+    private Operation operation;
 
 
     @Column(name = "OPERATION_ORDER")

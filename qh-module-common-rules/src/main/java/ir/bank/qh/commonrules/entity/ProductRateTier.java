@@ -23,8 +23,9 @@ public class ProductRateTier extends TenantAwareEntity {
     private Long id;
 
 
-    @Column(name = "PRICING_COMPONENT_ID", nullable = false)
-    private Long pricingComponentId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PRICING_COMPONENT_ID", nullable = false)
+    private ProductPricingComponent pricingComponent;
 
 
     @Column(name = "TIER_NO", nullable = false)

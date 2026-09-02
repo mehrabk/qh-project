@@ -22,11 +22,13 @@ public class ProductLegacyMapping extends TenantAwareEntity {
     private Long id;
 
 
-    @Column(name = "PRODUCT_ID", nullable = false)
-    private Long productId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PRODUCT_ID", nullable = false)
+    private Product product;
 
-    @Column(name = "PRODUCT_VERSION_ID", nullable = false)
-    private Long productVersionId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false)
+    private ProductVersion productVersion;
 
 
     @Column(name = "SOURCE_DOMAIN_CODE", nullable = false, length = 30)

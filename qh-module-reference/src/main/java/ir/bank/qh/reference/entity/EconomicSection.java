@@ -21,8 +21,9 @@ public class EconomicSection extends BaseEntity {
     private Long id;
 
 
-    @Column(name = "PLAN_TYPE_ID", nullable = false)
-    private Long planTypeId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PLAN_TYPE_ID", nullable = false)
+    private PlanType planType;
 
 
     @Column(name = "ECONOMIC_SECTION_CODE", nullable = false, length = 30)

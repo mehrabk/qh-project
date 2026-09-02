@@ -21,8 +21,9 @@ public class ProductVersionModule extends TenantAwareEntity {
     private Long id;
 
 
-    @Column(name = "PRODUCT_VERSION_ID", nullable = false)
-    private Long productVersionId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false)
+    private ProductVersion productVersion;
 
 
     @Column(name = "MODULE_CODE", nullable = false, length = 40)

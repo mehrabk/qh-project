@@ -22,8 +22,9 @@ public class ProductPricingComponent extends TenantAwareEntity {
     private Long id;
 
 
-    @Column(name = "PRICING_RULE_ID", nullable = false)
-    private Long pricingRuleId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PRICING_RULE_ID", nullable = false)
+    private ProductPricingRule pricingRule;
 
 
     @Column(name = "COMPONENT_TYPE_CODE", nullable = false, length = 30)

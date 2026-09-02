@@ -21,8 +21,9 @@ public class ProductChannelOperation extends TenantAwareEntity {
     private Long id;
 
 
-    @Column(name = "CHANNEL_RULE_ID", nullable = false)
-    private Long channelRuleId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CHANNEL_RULE_ID", nullable = false)
+    private ProductChannelRule channelRule;
 
 
     @Column(name = "OPERATION_CODE", nullable = false, length = 40)

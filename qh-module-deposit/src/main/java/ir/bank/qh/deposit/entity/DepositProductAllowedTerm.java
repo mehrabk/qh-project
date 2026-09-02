@@ -22,8 +22,9 @@ public class DepositProductAllowedTerm extends TenantAwareEntity {
     private Long id;
 
 
-    @Column(name = "TERM_RULE_ID", nullable = false)
-    private Long termRuleId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TERM_RULE_ID", nullable = false)
+    private DepositProductTermRule termRule;
 
 
     @Column(name = "TERM_VALUE", nullable = false)

@@ -22,14 +22,17 @@ public class ProductRelationship extends TenantAwareEntity {
     private Long id;
 
 
-    @Column(name = "SOURCE_PRODUCT_VERSION_ID", nullable = false)
-    private Long sourceProductVersionId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SOURCE_PRODUCT_VERSION_ID", nullable = false)
+    private ProductVersion sourceProductVersion;
 
-    @Column(name = "TARGET_PRODUCT_ID", nullable = false)
-    private Long targetProductId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TARGET_PRODUCT_ID", nullable = false)
+    private Product targetProduct;
 
-    @Column(name = "TARGET_PRODUCT_VERSION_ID")
-    private Long targetProductVersionId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TARGET_PRODUCT_VERSION_ID")
+    private ProductVersion targetProductVersion;
 
 
     @Column(name = "RELATIONSHIP_TYPE_CODE", nullable = false, length = 30)

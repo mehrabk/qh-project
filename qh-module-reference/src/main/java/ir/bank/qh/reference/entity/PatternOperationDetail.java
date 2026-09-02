@@ -21,11 +21,13 @@ public class PatternOperationDetail extends BaseEntity {
     private Long id;
 
 
-    @Column(name = "PATTERN_OPERATION_ID", nullable = false)
-    private Long patternOperationId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PATTERN_OPERATION_ID", nullable = false)
+    private PatternOperation patternOperation;
 
-    @Column(name = "SUB_OPERATION_ID", nullable = false)
-    private Long subOperationId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SUB_OPERATION_ID", nullable = false)
+    private SubOperation subOperation;
 
 
     @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)

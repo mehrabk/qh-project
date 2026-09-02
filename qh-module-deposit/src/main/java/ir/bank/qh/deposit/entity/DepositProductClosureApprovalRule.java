@@ -1,7 +1,6 @@
 package ir.bank.qh.deposit.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
-import ir.bank.qh.deposit.entity.DepositProductClosureRule;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import lombok.Getter;
@@ -23,9 +22,8 @@ public class DepositProductClosureApprovalRule extends TenantAwareEntity {
     private Long id;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CLOSURE_RULE_ID", nullable = false)
-    private DepositProductClosureRule closureRule;
+    @Column(name = "CLOSURE_RULE_ID", nullable = false)
+    private Long closureRuleId;
 
 
     @Column(name = "APPROVAL_LEVEL_CODE", nullable = false, length = 40)

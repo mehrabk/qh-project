@@ -1,7 +1,6 @@
 package ir.bank.qh.core.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
-import ir.bank.qh.core.entity.ProductVersion;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,9 +21,8 @@ public class ProductVersionModule extends TenantAwareEntity {
     private Long id;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false)
-    private ProductVersion productVersion;
+    @Column(name = "PRODUCT_VERSION_ID", nullable = false)
+    private Long productVersionId;
 
 
     @Column(name = "MODULE_CODE", nullable = false, length = 40)

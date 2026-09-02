@@ -1,8 +1,6 @@
 package ir.bank.qh.core.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
-import ir.bank.qh.core.entity.Product;
-import ir.bank.qh.core.entity.ProductVersion;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import lombok.Getter;
@@ -24,17 +22,14 @@ public class ProductRelationship extends TenantAwareEntity {
     private Long id;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "SOURCE_PRODUCT_VERSION_ID", nullable = false)
-    private ProductVersion sourceProductVersion;
+    @Column(name = "SOURCE_PRODUCT_VERSION_ID", nullable = false)
+    private Long sourceProductVersionId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TARGET_PRODUCT_ID", nullable = false)
-    private Product targetProduct;
+    @Column(name = "TARGET_PRODUCT_ID", nullable = false)
+    private Long targetProductId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TARGET_PRODUCT_VERSION_ID")
-    private ProductVersion targetProductVersion;
+    @Column(name = "TARGET_PRODUCT_VERSION_ID")
+    private Long targetProductVersionId;
 
 
     @Column(name = "RELATIONSHIP_TYPE_CODE", nullable = false, length = 30)

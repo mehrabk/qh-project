@@ -1,8 +1,6 @@
 package ir.bank.qh.core.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
-import ir.bank.qh.core.entity.Product;
-import ir.bank.qh.core.entity.ProductVersion;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import lombok.Getter;
@@ -24,13 +22,11 @@ public class ProductLegacyMapping extends TenantAwareEntity {
     private Long id;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PRODUCT_ID", nullable = false)
-    private Product product;
+    @Column(name = "PRODUCT_ID", nullable = false)
+    private Long productId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false)
-    private ProductVersion productVersion;
+    @Column(name = "PRODUCT_VERSION_ID", nullable = false)
+    private Long productVersionId;
 
 
     @Column(name = "SOURCE_DOMAIN_CODE", nullable = false, length = 30)

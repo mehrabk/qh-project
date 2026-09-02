@@ -1,8 +1,6 @@
 package ir.bank.qh.reference.entity;
 
 import ir.bank.qh.common.entity.BaseEntity;
-import ir.bank.qh.reference.entity.PatternOperation;
-import ir.bank.qh.reference.entity.SubOperation;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,13 +21,11 @@ public class PatternOperationDetail extends BaseEntity {
     private Long id;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PATTERN_OPERATION_ID", nullable = false)
-    private PatternOperation patternOperation;
+    @Column(name = "PATTERN_OPERATION_ID", nullable = false)
+    private Long patternOperationId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "SUB_OPERATION_ID", nullable = false)
-    private SubOperation subOperation;
+    @Column(name = "SUB_OPERATION_ID", nullable = false)
+    private Long subOperationId;
 
 
     @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)

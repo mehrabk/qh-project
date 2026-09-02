@@ -1,7 +1,6 @@
 package ir.bank.qh.reference.entity;
 
 import ir.bank.qh.common.entity.BaseEntity;
-import ir.bank.qh.reference.entity.LoanType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,9 +21,8 @@ public class PatternOperationLoanType extends BaseEntity {
     private Long id;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "LOAN_TYPE_ID", nullable = false)
-    private LoanType loanType;
+    @Column(name = "LOAN_TYPE_ID", nullable = false)
+    private Long loanTypeId;
 
 
     @Column(name = "PATTERN_OPERATION_VERSION")

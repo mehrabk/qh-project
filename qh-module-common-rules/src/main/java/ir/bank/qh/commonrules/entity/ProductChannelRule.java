@@ -1,7 +1,6 @@
 package ir.bank.qh.commonrules.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
-import ir.bank.qh.core.entity.ProductVersion;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import lombok.Getter;
@@ -23,9 +22,8 @@ public class ProductChannelRule extends TenantAwareEntity {
     private Long id;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false)
-    private ProductVersion productVersion;
+    @Column(name = "PRODUCT_VERSION_ID", nullable = false)
+    private Long productVersionId;
 
 
     @Column(name = "CHANNEL_CODE", nullable = false, length = 30)

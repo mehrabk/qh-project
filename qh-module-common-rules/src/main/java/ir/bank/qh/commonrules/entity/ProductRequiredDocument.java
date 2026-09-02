@@ -1,8 +1,6 @@
 package ir.bank.qh.commonrules.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
-import ir.bank.qh.core.entity.ProductVersion;
-import ir.bank.qh.reference.entity.DocumentType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,13 +21,11 @@ public class ProductRequiredDocument extends TenantAwareEntity {
     private Long id;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false)
-    private ProductVersion productVersion;
+    @Column(name = "PRODUCT_VERSION_ID", nullable = false)
+    private Long productVersionId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "DOCUMENT_TYPE_ID", nullable = false)
-    private DocumentType documentType;
+    @Column(name = "DOCUMENT_TYPE_ID", nullable = false)
+    private Long documentTypeId;
 
 
     @Column(name = "REQUIREMENT_STAGE_CODE", nullable = false, length = 30)

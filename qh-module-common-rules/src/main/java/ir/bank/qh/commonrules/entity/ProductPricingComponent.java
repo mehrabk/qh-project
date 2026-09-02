@@ -1,7 +1,6 @@
 package ir.bank.qh.commonrules.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
-import ir.bank.qh.commonrules.entity.ProductPricingRule;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import lombok.Getter;
@@ -23,9 +22,8 @@ public class ProductPricingComponent extends TenantAwareEntity {
     private Long id;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PRICING_RULE_ID", nullable = false)
-    private ProductPricingRule pricingRule;
+    @Column(name = "PRICING_RULE_ID", nullable = false)
+    private Long pricingRuleId;
 
 
     @Column(name = "COMPONENT_TYPE_CODE", nullable = false, length = 30)

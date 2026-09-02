@@ -1,7 +1,6 @@
 package ir.bank.qh.deposit.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
-import ir.bank.qh.core.entity.ProductVersion;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import lombok.Getter;
@@ -23,9 +22,8 @@ public class DepositProductHoldRule extends TenantAwareEntity {
     private Long id;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false)
-    private ProductVersion productVersion;
+    @Column(name = "PRODUCT_VERSION_ID", nullable = false)
+    private Long productVersionId;
 
 
     @Column(name = "HOLD_TYPE_CODE", nullable = false, length = 30)

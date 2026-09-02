@@ -1,7 +1,6 @@
 package ir.bank.qh.reference.entity;
 
 import ir.bank.qh.common.entity.BaseEntity;
-import ir.bank.qh.reference.entity.PlanType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,9 +21,8 @@ public class EconomicSection extends BaseEntity {
     private Long id;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PLAN_TYPE_ID", nullable = false)
-    private PlanType planType;
+    @Column(name = "PLAN_TYPE_ID", nullable = false)
+    private Long planTypeId;
 
 
     @Column(name = "ECONOMIC_SECTION_CODE", nullable = false, length = 30)

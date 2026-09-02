@@ -1,12 +1,6 @@
 package ir.bank.qh.loan.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
-import ir.bank.qh.core.entity.ProductVersion;
-import ir.bank.qh.reference.entity.EconomicSubSection;
-import ir.bank.qh.reference.entity.FacilityOperationParameter;
-import ir.bank.qh.reference.entity.LoanType;
-import ir.bank.qh.reference.entity.LoanUsage;
-import ir.bank.qh.reference.entity.PlanType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,29 +21,23 @@ public class LoanProductProfile extends TenantAwareEntity {
     private Long id;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PRODUCT_VERSION_ID", nullable = false, unique = true)
-    private ProductVersion productVersion;
+    @Column(name = "PRODUCT_VERSION_ID", nullable = false, unique = true)
+    private Long productVersionId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "LOAN_TYPE_ID", nullable = false)
-    private LoanType loanType;
+    @Column(name = "LOAN_TYPE_ID", nullable = false)
+    private Long loanTypeId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PLAN_TYPE_ID", nullable = false)
-    private PlanType planType;
+    @Column(name = "PLAN_TYPE_ID", nullable = false)
+    private Long planTypeId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "LOAN_USAGE_ID", nullable = false)
-    private LoanUsage loanUsage;
+    @Column(name = "LOAN_USAGE_ID", nullable = false)
+    private Long loanUsageId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ECONOMIC_SUB_SECTION_ID")
-    private EconomicSubSection economicSubSection;
+    @Column(name = "ECONOMIC_SUB_SECTION_ID")
+    private Long economicSubSectionId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "OPERATION_PARAMETER_ID")
-    private FacilityOperationParameter facilityOperationParameter;
+    @Column(name = "OPERATION_PARAMETER_ID")
+    private Long facilityOperationParameterId;
 
 
     @Column(name = "PARTY_NATURE_CODE", length = 30)

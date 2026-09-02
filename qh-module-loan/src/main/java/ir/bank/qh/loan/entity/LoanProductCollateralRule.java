@@ -15,7 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(schema = "LOAN", name = "loan_product_collateral_rule")
+@Table(schema = "PRODUCTBUILDER", name = "loan_product_collateral_rule")
 public class LoanProductCollateralRule extends TenantAwareEntity {
 
     @Id

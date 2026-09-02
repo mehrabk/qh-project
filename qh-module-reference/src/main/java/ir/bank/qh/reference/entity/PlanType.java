@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(schema = "REFERENCE", name = "plan_type")
+@Table(schema = "PRODUCTBUILDER", name = "plan_type")
 public class PlanType extends BaseEntity {
 
     @Id

@@ -1,26 +1,36 @@
-# Physical schema name for each module's logical @Table(schema = "...") - resolved at
-# Hibernate DDL/SQL-generation time by ConfigurableSchemaNamingStrategy (qh-common).
-# Change a value here (or override it in a profile, e.g. application-oracle.yml) to move a
-# module to a differently named schema without touching any entity. See README for the
-# planned multi-server/Oracle profile.
+# Physical schema name for each persistence unit's logical @Table(schema = "...") - resolved at
+# Hibernate DDL/SQL-generation time by ConfigurableSchemaNamingStrategy (qh-common). Change a value
+# here (or override it in a profile, e.g. application-oracle.yml) to move a persistence unit to a
+# differently named schema without touching any entity.
+#
+# There are exactly two logical schemas, matching the two real bounded contexts / persistence units
+# below - "productbuilder" (reference+core+commonrules+deposit+loan: one domain, always co-located)
+# and "party" (fully independent). See README's "Domain vs Schema" section.
 qh:
   schemas:
-    reference: REFERENCE
-    core: CORE
-    commonrules: COMMONRULES
-    deposit: DEPOSIT
-    loan: LOAN
+    productbuilder: PRODUCTBUILDER
     party: PARTY
+
+  # Each persistence unit's own DataSource - see ir.bank.qh.app.config
+  # (ProductBuilderPersistenceConfig / PartyPersistenceConfig) for how these are wired. Two
+  # separate in-memory H2 databases by default; point either one at a different server (e.g.
+  # Oracle) by overriding these same qh.datasources.* keys in a profile - see
+  # application-oracle.yml - with no code change.
+  datasources:
+    productbuilder:
+      url: jdbc:h2:mem:qh_productbuilder;DB_CLOSE_DELAY=-1;NON_KEYWORDS=USER
+      driver-class-name: org.h2.Driver
+      username: sa
+      password: ""
+    party:
+      url: jdbc:h2:mem:qh_party;DB_CLOSE_DELAY=-1;NON_KEYWORDS=USER
+      driver-class-name: org.h2.Driver
+      username: sa
+      password: ""
 
 spring:
   application:
     name: qh-productbuilder
-
-  datasource:
-    url: jdbc:h2:mem:qh_productbuilder;DB_CLOSE_DELAY=-1;NON_KEYWORDS=USER
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: ""
 
   h2:
     console:
@@ -29,6 +39,8 @@ spring:
       settings:
         web-allow-others: false
 
+  # Shared Hibernate behaviour for BOTH persistence units (see ir.bank.qh.app.config.JpaUnitSupport,
+  # which binds these instead of Spring Boot's normal single-DataSource JPA auto-configuration).
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -36,28 +48,13 @@ spring:
     properties:
       hibernate:
         format_sql: true
-        # Every module maps its @Table(schema = "...") to its own logical schema
-        # (REFERENCE, CORE, COMMONRULES, DEPOSIT, LOAN, PARTY), remapped to the physical
-        # schema names configured under qh.schemas.* above. This tells Hibernate to emit
-        # "CREATE SCHEMA IF NOT EXISTS ..." for each physical schema instead of failing
-        # because the schema doesn't exist yet.
+        # Each persistence unit's schema (see qh.schemas.* above) is created via "CREATE SCHEMA IF
+        # NOT EXISTS ..." instead of failing because the schema doesn't exist yet.
         hbm2ddl:
           create_namespaces: true
         jdbc:
           time_zone: UTC
     open-in-view: true
-    defer-datasource-initialization: true
-
-  sql:
-    init:
-      mode: always
-      encoding: UTF-8
-      # Each bounded context owns its own seed file - product-builder modules
-      # (reference/core/commonrules/deposit/loan) in data-product.sql, the
-      # Party module in data-party.sql. Add a new file here for any new module.
-      data-locations:
-        - classpath:data-product.sql
-        - classpath:data-party.sql
 
   jackson:
     default-property-inclusion: non_null

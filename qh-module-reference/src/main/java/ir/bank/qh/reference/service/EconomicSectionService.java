@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional("productBuilderTransactionManager")
 public class EconomicSectionService extends AbstractCrudService<EconomicSection> {
 
     private final EconomicSectionRepository repository;

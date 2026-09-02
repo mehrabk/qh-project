@@ -16,17 +16,17 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional("partyTransactionManager")
 public class SignatureSpecimenEntityService {
 
     private final SignatureSpecimenEntityRepository repository;
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, transactionManager = "partyTransactionManager")
     public List<SignatureSpecimenEntity> findAll() {
         return repository.findAll();
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, transactionManager = "partyTransactionManager")
     public SignatureSpecimenEntity findById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("SignatureSpecimenEntity", id));

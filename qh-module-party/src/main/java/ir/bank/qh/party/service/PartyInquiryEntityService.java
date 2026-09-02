@@ -16,17 +16,17 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional("partyTransactionManager")
 public class PartyInquiryEntityService {
 
     private final PartyInquiryEntityRepository repository;
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, transactionManager = "partyTransactionManager")
     public List<PartyInquiryEntity> findAll() {
         return repository.findAll();
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, transactionManager = "partyTransactionManager")
     public PartyInquiryEntity findById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("PartyInquiryEntity", id));

@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional(readOnly = true, transactionManager = "partyTransactionManager")
 public class PartyEntityService {
 
     private final PartyEntityRepository repository;

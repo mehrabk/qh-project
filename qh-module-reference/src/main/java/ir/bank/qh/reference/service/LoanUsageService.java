@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional("productBuilderTransactionManager")
 public class LoanUsageService extends AbstractCrudService<LoanUsage> {
 
     private final LoanUsageRepository repository;

@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(schema = "CORE", name = "product_legacy_mapping")
+@Table(schema = "PRODUCTBUILDER", name = "product_legacy_mapping")
 public class ProductLegacyMapping extends TenantAwareEntity {
 
     @Id

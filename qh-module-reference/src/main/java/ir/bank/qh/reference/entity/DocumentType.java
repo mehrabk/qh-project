@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(schema = "REFERENCE", name = "document_type")
+@Table(schema = "PRODUCTBUILDER", name = "document_type")
 public class DocumentType extends BaseEntity {
 
     @Id

@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(schema = "REFERENCE", name = "pattern_operation")
+@Table(schema = "PRODUCTBUILDER", name = "pattern_operation")
 public class PatternOperation extends BaseEntity {
 
     @Id

@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(schema = "CORE", name = "product")
+@Table(schema = "PRODUCTBUILDER", name = "product")
 public class Product extends TenantAwareEntity {
 
     @Id

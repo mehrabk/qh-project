@@ -20,7 +20,7 @@ import java.util.Set;
  */
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional("productBuilderTransactionManager")
 public class ProductService extends AbstractCrudService<Product> {
 
     private static final Set<String> VALID_CLASSES = Set.of("DEPOSIT", "LOAN");

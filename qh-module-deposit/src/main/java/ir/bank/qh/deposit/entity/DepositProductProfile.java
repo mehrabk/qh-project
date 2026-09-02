@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(schema = "DEPOSIT", name = "deposit_product_profile")
+@Table(schema = "PRODUCTBUILDER", name = "deposit_product_profile")
 public class DepositProductProfile extends TenantAwareEntity {
 
     @Id

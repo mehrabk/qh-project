@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional("productBuilderTransactionManager")
 public class ProductEligibilityRuleService extends AbstractCrudService<ProductEligibilityRule> {
 
     private final ProductEligibilityRuleRepository repository;

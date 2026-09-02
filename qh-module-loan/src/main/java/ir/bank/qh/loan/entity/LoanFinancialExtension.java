@@ -15,7 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(schema = "LOAN", name = "loan_financial_extension")
+@Table(schema = "PRODUCTBUILDER", name = "loan_financial_extension")
 public class LoanFinancialExtension extends TenantAwareEntity {
 
     @Id

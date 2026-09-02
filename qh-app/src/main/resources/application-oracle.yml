@@ -1,34 +1,36 @@
 # ============================================================
-# Template profile for a future single-Oracle-instance deployment.
-# Activate with: --spring.profiles.active=oracle (values below still need to be
-# supplied via env vars / a secrets store - nothing here is a real credential).
+# Template profile for a future Oracle deployment.
+# Activate with: --spring.profiles.active=oracle (values below still need to be supplied via env
+# vars / a secrets store - nothing here is a real credential).
 #
-# This profile only proves the "schema name from config" seam end-to-end against
-# Oracle's naming rules (no lowercase-unquoted defaults like H2). It intentionally does
-# NOT split modules across separate servers/databases yet - true per-module servers is a
-# bigger follow-up (one DataSource + one EntityManagerFactory per module/schema, with
-# routing so each module's repositories bind to the right one) that build on this same
-# qh.schemas.* seam. See the "چند سرور جدا" note in README before wiring that up.
+# Product Builder and Party already run as two fully independent DataSources/EntityManagerFactories
+# (ir.bank.qh.app.config.ProductBuilderPersistenceConfig / PartyPersistenceConfig), so pointing them
+# at two SEPARATE Oracle servers is just filling in two different qh.datasources.*.url values below -
+# no code change either way. Defaulted here to the same instance/two schemas, which is equally valid
+# if you don't need physically separate servers yet.
 #
-# Not wired up yet: an Oracle JDBC driver dependency (com.oracle.database.jdbc:ojdbc11)
-# in qh-app/pom.xml. Add it before activating this profile for real.
+# Not wired up yet: an Oracle JDBC driver dependency (com.oracle.database.jdbc:ojdbc11) in
+# qh-app/pom.xml. Add it before activating this profile for real.
 # ============================================================
 qh:
   schemas:
-    reference: REFERENCE
-    core: CORE
-    commonrules: COMMONRULES
-    deposit: DEPOSIT
-    loan: LOAN
+    productbuilder: PRODUCTBUILDER
     party: PARTY
 
-spring:
-  datasource:
-    url: ${QH_DB_URL:jdbc:oracle:thin:@//localhost:1521/ORCLPDB1}
-    driver-class-name: oracle.jdbc.OracleDriver
-    username: ${QH_DB_USERNAME}
-    password: ${QH_DB_PASSWORD}
+  datasources:
+    productbuilder:
+      url: ${QH_PRODUCTBUILDER_DB_URL:jdbc:oracle:thin:@//localhost:1521/ORCLPDB1}
+      driver-class-name: oracle.jdbc.OracleDriver
+      username: ${QH_PRODUCTBUILDER_DB_USERNAME}
+      password: ${QH_PRODUCTBUILDER_DB_PASSWORD}
+    party:
+      # Point at a different host:port/service here to actually split Party onto its own server.
+      url: ${QH_PARTY_DB_URL:jdbc:oracle:thin:@//localhost:1521/ORCLPDB1}
+      driver-class-name: oracle.jdbc.OracleDriver
+      username: ${QH_PARTY_DB_USERNAME}
+      password: ${QH_PARTY_DB_PASSWORD}
 
+spring:
   jpa:
     hibernate:
       # Never auto-manage schema/DDL against a real database - migrate explicitly instead.
@@ -38,8 +40,3 @@ spring:
         dialect: org.hibernate.dialect.OracleDialect
         hbm2ddl:
           create_namespaces: false
-
-  sql:
-    init:
-      # The H2 demo seed files are for the in-memory profile only.
-      mode: never

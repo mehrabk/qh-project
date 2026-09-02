@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional("productBuilderTransactionManager")
 public class DepositProductDormancyRuleService extends AbstractCrudService<DepositProductDormancyRule> {
 
     private final DepositProductDormancyRuleRepository repository;

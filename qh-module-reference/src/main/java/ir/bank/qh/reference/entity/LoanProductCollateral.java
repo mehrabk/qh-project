@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(schema = "REFERENCE", name = "loan_product_collateral")
+@Table(schema = "PRODUCTBUILDER", name = "loan_product_collateral")
 public class LoanProductCollateral extends BaseEntity {
 
     @Id

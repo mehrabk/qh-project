@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional("productBuilderTransactionManager")
 public class DepositProductClosureApprovalRuleService extends AbstractCrudService<DepositProductClosureApprovalRule> {
 
     private final DepositProductClosureApprovalRuleRepository repository;

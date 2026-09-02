@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional("productBuilderTransactionManager")
 public class DepositProductAllowedTermService extends AbstractCrudService<DepositProductAllowedTerm> {
 
     private final DepositProductAllowedTermRepository repository;

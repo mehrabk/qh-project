@@ -14,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(schema = "DEPOSIT", name = "deposit_product_withdrawal_media")
+@Table(schema = "PRODUCTBUILDER", name = "deposit_product_withdrawal_media")
 public class DepositProductWithdrawalMedia extends TenantAwareEntity {
 
     @Id

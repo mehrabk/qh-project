@@ -14,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(schema = "COMMONRULES", name = "product_required_document")
+@Table(schema = "PRODUCTBUILDER", name = "product_required_document")
 public class ProductRequiredDocument extends TenantAwareEntity {
 
     @Id

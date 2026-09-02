@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(schema = "COMMONRULES", name = "product_pricing_component")
+@Table(schema = "PRODUCTBUILDER", name = "product_pricing_component")
 public class ProductPricingComponent extends TenantAwareEntity {
 
     @Id

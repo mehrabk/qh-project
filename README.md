@@ -103,68 +103,79 @@ compile` واقعی در محیط من نبود، توصیه می‌کنم رف�
 موجودیتی که از `TenantAwareEntity` ارث می‌برد — نه فقط Party، بلکه core/commonrules/deposit/loan هم — نشان
 دهد).
 
-### Schema جدا برای هر ماژول — و اسم هر Schema از کانفیگ
+### Domain vs Schema — دو Bounded Context واقعی، دو دیتابیس مستقل
 
-هر ماژول جداول خودش را در یک Schema اختصاصی نگه می‌دارد (`@Table(schema = "...")`):
+این پروژه دقیقاً **دو** Bounded Context/دامنه واقعی دارد که هرکدام دیتابیس، Schema، و DataSource/
+EntityManagerFactory کاملاً مستقل خودش را دارد:
 
-| ماژول | Schema منطقی |
-|---|---|
-| qh-module-reference | `REFERENCE` |
-| qh-module-core | `CORE` |
-| qh-module-common-rules | `COMMONRULES` |
-| qh-module-deposit | `DEPOSIT` |
-| qh-module-loan | `LOAN` |
-| qh-module-party | `PARTY` |
+| دامنه (Persistence Unit) | شامل چه ماژول‌هایی | Schema منطقی |
+|---|---|---|
+| **Product Builder** | qh-module-reference + qh-module-core + qh-module-common-rules + qh-module-deposit + qh-module-loan (همان ۵ پکیج مدل اصلی، ۴۷ جدول) | `PRODUCTBUILDER` |
+| **Party** | qh-module-party (۱۸ جدول، BIAN-style) | `PARTY` |
 
-مقدار `schema` روی `@Table` یک **نام منطقی ثابت** است، نه اسم فیزیکی نهایی — و هرگز از کد حذف نمی‌شود
-(چون Hibernate مقدار این انوتیشن را باید در زمان کامپایل به‌صورت constant بداند، نه از یک property).
-اسم **فیزیکی** واقعی هر Schema از `qh.schemas.*` در `application.yml` خوانده می‌شود:
+این پنج پکیج محصول‌ساز صرفاً یک تقسیم‌بندی **سازمانی/کدی** (پنج پکیج جاوا زیر یک دامنه) هستند، نه پنج
+Bounded Context جدا — همیشه با هم یک واحد استقرار (Deployment Unit) می‌مانند، پس همه‌شان یک **Schema
+واحد** (`PRODUCTBUILDER`) دارند و Entity هایشان آزادانه از `@ManyToOne`/`@JoinColumn` واقعی به هم استفاده
+می‌کنند (Hibernate هم FK Constraint واقعی بین‌شان می‌سازد). **Party** تنها مرز واقعی است — از روز اول
+کاملاً مستقل/SOA طراحی شده، هیچ Entity ای بین آن و محصول‌ساز رفرنس نمی‌دهد، و به همین دلیل روی
+**دیتابیس مستقل خودش** اجرا می‌شود.
+
+اسم فیزیکی هر Schema از `qh.schemas.*` در `application.yml` خوانده می‌شود (مقدار `schema` روی
+`@Table` یک نام منطقی ثابت است — چون Hibernate آن را باید در زمان کامپایل به‌صورت constant بداند، نه
+از یک property — و توسط `ir.bank.qh.common.config.ConfigurableSchemaNamingStrategy` در لحظه تولید
+DDL/SQL به این نام فیزیکی نگاشت می‌شود):
 
 ```yaml
 qh:
   schemas:
-    reference: REFERENCE
-    core: CORE
-    commonrules: COMMONRULES
-    deposit: DEPOSIT
-    loan: LOAN
+    productbuilder: PRODUCTBUILDER
     party: PARTY
 ```
 
-این نگاشت را `ir.bank.qh.common.config.ConfigurableSchemaNamingStrategy` (یک `PhysicalNamingStrategy`
-که Spring Boot به‌طور خودکار شناسایی و به Hibernate متصل می‌کند) در لحظه تولید DDL/SQL اعمال می‌کند؛
-یعنی برای انتقال یک ماژول به Schema دیگر فقط کافی است مقدار مربوطه را در `application.yml` (یا یک
-Profile دیگر مثل `application-oracle.yml`) عوض کنید — نیازی به تغییر هیچ Entity نیست.
+### دو DataSource/EntityManagerFactory جدا — آماده جابه‌جایی به دو سرور مستقل
 
-**نکته مهم درباره مرز واقعی Bounded Context:** این پنج Schema (`REFERENCE`, `CORE`, `COMMONRULES`,
-`DEPOSIT`, `LOAN`) صرفاً یک تقسیم‌بندی **سازمانی/نام‌گذاری** داخل یک دامنه واحد به نام «محصول‌ساز
-(Product Builder)» هستند — دقیقاً همان ۵ پکیجی که مدل اصلی (۴۷ جدول) تعریف کرده. این پنج همیشه با هم روی
-یک دیتابیس/سرور می‌مانند و هرگز به‌تنهایی از هم جدا نمی‌شوند؛ به همین دلیل Entity های این پنج ماژول آزادانه
-از `@ManyToOne`/`@JoinColumn` واقعی به هم استفاده می‌کنند (حتی وقتی Schema هایشان فرق دارد) و Hibernate هم
-FK Constraint واقعی بین‌شان می‌سازد. مرز واقعی و تنها مرزی که ممکن است به یک سرور/دیتابیس جدا برود
-**Party** است (ماژول کاملاً مستقل/SOA، طبق طراحی همان اول هم جدا بوده) — و چون هیچ Entity ای در محصول‌ساز
-به Party (یا برعکس) رفرنس نمی‌دهد، این مرز از ابتدا هم تمیز بوده. اگر روزی محصول‌ساز خودش به چند سرویس
-مجزا شکسته شود (نه فقط از Party جدا شود)، آن‌وقت باید دوباره تصمیم گرفت کدام از این ۵۲ رابطه باید به id
-ساده (`Long`) برگردد — همان کاری که پیش از این تصحیح، اشتباهاً روی همه ۲۸ رابطه بین این پنج ماژول انجام
-شده بود.
+هر Persistence Unit، `DataSource`/`EntityManagerFactory`/`PlatformTransactionManager` کاملاً جدای خودش
+را دارد (`ir.bank.qh.app.config.ProductBuilderPersistenceConfig` و `PartyPersistenceConfig`؛
+پیکربندی مشترک هر دو — ddl-auto، naming strategy، Tenant Resolver — در `JpaUnitSupport`). به‌صورت
+پیش‌فرض این دو، دو دیتابیس **H2 in-memory جدا** هستند:
 
-⚠️ این نگاشت فقط روی چیزهایی اعمال می‌شود که از مسیر Hibernate رد می‌شوند (Entity Mapping، DDL). فایل‌های
-seed خام (`data-product.sql`, `data-party.sql`) نام Schema را به‌صورت متنی دارند (مثلاً
-`INSERT INTO CORE.product ...`) و از این نگاشت عبور نمی‌کنند؛ اگر Schema پیش‌فرض `CORE` را عوض کنید، باید
-seed خام را هم دستی هماهنگ کنید — این محدودیت ذاتی SQL خام است، نه چیزی که این مکانیزم قرار است حل کند.
+```yaml
+qh:
+  datasources:
+    productbuilder:
+      url: jdbc:h2:mem:qh_productbuilder;DB_CLOSE_DELAY=-1;NON_KEYWORDS=USER
+      driver-class-name: org.h2.Driver
+      username: sa
+      password: ""
+    party:
+      url: jdbc:h2:mem:qh_party;DB_CLOSE_DELAY=-1;NON_KEYWORDS=USER
+      driver-class-name: org.h2.Driver
+      username: sa
+      password: ""
+```
 
-`hibernate.hbm2ddl.create_namespaces=true` در `application.yml` باعث می‌شود Hibernate این Schemaهای
-فیزیکی را خودش بسازد. اگر جدولی از ماژول دیگر را از طریق SQL خام (نه JPA) کوئری می‌گیرید، حتماً نام Schema
-فیزیکی فعلی را هم بنویسید، مثلاً `SELECT * FROM CORE.PRODUCT` یا `SELECT * FROM PARTY.PARTY`.
+چون هرکدام DataSource واقعاً جدا دارند، جابه‌جایی به دو **سرور کاملاً مستقل** (مثلاً دو Oracle متفاوت)
+فقط تغییر `url`/`driver-class-name`/`username`/`password` همین بلوک در `application.yml` یا یک
+Profile دیگر است — نیازی به تغییر کد نیست. `application-oracle.yml` یک Profile نمونه است که همین دو
+بلوک را روی Oracle نشان می‌دهد (فعلاً بدون Driver واقعی روی classpath — قبل از استفاده واقعی،
+`com.oracle.database.jdbc:ojdbc11` را به `qh-app/pom.xml` اضافه کنید و با
+`--spring.profiles.active=oracle` فعالش کنید).
 
-**نقشه راه چند سرور (Oracle):** یک Profile نمونه در `application-oracle.yml` آماده شده که همین
-`qh.schemas.*` را روی نام‌گذاری Oracle نشان می‌دهد (فعلاً یک تک‌دیتابیس Oracle با چند Schema، هنوز بدون
-Driver واقعی روی classpath — قبل از استفاده واقعی، `ojdbc11` را به `qh-app/pom.xml` اضافه کنید). جدا
-کردن واقعی روی یک **سرور/دیتابیس مستقل** یک قدم بزرگ‌تر و جداگانه است و طبق مرز Bounded Context بالا،
-امروز فقط بین «محصول‌ساز» (این پنج Schema، همیشه با هم) و «Party» معنا دارد: هرکدام به یک
-`DataSource`/`EntityManagerFactory` اختصاصی نیاز دارند و باید Repository هر طرف به همان مسیر وصل شود
-(Multi-DataSource Routing). این مکانیزم `qh.schemas.*` همان سکوی پرشی است که آن مرحله را بدون دست‌زدن به
-Entity ها ممکن می‌کند، اما خودش هنوز آن جداسازی فیزیکی را انجام نمی‌دهد.
+⚠️ چون Spring Boot به‌صورت خودکار فقط برای **یک** DataSource می‌تواند JPA را پیکربندی کند
+(`spring-boot-hibernate`/`spring-boot-jdbc` autoconfiguration در `QhProductBuilderApplication` عمداً
+exclude شده‌اند)، این دو Persistence Unit به‌صورت دستی پیکربندی شده‌اند — شامل Open-Session-In-View
+هم برای هر دو جدا (`OpenSessionInViewConfig`) و Seed Data هم برای هر دو جدا (هرکدام seed خودش را فقط
+وقتی دیتابیس embedded باشد اجرا می‌کند، پس روی Oracle خودکار غیرفعال است، بدون نیاز به تنظیم دستی).
+فایل‌های seed خام (`data-product.sql`, `data-party.sql`) نام Schema را به‌صورت متنی دارند (مثلاً
+`INSERT INTO PRODUCTBUILDER.product ...`)؛ اگر Schema پیش‌فرض را عوض کنید باید این‌ها را هم دستی
+هماهنگ کنید — محدودیت ذاتی SQL خام است.
+
+`hibernate.hbm2ddl.create_namespaces=true` در `application.yml` باعث می‌شود Hibernate هر دو Schema
+فیزیکی را خودش بسازد. اگر جدولی را از طریق SQL خام (نه JPA) کوئری می‌گیرید، حتماً نام Schema فیزیکی
+فعلی را هم بنویسید، مثلاً `SELECT * FROM PRODUCTBUILDER.PRODUCT` یا `SELECT * FROM PARTY.PARTY`
+(و توجه کنید این دو از حالا واقعاً روی دو Connection/دیتابیس متفاوت‌اند — یک کوئری SQL نمی‌تواند
+بینشان JOIN بزند؛ همان چیزی که حذف `@ManyToOne` بین محصول‌ساز و Party را هم توجیه می‌کرد، البته چنین
+رابطه‌ای از ابتدا هم در مدل وجود نداشت).
 
 ## اجرای پروژه
 
@@ -283,18 +294,29 @@ X-Institution-Id: 1
    بسازید، دقیقاً با همان الگوی ماژول‌های موجود.
 3. Entity های خود را با `extends BaseEntity` **یا** `extends TenantAwareEntity` (هر دو در qh-common
    موجودند) بسازید؛ اگر داده‌تان مختص یک نهاد بانکی است از `TenantAwareEntity` استفاده کنید، وگرنه
-   (داده مرجع/ثابت مشترک بین همه نهادها) از `BaseEntity`. برای Schema مستقل،
-   `@Table(schema = "CARD", name = "...")` بگذارید.
+   (داده مرجع/ثابت مشترک بین همه نهادها) از `BaseEntity`.
 4. Repository را `extends JpaRepository<YourEntity, Long>` بسازید.
 5. Service را طبق الگوی A یا B بسازید؛ قواعد کسب‌وکار (معادل CHECK Constraint) را داخلش پیاده کنید.
 6. Controller را طبق همان الگو بسازید و `@RequestMapping("/api/v1/card/your-entities")` بگذارید.
 7. در `pom.xml` ریشه، `<module>qh-module-card</module>` را اضافه کنید.
 8. در `qh-app/pom.xml`، `qh-module-card` را به عنوان `<dependency>` اضافه کنید.
-9. اگر داده نمونه دارید، یک `data-card.sql` بسازید و آن را به لیست `spring.jpa.sql.init.data-locations`
-   در `application.yml` اضافه کنید.
+9. اگر داده نمونه دارید، یک `data-card.sql` بسازید.
+10. **تصمیم مهم: ماژول جدید به کدام Persistence Unit تعلق دارد؟** (نگاه کنید به بخش
+    «Domain vs Schema» بالا)
+    - اگر واقعاً بخشی از دامنه محصول‌ساز است (به `ProductVersion`/`Product` وصل می‌شود): از
+      `@Table(schema = "PRODUCTBUILDER", name = "...")` استفاده کنید، پکیج
+      `ir.bank.qh.card.entity`/`ir.bank.qh.card.repository` را به لیست‌های
+      `ProductBuilderPersistenceConfig` (در `qh-app/src/main/java/ir/bank/qh/app/config`) اضافه
+      کنید، و `data-card.sql` را به `data-locations` در `ProductBuilderPersistenceConfig`'s
+      initializer اضافه کنید.
+    - اگر یک Bounded Context کاملاً مستقل و جدید است (نه محصول‌ساز، نه Party): یک Schema منطقی
+      جدید در `qh.schemas.*` تعریف کنید و یک `CardPersistenceConfig` جدید بسازید (کپی از
+      `PartyPersistenceConfig` با پکیج‌ها و نام Bean های خودش) — همراه با یک ورودی جدید در
+      `qh.datasources.*` برای DataSource مستقلش.
 
-همین! نیازی به تغییر `QhProductBuilderApplication` نیست چون component-scan روی کل
-`ir.bank.qh` است و ماژول جدید را خودکار پیدا می‌کند.
+همین! نیازی به تغییر `QhProductBuilderApplication` نیست (فقط اگر Persistence Unit جدید ساختید، باید
+`OpenSessionInViewConfig` را هم برای آن به‌روزرسانی کنید) چون component-scan روی کل `ir.bank.qh` است
+و Service/Controller ماژول جدید را خودکار پیدا می‌کند.
 
 ## نکات فنی مهم (طبق راهنمای اصلی)
 
@@ -305,7 +327,10 @@ X-Institution-Id: 1
   (`JpaAuditingConfig` در `qh-common`؛ در دمو کاربر ثابت `SYSTEM` برگردانده می‌شود — در پروژه
   واقعی باید به Spring Security متصل شود).
 - `spring.jpa.open-in-view=true` عمداً فعال است تا لود Lazy روابط هنگام serialize کردن JSON با
-  خطا مواجه نشود؛ برای پروژه Production توصیه می‌شود این را با DTO/Projection جایگزین کنید.
+  خطا مواجه نشود؛ برای پروژه Production توصیه می‌شود این را با DTO/Projection جایگزین کنید. چون دو
+  Persistence Unit جدا داریم، این رفتار به‌صورت دستی در `OpenSessionInViewConfig`
+  (`qh-app/src/main/java/ir/bank/qh/app/config`) برای هر دو پیاده شده، نه از طریق auto-configuration
+  معمول Spring Boot که فقط برای یک DataSource کار می‌کند.
 
 ## محدودیت شناخته‌شده
 

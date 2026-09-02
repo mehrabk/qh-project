@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional("productBuilderTransactionManager")
 public class ProductOrgScopeService extends AbstractCrudService<ProductOrgScope> {
 
     private final ProductOrgScopeRepository repository;

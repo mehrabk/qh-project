@@ -1,6 +1,7 @@
 package ir.bank.qh.productbuilder.deposit.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.common.enums.TermUnit;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import lombok.Getter;
@@ -32,7 +33,8 @@ public class DepositProductAllowedTerm extends TenantAwareEntity {
 
 
     @Column(name = "TERM_UNIT_CODE", nullable = false, length = 20)
-    private String termUnitCode;
+    @Enumerated(EnumType.STRING)
+    private TermUnit termUnitCode;
 
 
     @Column(name = "IS_DEFAULT", nullable = false)

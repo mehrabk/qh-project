@@ -1,6 +1,8 @@
 package ir.bank.qh.productbuilder.core.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.common.enums.RecordStatus;
+import ir.bank.qh.productbuilder.core.enums.RelationshipType;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import lombok.Getter;
@@ -36,7 +38,8 @@ public class ProductRelationship extends TenantAwareEntity {
 
 
     @Column(name = "RELATIONSHIP_TYPE_CODE", nullable = false, length = 30)
-    private String relationshipTypeCode;
+    @Enumerated(EnumType.STRING)
+    private RelationshipType relationshipTypeCode;
 
 
     @Column(name = "PRIORITY_NO", nullable = false)
@@ -56,5 +59,6 @@ public class ProductRelationship extends TenantAwareEntity {
 
 
     @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
-    private String recordStatusCode = "ACTIVE";
+    @Enumerated(EnumType.STRING)
+    private RecordStatus recordStatusCode = RecordStatus.ACTIVE;
 }

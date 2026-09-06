@@ -1,6 +1,8 @@
 package ir.bank.qh.productbuilder.commonrules.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.common.enums.RecordStatus;
+import ir.bank.qh.productbuilder.commonrules.enums.RequirementStage;
 import ir.bank.qh.productbuilder.core.entity.ProductVersion;
 import ir.bank.qh.productbuilder.reference.entity.DocumentType;
 import jakarta.persistence.*;
@@ -33,7 +35,8 @@ public class ProductRequiredDocument extends TenantAwareEntity {
 
 
     @Column(name = "REQUIREMENT_STAGE_CODE", nullable = false, length = 30)
-    private String requirementStageCode;
+    @Enumerated(EnumType.STRING)
+    private RequirementStage requirementStageCode;
 
 
     @Column(name = "PROCESS_STEP_NO")
@@ -49,5 +52,6 @@ public class ProductRequiredDocument extends TenantAwareEntity {
 
 
     @Column(name = "RULE_STATUS_CODE", nullable = false, length = 20)
-    private String ruleStatusCode = "ACTIVE";
+    @Enumerated(EnumType.STRING)
+    private RecordStatus ruleStatusCode = RecordStatus.ACTIVE;
 }

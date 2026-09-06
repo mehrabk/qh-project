@@ -2,6 +2,7 @@ package ir.bank.qh.productbuilder.deposit.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
 import ir.bank.qh.productbuilder.core.entity.ProductVersion;
+import ir.bank.qh.productbuilder.deposit.enums.TransactionType;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import lombok.Getter;
@@ -29,7 +30,8 @@ public class DepositProductTransactionRule extends TenantAwareEntity {
 
 
     @Column(name = "TRANSACTION_TYPE_CODE", nullable = false, length = 30)
-    private String transactionTypeCode;
+    @Enumerated(EnumType.STRING)
+    private TransactionType transactionTypeCode;
 
 
     @Column(name = "IS_ALLOWED", nullable = false)

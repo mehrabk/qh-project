@@ -1,6 +1,8 @@
 package ir.bank.qh.productbuilder.deposit.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.common.enums.RecordStatus;
+import ir.bank.qh.common.enums.TermUnit;
 import ir.bank.qh.productbuilder.core.entity.ProductVersion;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -36,7 +38,8 @@ public class DepositProductTermRule extends TenantAwareEntity {
 
 
     @Column(name = "TERM_UNIT_CODE", length = 20)
-    private String termUnitCode;
+    @Enumerated(EnumType.STRING)
+    private TermUnit termUnitCode;
 
 
     @Column(name = "AUTO_RENEWAL_ALLOWED", nullable = false)
@@ -52,5 +55,6 @@ public class DepositProductTermRule extends TenantAwareEntity {
 
 
     @Column(name = "RULE_STATUS_CODE", nullable = false, length = 20)
-    private String ruleStatusCode = "ACTIVE";
+    @Enumerated(EnumType.STRING)
+    private RecordStatus ruleStatusCode = RecordStatus.ACTIVE;
 }

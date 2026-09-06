@@ -1,6 +1,8 @@
 package ir.bank.qh.productbuilder.commonrules.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.common.enums.RecordStatus;
+import ir.bank.qh.productbuilder.commonrules.enums.OrgUnitType;
 import ir.bank.qh.productbuilder.core.entity.ProductVersion;
 import jakarta.persistence.*;
 import java.time.LocalDate;
@@ -29,7 +31,8 @@ public class ProductOrgScope extends TenantAwareEntity {
 
 
     @Column(name = "ORG_UNIT_TYPE_CODE", nullable = false, length = 30)
-    private String orgUnitTypeCode;
+    @Enumerated(EnumType.STRING)
+    private OrgUnitType orgUnitTypeCode;
 
 
     @Column(name = "ORG_UNIT_ID")
@@ -53,5 +56,6 @@ public class ProductOrgScope extends TenantAwareEntity {
 
 
     @Column(name = "RULE_STATUS_CODE", nullable = false, length = 20)
-    private String ruleStatusCode = "ACTIVE";
+    @Enumerated(EnumType.STRING)
+    private RecordStatus ruleStatusCode = RecordStatus.ACTIVE;
 }

@@ -1,6 +1,7 @@
 package ir.bank.qh.productbuilder.deposit.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.productbuilder.deposit.enums.FailureAction;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,7 +36,8 @@ public class DepositProductClosurePrecheck extends TenantAwareEntity {
 
 
     @Column(name = "FAILURE_ACTION_CODE", length = 30)
-    private String failureActionCode;
+    @Enumerated(EnumType.STRING)
+    private FailureAction failureActionCode;
 
 
     @Column(name = "SEQUENCE_NO", nullable = false)

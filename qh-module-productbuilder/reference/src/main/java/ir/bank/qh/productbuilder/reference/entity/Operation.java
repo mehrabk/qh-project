@@ -1,6 +1,8 @@
 package ir.bank.qh.productbuilder.reference.entity;
 
 import ir.bank.qh.common.entity.BaseEntity;
+import ir.bank.qh.common.enums.RecordStatus;
+import ir.bank.qh.productbuilder.reference.enums.OperationType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,7 +33,8 @@ public class Operation extends BaseEntity {
 
 
     @Column(name = "OPERATION_TYPE_CODE", length = 30)
-    private String operationTypeCode;
+    @Enumerated(EnumType.STRING)
+    private OperationType operationTypeCode;
 
 
     @Column(name = "FACILITY_STEP")
@@ -39,5 +42,6 @@ public class Operation extends BaseEntity {
 
 
     @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
-    private String recordStatusCode = "ACTIVE";
+    @Enumerated(EnumType.STRING)
+    private RecordStatus recordStatusCode = RecordStatus.ACTIVE;
 }

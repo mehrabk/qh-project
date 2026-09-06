@@ -2,6 +2,8 @@ package ir.bank.qh.productbuilder.loan.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
 import ir.bank.qh.productbuilder.commonrules.entity.ProductEligibilityRule;
+import ir.bank.qh.productbuilder.loan.enums.EmploymentType;
+import ir.bank.qh.productbuilder.loan.enums.RiskGrade;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import lombok.Getter;
@@ -37,7 +39,8 @@ public class LoanEligibilityExtension extends TenantAwareEntity {
 
 
     @Column(name = "MAX_RISK_GRADE_CODE", length = 30)
-    private String maxRiskGradeCode;
+    @Enumerated(EnumType.STRING)
+    private RiskGrade maxRiskGradeCode;
 
 
     @Column(name = "REQUIRED_GUARANTOR_COUNT", nullable = false)
@@ -45,7 +48,8 @@ public class LoanEligibilityExtension extends TenantAwareEntity {
 
 
     @Column(name = "EMPLOYMENT_TYPE_CODE", length = 30)
-    private String employmentTypeCode;
+    @Enumerated(EnumType.STRING)
+    private EmploymentType employmentTypeCode;
 
 
     @Column(name = "CBI_TRACKING_REQUIRED", nullable = false)

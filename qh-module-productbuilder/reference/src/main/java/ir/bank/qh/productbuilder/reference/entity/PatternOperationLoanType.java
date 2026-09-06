@@ -1,6 +1,7 @@
 package ir.bank.qh.productbuilder.reference.entity;
 
 import ir.bank.qh.common.entity.BaseEntity;
+import ir.bank.qh.common.enums.RecordStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,5 +36,6 @@ public class PatternOperationLoanType extends BaseEntity {
 
 
     @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
-    private String recordStatusCode = "ACTIVE";
+    @Enumerated(EnumType.STRING)
+    private RecordStatus recordStatusCode = RecordStatus.ACTIVE;
 }

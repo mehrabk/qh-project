@@ -2,6 +2,7 @@ package ir.bank.qh.productbuilder.deposit.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
 import ir.bank.qh.productbuilder.core.entity.ProductVersion;
+import ir.bank.qh.productbuilder.deposit.enums.HoldType;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import lombok.Getter;
@@ -29,7 +30,8 @@ public class DepositProductHoldRule extends TenantAwareEntity {
 
 
     @Column(name = "HOLD_TYPE_CODE", nullable = false, length = 30)
-    private String holdTypeCode;
+    @Enumerated(EnumType.STRING)
+    private HoldType holdTypeCode;
 
 
     @Column(name = "IS_SUPPORTED", nullable = false)

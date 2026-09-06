@@ -1,6 +1,9 @@
 package ir.bank.qh.productbuilder.commonrules.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.common.enums.RecordStatus;
+import ir.bank.qh.productbuilder.commonrules.enums.InquiryType;
+import ir.bank.qh.productbuilder.commonrules.enums.RequirementStage;
 import ir.bank.qh.productbuilder.core.entity.ProductVersion;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -28,11 +31,13 @@ public class ProductRequiredInquiry extends TenantAwareEntity {
 
 
     @Column(name = "INQUIRY_TYPE_CODE", nullable = false, length = 30)
-    private String inquiryTypeCode;
+    @Enumerated(EnumType.STRING)
+    private InquiryType inquiryTypeCode;
 
 
     @Column(name = "REQUIREMENT_STAGE_CODE", length = 30)
-    private String requirementStageCode;
+    @Enumerated(EnumType.STRING)
+    private RequirementStage requirementStageCode;
 
 
     @Column(name = "MAX_RESULT_AGE_MINUTES")
@@ -44,5 +49,6 @@ public class ProductRequiredInquiry extends TenantAwareEntity {
 
 
     @Column(name = "RULE_STATUS_CODE", nullable = false, length = 20)
-    private String ruleStatusCode = "ACTIVE";
+    @Enumerated(EnumType.STRING)
+    private RecordStatus ruleStatusCode = RecordStatus.ACTIVE;
 }

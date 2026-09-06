@@ -1,6 +1,9 @@
 package ir.bank.qh.productbuilder.core.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.common.enums.RecordStatus;
+import ir.bank.qh.productbuilder.core.enums.ApprovalStatus;
+import ir.bank.qh.productbuilder.core.enums.EnableStatus;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -45,7 +48,8 @@ public class ProductVersion extends TenantAwareEntity {
 
 
     @Column(name = "VERSION_STATUS_CODE", nullable = false, length = 30)
-    private String versionStatusCode = "DRAFT";
+    @Enumerated(EnumType.STRING)
+    private ApprovalStatus versionStatusCode = ApprovalStatus.DRAFT;
 
 
     @Column(name = "IS_CURRENT", nullable = false)
@@ -53,11 +57,13 @@ public class ProductVersion extends TenantAwareEntity {
 
 
     @Column(name = "ORIGINATION_STATUS_CODE", nullable = false, length = 30)
-    private String originationStatusCode = "DISABLED";
+    @Enumerated(EnumType.STRING)
+    private EnableStatus originationStatusCode = EnableStatus.DISABLED;
 
 
     @Column(name = "SERVICING_STATUS_CODE", nullable = false, length = 30)
-    private String servicingStatusCode = "DISABLED";
+    @Enumerated(EnumType.STRING)
+    private EnableStatus servicingStatusCode = EnableStatus.DISABLED;
 
 
     @Column(name = "CHANGE_REASON", length = 500)
@@ -73,5 +79,6 @@ public class ProductVersion extends TenantAwareEntity {
 
 
     @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
-    private String recordStatusCode = "ACTIVE";
+    @Enumerated(EnumType.STRING)
+    private RecordStatus recordStatusCode = RecordStatus.ACTIVE;
 }

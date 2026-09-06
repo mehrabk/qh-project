@@ -1,6 +1,7 @@
 package ir.bank.qh.productbuilder.loan.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.common.enums.RecordStatus;
 import ir.bank.qh.productbuilder.core.entity.ProductVersion;
 import ir.bank.qh.productbuilder.reference.entity.LoanProductCollateral;
 import jakarta.persistence.*;
@@ -62,5 +63,6 @@ public class LoanProductCollateralRule extends TenantAwareEntity {
 
 
     @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
-    private String recordStatusCode = "ACTIVE";
+    @Enumerated(EnumType.STRING)
+    private RecordStatus recordStatusCode = RecordStatus.ACTIVE;
 }

@@ -1,6 +1,9 @@
 package ir.bank.qh.productbuilder.core.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.productbuilder.core.enums.ApprovalStatus;
+import ir.bank.qh.productbuilder.core.enums.BalanceNature;
+import ir.bank.qh.productbuilder.core.enums.ProductDomain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,11 +36,13 @@ public class Product extends TenantAwareEntity {
 
 
     @Column(name = "PRODUCT_CLASS_CODE", nullable = false, length = 30)
-    private String productClassCode;
+    @Enumerated(EnumType.STRING)
+    private ProductDomain productClassCode;
 
 
     @Column(name = "BALANCE_NATURE_CODE", nullable = false, length = 20)
-    private String balanceNatureCode;
+    @Enumerated(EnumType.STRING)
+    private BalanceNature balanceNatureCode;
 
 
     @Column(name = "PRODUCT_FAMILY_CODE", length = 30)
@@ -53,5 +58,6 @@ public class Product extends TenantAwareEntity {
 
 
     @Column(name = "PRODUCT_STATUS_CODE", nullable = false, length = 30)
-    private String productStatusCode = "DRAFT";
+    @Enumerated(EnumType.STRING)
+    private ApprovalStatus productStatusCode = ApprovalStatus.DRAFT;
 }

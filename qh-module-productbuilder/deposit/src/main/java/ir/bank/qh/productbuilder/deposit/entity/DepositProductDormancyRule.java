@@ -1,7 +1,9 @@
 package ir.bank.qh.productbuilder.deposit.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.common.enums.TermUnit;
 import ir.bank.qh.productbuilder.core.entity.ProductVersion;
+import ir.bank.qh.productbuilder.deposit.enums.ReactivationMethod;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import lombok.Getter;
@@ -33,7 +35,8 @@ public class DepositProductDormancyRule extends TenantAwareEntity {
 
 
     @Column(name = "INACTIVITY_PERIOD_UNIT_CODE", length = 30)
-    private String inactivityPeriodUnitCode;
+    @Enumerated(EnumType.STRING)
+    private TermUnit inactivityPeriodUnitCode;
 
 
     @Column(name = "WARNING_PERIOD_VALUE")
@@ -41,11 +44,13 @@ public class DepositProductDormancyRule extends TenantAwareEntity {
 
 
     @Column(name = "WARNING_PERIOD_UNIT_CODE", length = 30)
-    private String warningPeriodUnitCode;
+    @Enumerated(EnumType.STRING)
+    private TermUnit warningPeriodUnitCode;
 
 
     @Column(name = "REACTIVATION_METHOD_CODE", length = 30)
-    private String reactivationMethodCode;
+    @Enumerated(EnumType.STRING)
+    private ReactivationMethod reactivationMethodCode;
 
 
     @Column(name = "AUTO_REACTIVATION_ALLOWED", nullable = false)

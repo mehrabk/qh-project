@@ -1,7 +1,12 @@
 package ir.bank.qh.productbuilder.loan.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.common.enums.RecordStatus;
+import ir.bank.qh.common.enums.TermUnit;
 import ir.bank.qh.productbuilder.core.entity.ProductVersion;
+import ir.bank.qh.productbuilder.loan.enums.GraceMethod;
+import ir.bank.qh.productbuilder.loan.enums.InstallmentFrequency;
+import ir.bank.qh.productbuilder.loan.enums.RepaymentMethod;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import lombok.Getter;
@@ -37,11 +42,13 @@ public class LoanProductRepaymentRule extends TenantAwareEntity {
 
 
     @Column(name = "REPAYMENT_METHOD_CODE", length = 30)
-    private String repaymentMethodCode;
+    @Enumerated(EnumType.STRING)
+    private RepaymentMethod repaymentMethodCode;
 
 
     @Column(name = "INSTALLMENT_FREQUENCY_CODE", length = 30)
-    private String installmentFrequencyCode;
+    @Enumerated(EnumType.STRING)
+    private InstallmentFrequency installmentFrequencyCode;
 
 
     @Column(name = "MIN_TERM_DURATION")
@@ -53,7 +60,8 @@ public class LoanProductRepaymentRule extends TenantAwareEntity {
 
 
     @Column(name = "TERM_UNIT_CODE", length = 20)
-    private String termUnitCode;
+    @Enumerated(EnumType.STRING)
+    private TermUnit termUnitCode;
 
 
     @Column(name = "MIN_INSTALLMENT_COUNT")
@@ -69,7 +77,8 @@ public class LoanProductRepaymentRule extends TenantAwareEntity {
 
 
     @Column(name = "INSTALLMENT_INTERVAL_UNIT_CODE", length = 30)
-    private String installmentIntervalUnitCode;
+    @Enumerated(EnumType.STRING)
+    private TermUnit installmentIntervalUnitCode;
 
 
     @Column(name = "GRACE_ALLOWED", nullable = false)
@@ -85,11 +94,13 @@ public class LoanProductRepaymentRule extends TenantAwareEntity {
 
 
     @Column(name = "GRACE_UNIT_CODE", length = 30)
-    private String graceUnitCode;
+    @Enumerated(EnumType.STRING)
+    private TermUnit graceUnitCode;
 
 
     @Column(name = "GRACE_METHOD_CODE", length = 30)
-    private String graceMethodCode;
+    @Enumerated(EnumType.STRING)
+    private GraceMethod graceMethodCode;
 
 
     @Column(name = "PREPAYMENT_ALLOWED", nullable = false)
@@ -113,5 +124,6 @@ public class LoanProductRepaymentRule extends TenantAwareEntity {
 
 
     @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
-    private String recordStatusCode = "ACTIVE";
+    @Enumerated(EnumType.STRING)
+    private RecordStatus recordStatusCode = RecordStatus.ACTIVE;
 }

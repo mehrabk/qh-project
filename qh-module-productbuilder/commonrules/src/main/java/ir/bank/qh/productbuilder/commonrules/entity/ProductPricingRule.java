@@ -1,6 +1,9 @@
 package ir.bank.qh.productbuilder.commonrules.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.common.enums.RecordStatus;
+import ir.bank.qh.productbuilder.commonrules.enums.PricingMethod;
+import ir.bank.qh.productbuilder.commonrules.enums.PricingPurpose;
 import ir.bank.qh.productbuilder.core.entity.ProductVersion;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
@@ -30,11 +33,13 @@ public class ProductPricingRule extends TenantAwareEntity {
 
 
     @Column(name = "PRICING_PURPOSE_CODE", length = 30)
-    private String pricingPurposeCode;
+    @Enumerated(EnumType.STRING)
+    private PricingPurpose pricingPurposeCode;
 
 
     @Column(name = "PRICING_METHOD_CODE", nullable = false, length = 30)
-    private String pricingMethodCode;
+    @Enumerated(EnumType.STRING)
+    private PricingMethod pricingMethodCode;
 
 
     @Column(name = "CURRENCY_CODE", length = 3)
@@ -58,5 +63,6 @@ public class ProductPricingRule extends TenantAwareEntity {
 
 
     @Column(name = "RULE_STATUS_CODE", nullable = false, length = 20)
-    private String ruleStatusCode = "ACTIVE";
+    @Enumerated(EnumType.STRING)
+    private RecordStatus ruleStatusCode = RecordStatus.ACTIVE;
 }

@@ -1,6 +1,7 @@
 package ir.bank.qh.productbuilder.core.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.productbuilder.core.enums.ProductDomain;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import lombok.Getter;
@@ -32,7 +33,8 @@ public class ProductLegacyMapping extends TenantAwareEntity {
 
 
     @Column(name = "SOURCE_DOMAIN_CODE", nullable = false, length = 30)
-    private String sourceDomainCode;
+    @Enumerated(EnumType.STRING)
+    private ProductDomain sourceDomainCode;
 
 
     @Column(name = "SOURCE_TABLE_NAME", nullable = false, length = 100)

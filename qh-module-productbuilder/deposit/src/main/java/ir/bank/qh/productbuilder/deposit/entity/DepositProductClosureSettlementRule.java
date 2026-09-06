@@ -1,6 +1,7 @@
 package ir.bank.qh.productbuilder.deposit.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.productbuilder.deposit.enums.SettlementMethod;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,7 +32,8 @@ public class DepositProductClosureSettlementRule extends TenantAwareEntity {
 
 
     @Column(name = "SETTLEMENT_METHOD_CODE", length = 40)
-    private String settlementMethodCode;
+    @Enumerated(EnumType.STRING)
+    private SettlementMethod settlementMethodCode;
 
 
     @Column(name = "DESTINATION_CODE", length = 30)

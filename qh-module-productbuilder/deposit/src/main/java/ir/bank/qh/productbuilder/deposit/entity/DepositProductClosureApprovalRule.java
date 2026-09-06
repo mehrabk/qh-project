@@ -1,6 +1,7 @@
 package ir.bank.qh.productbuilder.deposit.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.common.enums.ApprovalLevel;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import lombok.Getter;
@@ -28,7 +29,8 @@ public class DepositProductClosureApprovalRule extends TenantAwareEntity {
 
 
     @Column(name = "APPROVAL_LEVEL_CODE", nullable = false, length = 40)
-    private String approvalLevelCode;
+    @Enumerated(EnumType.STRING)
+    private ApprovalLevel approvalLevelCode;
 
 
     @Column(name = "IS_MANDATORY", nullable = false)

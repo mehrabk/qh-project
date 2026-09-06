@@ -1,6 +1,8 @@
 package ir.bank.qh.productbuilder.reference.entity;
 
 import ir.bank.qh.common.entity.BaseEntity;
+import ir.bank.qh.common.enums.RecordStatus;
+import ir.bank.qh.productbuilder.reference.enums.CollateralCategory;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,7 +33,8 @@ public class LoanProductCollateral extends BaseEntity {
 
 
     @Column(name = "COLLATERAL_CATEGORY_CODE", length = 30)
-    private String collateralCategoryCode;
+    @Enumerated(EnumType.STRING)
+    private CollateralCategory collateralCategoryCode;
 
 
     @Column(name = "DESCRIPTION", length = 500)
@@ -39,5 +42,6 @@ public class LoanProductCollateral extends BaseEntity {
 
 
     @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
-    private String recordStatusCode = "ACTIVE";
+    @Enumerated(EnumType.STRING)
+    private RecordStatus recordStatusCode = RecordStatus.ACTIVE;
 }

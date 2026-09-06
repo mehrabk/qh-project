@@ -1,6 +1,9 @@
 package ir.bank.qh.productbuilder.core.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.productbuilder.core.enums.ConfigurationStatus;
+import ir.bank.qh.productbuilder.core.enums.ProductDomain;
+import ir.bank.qh.productbuilder.core.enums.ValidationStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +30,8 @@ public class ProductVersionModule extends TenantAwareEntity {
 
 
     @Column(name = "MODULE_CODE", nullable = false, length = 40)
-    private String moduleCode;
+    @Enumerated(EnumType.STRING)
+    private ProductDomain moduleCode;
 
 
     @Column(name = "IS_ENABLED", nullable = false)
@@ -35,11 +39,13 @@ public class ProductVersionModule extends TenantAwareEntity {
 
 
     @Column(name = "CONFIGURATION_STATUS_CODE", nullable = false, length = 30)
-    private String configurationStatusCode = "NOT_CONFIGURED";
+    @Enumerated(EnumType.STRING)
+    private ConfigurationStatus configurationStatusCode = ConfigurationStatus.NOT_CONFIGURED;
 
 
     @Column(name = "VALIDATION_STATUS_CODE", nullable = false, length = 30)
-    private String validationStatusCode = "NOT_VALIDATED";
+    @Enumerated(EnumType.STRING)
+    private ValidationStatus validationStatusCode = ValidationStatus.NOT_VALIDATED;
 
 
     @Lob

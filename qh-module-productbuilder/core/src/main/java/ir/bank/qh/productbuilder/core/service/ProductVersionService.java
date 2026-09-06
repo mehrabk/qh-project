@@ -1,6 +1,8 @@
 package ir.bank.qh.productbuilder.core.service;
 
 import ir.bank.qh.productbuilder.core.entity.ProductVersion;
+import ir.bank.qh.productbuilder.core.enums.ApprovalStatus;
+import ir.bank.qh.productbuilder.core.enums.EnableStatus;
 import ir.bank.qh.productbuilder.core.repository.ProductVersionRepository;
 import ir.bank.qh.common.exception.BusinessRuleViolationException;
 import ir.bank.qh.common.service.AbstractCrudService;
@@ -49,10 +51,10 @@ public class ProductVersionService extends AbstractCrudService<ProductVersion> {
      */
     public ProductVersion approve(Long id, String approvedBy) {
         ProductVersion v = findById(id);
-        if (!"DRAFT".equalsIgnoreCase(v.getVersionStatusCode())) {
+        if (v.getVersionStatusCode() != ApprovalStatus.DRAFT) {
             throw new BusinessRuleViolationException("فقط نسخه‌های DRAFT قابل تصویب هستند");
         }
-        v.setVersionStatusCode("APPROVED");
+        v.setVersionStatusCode(ApprovalStatus.APPROVED);
         v.setApprovedBy(approvedBy);
         v.setApprovedAt(java.time.LocalDateTime.now());
         return repository.save(v);
@@ -65,11 +67,11 @@ public class ProductVersionService extends AbstractCrudService<ProductVersion> {
      */
     public ProductVersion enableOrigination(Long id) {
         ProductVersion v = findById(id);
-        if (!"APPROVED".equalsIgnoreCase(v.getVersionStatusCode())) {
+        if (v.getVersionStatusCode() != ApprovalStatus.APPROVED) {
             throw new BusinessRuleViolationException("Origination فقط برای نسخه‌های APPROVED فعال می‌شود");
         }
-        v.setOriginationStatusCode("ENABLED");
-        v.setServicingStatusCode("ENABLED");
+        v.setOriginationStatusCode(EnableStatus.ENABLED);
+        v.setServicingStatusCode(EnableStatus.ENABLED);
         v.setIsCurrent(true);
         return repository.save(v);
     }
@@ -77,7 +79,7 @@ public class ProductVersionService extends AbstractCrudService<ProductVersion> {
     /** Disables new origination while keeping servicing available for existing accounts/contracts. */
     public ProductVersion disableOrigination(Long id) {
         ProductVersion v = findById(id);
-        v.setOriginationStatusCode("DISABLED");
+        v.setOriginationStatusCode(EnableStatus.DISABLED);
         return repository.save(v);
     }
 
@@ -89,8 +91,8 @@ public class ProductVersionService extends AbstractCrudService<ProductVersion> {
             throw new BusinessRuleViolationException(
                     "VALID_FROM نمی‌تواند بعد از VALID_TO باشد (CK_PRODUCT_VERSION_DATES)");
         }
-        if ("ENABLED".equalsIgnoreCase(v.getOriginationStatusCode())
-                && !"APPROVED".equalsIgnoreCase(v.getVersionStatusCode())) {
+        if (v.getOriginationStatusCode() == EnableStatus.ENABLED
+                && v.getVersionStatusCode() != ApprovalStatus.APPROVED) {
             throw new BusinessRuleViolationException(
                     "ORIGINATION_STATUS_CODE فقط برای نسخه‌های APPROVED می‌تواند ENABLED شود");
         }

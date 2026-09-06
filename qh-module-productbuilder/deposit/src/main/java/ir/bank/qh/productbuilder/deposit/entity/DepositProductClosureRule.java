@@ -1,7 +1,10 @@
 package ir.bank.qh.productbuilder.deposit.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.common.enums.RecordStatus;
 import ir.bank.qh.productbuilder.core.entity.ProductVersion;
+import ir.bank.qh.productbuilder.deposit.enums.ClosureType;
+import ir.bank.qh.productbuilder.deposit.enums.SettlementMethod;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import lombok.Getter;
@@ -29,7 +32,8 @@ public class DepositProductClosureRule extends TenantAwareEntity {
 
 
     @Column(name = "CLOSURE_TYPE_CODE", nullable = false, length = 30)
-    private String closureTypeCode;
+    @Enumerated(EnumType.STRING)
+    private ClosureType closureTypeCode;
 
 
     @Column(name = "IS_CLOSURE_ALLOWED", nullable = false)
@@ -41,7 +45,8 @@ public class DepositProductClosureRule extends TenantAwareEntity {
 
 
     @Column(name = "BALANCE_DESTINATION_CODE", length = 30)
-    private String balanceDestinationCode;
+    @Enumerated(EnumType.STRING)
+    private SettlementMethod balanceDestinationCode;
 
 
     @Column(name = "EFFECTIVE_FROM_DATE")
@@ -53,7 +58,8 @@ public class DepositProductClosureRule extends TenantAwareEntity {
 
 
     @Column(name = "STATUS_CODE", nullable = false, length = 20)
-    private String statusCode = "ACTIVE";
+    @Enumerated(EnumType.STRING)
+    private RecordStatus statusCode = RecordStatus.ACTIVE;
 
 
     @Column(name = "DESCRIPTION", length = 1000)

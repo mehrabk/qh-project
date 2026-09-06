@@ -1,6 +1,14 @@
 package ir.bank.qh.productbuilder.commonrules.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.common.enums.PartyNature;
+import ir.bank.qh.common.enums.RecordStatus;
+import ir.bank.qh.productbuilder.commonrules.enums.CustomerSegment;
+import ir.bank.qh.productbuilder.commonrules.enums.Gender;
+import ir.bank.qh.productbuilder.commonrules.enums.KycLevel;
+import ir.bank.qh.productbuilder.commonrules.enums.NationalityScope;
+import ir.bank.qh.productbuilder.commonrules.enums.ResidencyStatus;
+import ir.bank.qh.productbuilder.commonrules.enums.RiskLevel;
 import ir.bank.qh.productbuilder.core.entity.ProductVersion;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
@@ -29,27 +37,33 @@ public class ProductEligibilityRule extends TenantAwareEntity {
 
 
     @Column(name = "PARTY_TYPE_CODE", length = 30)
-    private String partyTypeCode;
+    @Enumerated(EnumType.STRING)
+    private PartyNature partyTypeCode;
 
 
     @Column(name = "CUSTOMER_SEGMENT_CODE", length = 30)
-    private String customerSegmentCode;
+    @Enumerated(EnumType.STRING)
+    private CustomerSegment customerSegmentCode;
 
 
     @Column(name = "RESIDENCY_STATUS_CODE", length = 30)
-    private String residencyStatusCode;
+    @Enumerated(EnumType.STRING)
+    private ResidencyStatus residencyStatusCode;
 
 
     @Column(name = "NATIONALITY_SCOPE_CODE", length = 30)
-    private String nationalityScopeCode;
+    @Enumerated(EnumType.STRING)
+    private NationalityScope nationalityScopeCode;
 
 
     @Column(name = "GENDER_CODE", length = 30)
-    private String genderCode;
+    @Enumerated(EnumType.STRING)
+    private Gender genderCode;
 
 
     @Column(name = "KYC_LEVEL_CODE", length = 30)
-    private String kycLevelCode;
+    @Enumerated(EnumType.STRING)
+    private KycLevel kycLevelCode;
 
 
     @Column(name = "MIN_AGE")
@@ -61,7 +75,8 @@ public class ProductEligibilityRule extends TenantAwareEntity {
 
 
     @Column(name = "AML_RISK_MAX_CODE", length = 30)
-    private String amlRiskMaxCode;
+    @Enumerated(EnumType.STRING)
+    private RiskLevel amlRiskMaxCode;
 
 
     @Column(name = "PEP_ALLOWED_FLAG", nullable = false)
@@ -85,5 +100,6 @@ public class ProductEligibilityRule extends TenantAwareEntity {
 
 
     @Column(name = "RULE_STATUS_CODE", nullable = false, length = 20)
-    private String ruleStatusCode = "ACTIVE";
+    @Enumerated(EnumType.STRING)
+    private RecordStatus ruleStatusCode = RecordStatus.ACTIVE;
 }

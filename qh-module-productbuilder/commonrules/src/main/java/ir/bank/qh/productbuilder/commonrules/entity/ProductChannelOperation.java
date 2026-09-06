@@ -1,6 +1,8 @@
 package ir.bank.qh.productbuilder.commonrules.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.common.enums.RecordStatus;
+import ir.bank.qh.productbuilder.commonrules.enums.ChannelOperationType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +29,8 @@ public class ProductChannelOperation extends TenantAwareEntity {
 
 
     @Column(name = "OPERATION_CODE", nullable = false, length = 40)
-    private String operationCode;
+    @Enumerated(EnumType.STRING)
+    private ChannelOperationType operationCode;
 
 
     @Column(name = "IS_ALLOWED", nullable = false)
@@ -39,5 +42,6 @@ public class ProductChannelOperation extends TenantAwareEntity {
 
 
     @Column(name = "RECORD_STATUS_CODE", nullable = false, length = 20)
-    private String recordStatusCode = "ACTIVE";
+    @Enumerated(EnumType.STRING)
+    private RecordStatus recordStatusCode = RecordStatus.ACTIVE;
 }

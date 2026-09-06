@@ -1,6 +1,7 @@
 package ir.bank.qh.productbuilder.reference.entity;
 
 import ir.bank.qh.common.entity.BaseEntity;
+import ir.bank.qh.common.enums.RecordStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -51,5 +52,6 @@ public class FacilityOperationParameter extends BaseEntity {
 
 
     @Column(name = "PARAMETER_STATUS_CODE", nullable = false, length = 20)
-    private String parameterStatusCode = "ACTIVE";
+    @Enumerated(EnumType.STRING)
+    private RecordStatus parameterStatusCode = RecordStatus.ACTIVE;
 }

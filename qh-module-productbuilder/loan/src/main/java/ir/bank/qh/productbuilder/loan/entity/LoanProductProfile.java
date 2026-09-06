@@ -1,6 +1,7 @@
 package ir.bank.qh.productbuilder.loan.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.common.enums.PartyNature;
 import ir.bank.qh.productbuilder.core.entity.ProductVersion;
 import ir.bank.qh.productbuilder.reference.entity.EconomicSubSection;
 import ir.bank.qh.productbuilder.reference.entity.FacilityOperationParameter;
@@ -53,7 +54,8 @@ public class LoanProductProfile extends TenantAwareEntity {
 
 
     @Column(name = "PARTY_NATURE_CODE", length = 30)
-    private String partyNatureCode;
+    @Enumerated(EnumType.STRING)
+    private PartyNature partyNatureCode;
 
 
     @Column(name = "CURRENCY_TYPE_CODE", length = 3)

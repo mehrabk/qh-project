@@ -2,6 +2,8 @@ package ir.bank.qh.productbuilder.deposit.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
 import ir.bank.qh.productbuilder.core.entity.ProductVersion;
+import ir.bank.qh.productbuilder.deposit.enums.JointOwnershipType;
+import ir.bank.qh.productbuilder.deposit.enums.JointSigningRule;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,7 +30,8 @@ public class DepositProductJointRule extends TenantAwareEntity {
 
 
     @Column(name = "OWNERSHIP_TYPE_CODE", length = 30)
-    private String ownershipTypeCode;
+    @Enumerated(EnumType.STRING)
+    private JointOwnershipType ownershipTypeCode;
 
 
     @Column(name = "MIN_JOINT_OWNER_COUNT")
@@ -40,7 +43,8 @@ public class DepositProductJointRule extends TenantAwareEntity {
 
 
     @Column(name = "SIGNING_RULE_CODE", length = 30)
-    private String signingRuleCode;
+    @Enumerated(EnumType.STRING)
+    private JointSigningRule signingRuleCode;
 
 
     @Column(name = "MIN_REQUIRED_SIGNER_COUNT")

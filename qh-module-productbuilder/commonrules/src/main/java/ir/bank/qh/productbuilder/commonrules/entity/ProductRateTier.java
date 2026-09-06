@@ -1,6 +1,7 @@
 package ir.bank.qh.productbuilder.commonrules.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.common.enums.TermUnit;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -49,7 +50,8 @@ public class ProductRateTier extends TenantAwareEntity {
 
 
     @Column(name = "TERM_UNIT_CODE", length = 20)
-    private String termUnitCode;
+    @Enumerated(EnumType.STRING)
+    private TermUnit termUnitCode;
 
 
     @Column(name = "RATE_VALUE", precision = 12, scale = 8)

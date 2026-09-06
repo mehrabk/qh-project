@@ -1,7 +1,9 @@
 package ir.bank.qh.productbuilder.deposit.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.common.enums.Channel;
 import ir.bank.qh.productbuilder.core.entity.ProductVersion;
+import ir.bank.qh.productbuilder.deposit.enums.WithdrawalMedia;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import lombok.Getter;
@@ -29,11 +31,13 @@ public class DepositProductWithdrawalMedia extends TenantAwareEntity {
 
 
     @Column(name = "WITHDRAWAL_MEDIA_CODE", nullable = false, length = 30)
-    private String withdrawalMediaCode;
+    @Enumerated(EnumType.STRING)
+    private WithdrawalMedia withdrawalMediaCode;
 
 
     @Column(name = "CHANNEL_CODE", length = 30)
-    private String channelCode;
+    @Enumerated(EnumType.STRING)
+    private Channel channelCode;
 
 
     @Column(name = "IS_ALLOWED", nullable = false)

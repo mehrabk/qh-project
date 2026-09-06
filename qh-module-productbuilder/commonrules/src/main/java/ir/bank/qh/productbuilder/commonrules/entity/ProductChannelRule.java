@@ -1,6 +1,8 @@
 package ir.bank.qh.productbuilder.commonrules.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.common.enums.Channel;
+import ir.bank.qh.common.enums.RecordStatus;
 import ir.bank.qh.productbuilder.core.entity.ProductVersion;
 import jakarta.persistence.*;
 import java.time.LocalDate;
@@ -29,7 +31,8 @@ public class ProductChannelRule extends TenantAwareEntity {
 
 
     @Column(name = "CHANNEL_CODE", nullable = false, length = 30)
-    private String channelCode;
+    @Enumerated(EnumType.STRING)
+    private Channel channelCode;
 
 
     @Column(name = "IS_ALLOWED", nullable = false)
@@ -45,5 +48,6 @@ public class ProductChannelRule extends TenantAwareEntity {
 
 
     @Column(name = "RULE_STATUS_CODE", nullable = false, length = 20)
-    private String ruleStatusCode = "ACTIVE";
+    @Enumerated(EnumType.STRING)
+    private RecordStatus ruleStatusCode = RecordStatus.ACTIVE;
 }

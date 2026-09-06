@@ -3,7 +3,11 @@ package ir.bank.qh.party.service;
 import ir.bank.qh.party.entity.PartyGroupEntity;
 import ir.bank.qh.party.repository.PartyGroupEntityRepository;
 import ir.bank.qh.common.exception.ResourceNotFoundException;
+import ir.bank.qh.common.service.JpaReferenceResolver;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +25,9 @@ public class PartyGroupEntityService {
 
     private final PartyGroupEntityRepository repository;
 
+    @PersistenceContext(unitName = "party")
+    private EntityManager entityManager;
+
     @Transactional(readOnly = true, transactionManager = "partyTransactionManager")
     public List<PartyGroupEntity> findAll() {
         return repository.findAll();
@@ -33,16 +40,15 @@ public class PartyGroupEntityService {
     }
 
     public PartyGroupEntity create(PartyGroupEntity entity) {
+        JpaReferenceResolver.resolveManyToOneReferences(entity, entityManager);
         return repository.save(entity);
     }
 
     public PartyGroupEntity update(Long id, PartyGroupEntity incoming) {
-        // Ensures the row actually exists (throws 404 otherwise) before saving,
-        // and forces the update to target that exact row rather than trusting
-        // whatever id happened to be in the request body.
-        findById(id);
-        incoming.setId(id);
-        return repository.save(incoming);
+        JpaReferenceResolver.resolveManyToOneReferences(incoming, entityManager);
+        PartyGroupEntity existing = findById(id);
+        BeanUtils.copyProperties(incoming, existing, JpaReferenceResolver.updateIgnoredProperties(PartyGroupEntity.class));
+        return repository.save(existing);
     }
 
     public void delete(Long id) {

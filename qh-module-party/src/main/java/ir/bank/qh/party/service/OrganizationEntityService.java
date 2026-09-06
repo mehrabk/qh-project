@@ -3,7 +3,11 @@ package ir.bank.qh.party.service;
 import ir.bank.qh.party.entity.OrganizationEntity;
 import ir.bank.qh.party.repository.OrganizationEntityRepository;
 import ir.bank.qh.common.exception.ResourceNotFoundException;
+import ir.bank.qh.common.service.JpaReferenceResolver;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +25,9 @@ public class OrganizationEntityService {
 
     private final OrganizationEntityRepository repository;
 
+    @PersistenceContext(unitName = "party")
+    private EntityManager entityManager;
+
     @Transactional(readOnly = true, transactionManager = "partyTransactionManager")
     public List<OrganizationEntity> findAll() {
         return repository.findAll();
@@ -33,16 +40,15 @@ public class OrganizationEntityService {
     }
 
     public OrganizationEntity create(OrganizationEntity entity) {
+        JpaReferenceResolver.resolveManyToOneReferences(entity, entityManager);
         return repository.save(entity);
     }
 
     public OrganizationEntity update(Long id, OrganizationEntity incoming) {
-        // Ensures the row actually exists (throws 404 otherwise) before saving,
-        // and forces the update to target that exact row rather than trusting
-        // whatever id happened to be in the request body.
-        findById(id);
-        incoming.setId(id);
-        return repository.save(incoming);
+        JpaReferenceResolver.resolveManyToOneReferences(incoming, entityManager);
+        OrganizationEntity existing = findById(id);
+        BeanUtils.copyProperties(incoming, existing, JpaReferenceResolver.updateIgnoredProperties(OrganizationEntity.class));
+        return repository.save(existing);
     }
 
     public void delete(Long id) {

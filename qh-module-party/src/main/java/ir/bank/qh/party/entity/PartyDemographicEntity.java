@@ -2,7 +2,7 @@ package ir.bank.qh.party.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -31,7 +31,7 @@ public class PartyDemographicEntity extends TenantAwareEntity {
     @EqualsAndHashCode.Include
     private Long id;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "PARTY_ID", referencedColumnName = "PARTY_ID", nullable = false, unique = true,
             foreignKey = @ForeignKey(name = "PARTY_DEMOGRAPHIC_FK_PARTY"))

@@ -3,7 +3,7 @@ package ir.bank.qh.party.entity;
 import ir.bank.qh.common.entity.TenantAwareEntity;
 
 import ir.bank.qh.party.enums.MemberRole;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -32,7 +32,7 @@ public class PartyGroupMemberEntity extends TenantAwareEntity {
     @EqualsAndHashCode.Include
     private Long id;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "GROUP_ID", referencedColumnName = "GROUP_ID", nullable = false,
             foreignKey = @ForeignKey(name = "GMEM_FK_GROUP"))

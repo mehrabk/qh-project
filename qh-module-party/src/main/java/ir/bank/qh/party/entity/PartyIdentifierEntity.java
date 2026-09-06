@@ -6,7 +6,7 @@ import ir.bank.qh.party.converter.YesNoConverter;
 import ir.bank.qh.party.enums.IdentifierType;
 import ir.bank.qh.party.enums.VerificationMethod;
 import ir.bank.qh.party.enums.VerificationStatus;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -35,7 +35,7 @@ public class PartyIdentifierEntity extends TenantAwareEntity {
     @EqualsAndHashCode.Include
     private Long id;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "PARTY_ID", referencedColumnName = "PARTY_ID", nullable = false,
             foreignKey = @ForeignKey(name = "PARTY_IDENTIFIER_FK_PARTY"))

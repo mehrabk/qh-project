@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { fieldLabel } from './FieldInput';
 import { byEntityName, displayValue, isAuditField } from '../data/meta';
+import { enumValueLabel } from '../data/enumLabels';
 
 function cellValue(field, item) {
   const raw = item[field.field];
@@ -9,6 +10,7 @@ function cellValue(field, item) {
     const target = byEntityName[field.fkTarget];
     return target ? `#${raw.id} ${displayValue(target, raw)}` : `#${raw.id}`;
   }
+  if (field.widget === 'select') return enumValueLabel(raw);
   if (field.widget === 'checkbox') return raw ? '✔' : '—';
   if (typeof raw === 'object') return JSON.stringify(raw);
   return String(raw);

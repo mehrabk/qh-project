@@ -225,9 +225,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -476,9 +479,14 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "BRANCH_MANAGER",
+          "REGIONAL_MANAGER",
+          "COMMITTEE",
+          "HEAD_OFFICE"
+        ],
         "default": null
       },
       {
@@ -502,9 +510,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -688,9 +699,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -887,9 +901,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "PERSON",
+          "ORGANIZATION"
+        ],
         "default": null
       },
       {
@@ -1060,9 +1077,14 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
         "default": null
       },
       {
@@ -1086,9 +1108,14 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "SALARIED",
+          "SELF_EMPLOYED",
+          "RETIRED",
+          "UNEMPLOYED"
+        ],
         "default": null
       },
       {
@@ -1285,9 +1312,13 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "EQUAL_INSTALLMENT",
+          "DECREASING_INSTALLMENT",
+          "BALLOON"
+        ],
         "default": null
       },
       {
@@ -1298,9 +1329,14 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "WEEKLY",
+          "MONTHLY",
+          "QUARTERLY",
+          "ANNUAL"
+        ],
         "default": null
       },
       {
@@ -1337,9 +1373,13 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "DAY",
+          "MONTH",
+          "YEAR"
+        ],
         "default": null
       },
       {
@@ -1389,9 +1429,13 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "DAY",
+          "MONTH",
+          "YEAR"
+        ],
         "default": null
       },
       {
@@ -1441,9 +1485,13 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "DAY",
+          "MONTH",
+          "YEAR"
+        ],
         "default": null
       },
       {
@@ -1454,9 +1502,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "DEFERRED",
+          "CAPITALIZED"
+        ],
         "default": null
       },
       {
@@ -1532,9 +1583,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -1666,9 +1720,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "CREDIT_BUREAU",
+          "BOUNCED_CHEQUE_CHECK"
+        ],
         "default": null
       },
       {
@@ -1679,9 +1736,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "OPENING",
+          "APPLICATION"
+        ],
         "default": null
       },
       {
@@ -1718,9 +1778,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -1852,9 +1915,13 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ALL_BRANCHES",
+          "SPECIFIC_BRANCH",
+          "REGION"
+        ],
         "default": null
       },
       {
@@ -1930,9 +1997,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -2064,9 +2134,14 @@
         "length": 40,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "OPEN",
+          "APPLY",
+          "SERVICE",
+          "CLOSE"
+        ],
         "default": null
       },
       {
@@ -2103,9 +2178,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -2237,9 +2315,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "DEPOSIT_BONUS",
+          "LOAN_FEE"
+        ],
         "default": null
       },
       {
@@ -2250,9 +2331,13 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "FIXED",
+          "TIERED",
+          "REFERENCE"
+        ],
         "default": null
       },
       {
@@ -2328,9 +2413,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -2527,9 +2615,13 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "DAY",
+          "MONTH",
+          "YEAR"
+        ],
         "default": null
       },
       {
@@ -2843,9 +2935,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -2977,9 +3072,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "PERSON",
+          "ORGANIZATION"
+        ],
         "default": null
       },
       {
@@ -2990,9 +3088,13 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "RETAIL",
+          "SME",
+          "CORPORATE"
+        ],
         "default": null
       },
       {
@@ -3003,9 +3105,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "RESIDENT",
+          "NON_RESIDENT"
+        ],
         "default": null
       },
       {
@@ -3016,9 +3121,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ANY",
+          "IRANIAN"
+        ],
         "default": null
       },
       {
@@ -3029,9 +3137,13 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "MALE",
+          "FEMALE",
+          "ANY"
+        ],
         "default": null
       },
       {
@@ -3042,9 +3154,13 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "L1",
+          "L2",
+          "L3"
+        ],
         "default": null
       },
       {
@@ -3081,9 +3197,13 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "LOW",
+          "MEDIUM",
+          "HIGH"
+        ],
         "default": null
       },
       {
@@ -3159,9 +3279,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -3293,9 +3416,14 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ALL",
+          "BRANCH",
+          "MOBILE_BANK",
+          "INTERNET_BANK"
+        ],
         "default": null
       },
       {
@@ -3345,9 +3473,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -3492,9 +3623,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "OPENING",
+          "APPLICATION"
+        ],
         "default": null
       },
       {
@@ -3544,9 +3678,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -3678,9 +3815,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "CREDIT",
+          "DEBIT"
+        ],
         "default": null
       },
       {
@@ -3704,9 +3844,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -3838,9 +3981,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -4037,9 +4183,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -4171,9 +4320,13 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "PERSONAL",
+          "CASH",
+          "REAL_ESTATE"
+        ],
         "default": null
       },
       {
@@ -4197,9 +4350,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -4331,9 +4487,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -4491,9 +4650,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -4638,9 +4800,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -4811,9 +4976,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -4971,9 +5139,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -5183,9 +5354,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -5317,9 +5491,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -5464,9 +5641,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -5598,9 +5778,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -5745,9 +5928,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -5879,9 +6065,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "FULL",
+          "PARTIAL"
+        ],
         "default": null
       },
       {
@@ -6052,9 +6241,13 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "CUSTOMER_REQUEST",
+          "BANK_INITIATED",
+          "DORMANCY"
+        ],
         "default": null
       },
       {
@@ -6091,9 +6284,13 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "CASH",
+          "TRANSFER",
+          "CASH_OR_TRANSFER"
+        ],
         "default": null
       },
       {
@@ -6130,9 +6327,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       },
       {
@@ -6277,9 +6477,13 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "DEBIT_CARD",
+          "CHEQUE_BOOK",
+          "BRANCH_INSTRUCTION"
+        ],
         "default": null
       },
       {
@@ -6290,9 +6494,14 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ALL",
+          "BRANCH",
+          "MOBILE_BANK",
+          "INTERNET_BANK"
+        ],
         "default": null
       },
       {
@@ -6502,9 +6711,13 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "DAY",
+          "MONTH",
+          "YEAR"
+        ],
         "default": null
       },
       {
@@ -6554,9 +6767,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -6701,9 +6917,13 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "DAY",
+          "MONTH",
+          "YEAR"
+        ],
         "default": null
       },
       {
@@ -6727,9 +6947,13 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "DAY",
+          "MONTH",
+          "YEAR"
+        ],
         "default": null
       },
       {
@@ -6740,9 +6964,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "BRANCH_VISIT",
+          "ONLINE_VERIFICATION"
+        ],
         "default": null
       },
       {
@@ -6926,9 +7153,13 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "DAY",
+          "MONTH",
+          "YEAR"
+        ],
         "default": null
       },
       {
@@ -7086,9 +7317,14 @@
         "length": 40,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "BRANCH_MANAGER",
+          "REGIONAL_MANAGER",
+          "COMMITTEE",
+          "HEAD_OFFICE"
+        ],
         "default": null
       },
       {
@@ -7510,9 +7746,13 @@
         "length": 40,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "CASH",
+          "TRANSFER",
+          "CASH_OR_TRANSFER"
+        ],
         "default": null
       },
       {
@@ -7696,9 +7936,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "JOINT_AND",
+          "JOINT_OR"
+        ],
         "default": null
       },
       {
@@ -7735,9 +7978,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ANY_ONE",
+          "ALL_REQUIRED"
+        ],
         "default": null
       },
       {
@@ -7908,9 +8154,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "BLOCK",
+          "WARN"
+        ],
         "default": null
       },
       {
@@ -8068,9 +8317,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "DEPOSIT",
+          "WITHDRAWAL"
+        ],
         "default": null
       },
       {
@@ -8466,9 +8718,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "DEPOSIT",
+          "LOAN"
+        ],
         "default": null
       },
       {
@@ -8479,9 +8734,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ASSET",
+          "LIABILITY"
+        ],
         "default": null
       },
       {
@@ -8531,9 +8789,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "DRAFT",
+          "APPROVED"
+        ],
         "default": "\"DRAFT\""
       }
     ],
@@ -8678,9 +8939,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "DEPOSIT",
+          "LOAN"
+        ],
         "default": null
       },
       {
@@ -8877,9 +9141,12 @@
         "length": 40,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "DEPOSIT",
+          "LOAN"
+        ],
         "default": null
       },
       {
@@ -8903,9 +9170,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "NOT_CONFIGURED",
+          "CONFIGURED"
+        ],
         "default": "\"NOT_CONFIGURED\""
       },
       {
@@ -8916,9 +9186,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "NOT_VALIDATED",
+          "VALIDATED"
+        ],
         "default": "\"NOT_VALIDATED\""
       },
       {
@@ -9089,9 +9362,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "REQUIRES",
+          "BACKED_BY"
+        ],
         "default": null
       },
       {
@@ -9154,9 +9430,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],
@@ -9340,9 +9619,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "DRAFT",
+          "APPROVED"
+        ],
         "default": "\"DRAFT\""
       },
       {
@@ -9366,9 +9648,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ENABLED",
+          "DISABLED"
+        ],
         "default": "\"DISABLED\""
       },
       {
@@ -9379,9 +9664,12 @@
         "length": 30,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ENABLED",
+          "DISABLED"
+        ],
         "default": "\"DISABLED\""
       },
       {
@@ -9431,9 +9719,12 @@
         "length": 20,
         "unique": false,
         "isId": false,
-        "widget": "text",
+        "widget": "select",
         "fkTarget": null,
-        "enumValues": null,
+        "enumValues": [
+          "ACTIVE",
+          "INACTIVE"
+        ],
         "default": "\"ACTIVE\""
       }
     ],

@@ -1,6 +1,7 @@
 import { displayValue } from '../data/meta';
 import { useFkOptions } from '../hooks/useFkOptions';
 import { FIELD_LABELS } from '../data/fieldLabels';
+import { enumValueLabel } from '../data/enumLabels';
 
 function humanize(fieldName) {
   const withSpaces = fieldName.replace(/([a-z0-9])([A-Z])/g, '$1 $2');
@@ -44,7 +45,7 @@ export default function FieldInput({ field, value, onChange }) {
       <select value={value ?? ''} onChange={(e) => onChange(e.target.value || null)} required={!field.nullable}>
         <option value="">— انتخاب کنید —</option>
         {(field.enumValues || []).map((v) => (
-          <option key={v} value={v}>{v}</option>
+          <option key={v} value={v}>{enumValueLabel(v)}</option>
         ))}
       </select>
     );

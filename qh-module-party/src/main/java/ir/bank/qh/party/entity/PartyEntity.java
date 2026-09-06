@@ -1,5 +1,6 @@
 package ir.bank.qh.party.entity;
 
+import ir.bank.qh.common.entity.BaseEntity;
 import ir.bank.qh.common.entity.TenantAwareEntity;
 
 import ir.bank.qh.party.converter.YesNoConverter;
@@ -35,7 +36,7 @@ import java.util.List;
 @SequenceGenerator(name = "PARTY_ID_SEQ", schema = "PARTY", sequenceName = "PARTY_ID_SEQ", allocationSize = 1)
 @Getter
 @Setter
-public abstract class PartyEntity extends TenantAwareEntity {
+public abstract class PartyEntity extends BaseEntity {
 
     @Id
     @Column(name = "PARTY_ID", columnDefinition = "number(19,0)")

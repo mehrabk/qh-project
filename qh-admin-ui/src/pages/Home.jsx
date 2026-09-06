@@ -1,0 +1,57 @@
+import { Link } from 'react-router-dom';
+import { navigation, entities } from '../data/meta';
+import { scenarios } from '../data/scenarios';
+import ScenarioRunner from '../components/ScenarioRunner';
+
+export default function Home() {
+  return (
+    <div className="home-page">
+      <div className="hero">
+        <h1>پنل مدیریت محصول‌ساز یکپارچه قرض‌الحسنه</h1>
+        <p>
+          این یک رابط کاربری React مستقل است که مستقیم روی REST APIهای بک‌اند Spring Boot کار می‌کند
+          (از طریق پراکسی Vite به <code>localhost:8080</code>) و تمام {entities.length} موجودیت پروژه —
+          هر دو Bounded Context (محصول‌ساز و اشخاص) — را با CRUD کامل پوشش می‌دهد.
+        </p>
+      </div>
+
+      <section>
+        <h2>نقشه موجودیت‌ها</h2>
+        <div className="domain-grid">
+          {Object.entries(navigation).map(([bcKey, bc]) => (
+            <div className="bc-card" key={bcKey}>
+              <h3>{bc.title}</h3>
+              {Object.entries(bc.domains).map(([domainKey, domain]) => (
+                <div key={domainKey} className="domain-block">
+                  <div className="domain-block-title">{domain.title} · {domain.entities.length} موجودیت</div>
+                  <div className="chip-row">
+                    {domain.entities.map((e) => (
+                      <Link key={e.slug} to={`/e/${e.slug}`} className="chip">
+                        {e.title}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2>سناریوهای نمونه (اجرای زنده روی بک‌اند)</h2>
+        <p className="muted">
+          هر سناریو زنجیره واقعی از درخواست‌های POST را روی API اجرا می‌کند و رکوردهای واقعی در H2 می‌سازد؛
+          پس از اجرا می‌توانید نتیجه را در جدول‌های مربوطه ببینید. (توجه: علاوه بر این سناریوها، خود بک‌اند
+          از قبل برای همه ۶۴ جدول حداقل یک ردیف نمونه seed کرده — با مراجعه به هر صفحه از منوی راست هم
+          می‌توانید مثال واقعی آن موجودیت را ببینید.)
+        </p>
+        <div className="scenario-grid">
+          {scenarios.map((s) => (
+            <ScenarioRunner key={s.id} scenario={s} />
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}

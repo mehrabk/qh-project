@@ -60,6 +60,16 @@ function sampleForColumn(field) {
   return withUniqueSuffix(`نمونه-${name}`, field.length);
 }
 
+// A field's `default` is captured from its Java initializer, so it can show up as
+// a quoted string literal (`"DISABLED"`) or a qualified enum constant
+// (`EnableStatus.DISABLED`) depending on the source type - normalize both down to
+// the bare constant name before comparing against `enumValues`.
+function normalizeDefault(raw) {
+  const unquoted = raw.replace(/^"|"$/g, '');
+  const dot = unquoted.lastIndexOf('.');
+  return dot >= 0 ? unquoted.slice(dot + 1) : unquoted;
+}
+
 export function buildExampleValue(field) {
   switch (field.widget) {
     case 'checkbox':
@@ -70,8 +80,19 @@ export function buildExampleValue(field) {
       return new Date().toISOString().slice(0, 10);
     case 'datetime-local':
       return new Date().toISOString().slice(0, 16);
-    case 'select':
+    case 'select': {
+      // Prefer the entity's own declared default (e.g. a fresh ProductVersion
+      // starts ORIGINATION_STATUS_CODE=DISABLED) over the metadata array's first
+      // entry, which is ordered for dropdown readability, not "safest example" -
+      // picking the wrong one can violate a cross-field business rule that only
+      // allows certain enum values together (e.g. origination can't be ENABLED
+      // unless the version is already APPROVED).
+      if (field.default != null) {
+        const def = normalizeDefault(field.default);
+        if (field.enumValues?.includes(def)) return def;
+      }
       return field.enumValues?.[0] ?? '';
+    }
     case 'fk':
       return null; // resolved separately via the FK picker's loaded options
     case 'text':

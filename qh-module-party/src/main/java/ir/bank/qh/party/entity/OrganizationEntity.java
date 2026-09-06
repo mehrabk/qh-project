@@ -25,9 +25,10 @@ public class OrganizationEntity extends PartyEntity {
     @Column(name = "REGISTRATION_NO", length = 80)
     private String registrationNo;
 
-    /** Free-text code for the place of registration when it does not map to a CITY master record. */
-    @Column(name = "REGISTRATION_PLACE_CODE", length = 30)
-    private String registrationPlaceCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "REGISTRATION_PLACE_ID", referencedColumnName = "CITY_ID",
+            foreignKey = @ForeignKey(name = "ORGANIZATION_FK_CITY"))
+    private CityEntity registrationPlace;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "REGISTRATION_COUNTRY_ID", referencedColumnName = "COUNTRY_ID",

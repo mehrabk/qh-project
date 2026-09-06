@@ -28,12 +28,19 @@ function uniqueSuffix() {
 }
 
 // Appends the suffix without exceeding the column's length limit, trimming
-// the base text (never the suffix) when the two together would overflow.
+// the base text (never the suffix) when the two together would overflow. For
+// a column too short to fit even the suffix itself (e.g. a 3-char ISO country
+// code), falls back to just the tail of the raw unique token, still capped to
+// `length` - a truncated-but-still-attached suffix would otherwise silently
+// exceed the column and fail on insert.
 function withUniqueSuffix(base, length) {
   const suffix = '_' + uniqueSuffix();
   if (!length) return base + suffix;
+  if (suffix.length >= length) {
+    return uniqueSuffix().slice(-length);
+  }
   if (base.length + suffix.length > length) {
-    return base.slice(0, Math.max(0, length - suffix.length)) + suffix;
+    return base.slice(0, length - suffix.length) + suffix;
   }
   return base + suffix;
 }

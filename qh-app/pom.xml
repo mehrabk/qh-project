@@ -79,6 +79,13 @@
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <!-- Spring Boot 4 moved H2ConsoleAutoConfiguration out of spring-boot-autoconfigure into
+             its own module - without this, spring.h2.console.enabled=true is silently a no-op. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-h2console</artifactId>
+            <scope>runtime</scope>
+        </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-hibernate7</artifactId>

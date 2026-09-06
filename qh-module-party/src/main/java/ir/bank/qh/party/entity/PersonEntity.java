@@ -54,10 +54,6 @@ public class PersonEntity extends PartyEntity {
     @Enumerated(EnumType.STRING)
     private ResidencyStatus residencyStatus;
 
-    @Column(name = "PHYSICAL_ABILITY_CODE", length = 30)
-    @Enumerated(EnumType.STRING)
-    private PhysicalAbilityStatus physicalAbilityStatus;
-
     @Column(name = "DATA_QUALITY_STATUS_CODE", length = 30)
     @Enumerated(EnumType.STRING)
     private DataQualityStatus dataQualityStatus;

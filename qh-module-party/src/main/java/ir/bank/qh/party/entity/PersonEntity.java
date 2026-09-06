@@ -29,10 +29,8 @@ public class PersonEntity extends PartyEntity {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "BIRTH_COUNTRY_ID", referencedColumnName = "COUNTRY_ID",
-            foreignKey = @ForeignKey(name = "PERSON_FK_BIRTH_COUNTRY"))
-    private CountryEntity birthCountry;
+    @Column(name = "BIRTH_COUNTRY_CODE", length = 3)
+    private String birthCountryCode;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BIRTH_PLACE_ID", referencedColumnName = "CITY_ID",
@@ -54,21 +52,8 @@ public class PersonEntity extends PartyEntity {
     @Enumerated(EnumType.STRING)
     private ResidencyStatus residencyStatus;
 
-    @Column(name = "DATA_QUALITY_STATUS_CODE", length = 30)
-    @Enumerated(EnumType.STRING)
-    private DataQualityStatus dataQualityStatus;
-
-    @Column(name = "LEGAL_CAPACITY_CODE", length = 30)
-    @Enumerated(EnumType.STRING)
-    private LegalCapacityStatus legalCapacityStatus;
-
-    @Column(name = "LIFE_STATUS_CODE", length = 30)
-    @Enumerated(EnumType.STRING)
-    private LifeStatus lifeStatus;
-
-    /** ISO 639-1 preferred-language code, e.g. {@code fa}, {@code en}. */
-    @Column(name = "LANGUAGE_CODE", length = 10)
-    private String languageCode;
+    @Column(name = "PHYSICAL_ABILITY", length = 15)
+    private String physicalAbility;
 
     @Override
     public PartyType getPartyType() {

@@ -48,14 +48,6 @@ public class PartyIdentifierEntity extends TenantAwareEntity {
     @Column(name = "IDENTIFIER_VALUE", nullable = false, length = 200)
     private String identifierValue;
 
-    @Column(name = "ISSUING_AUTHORITY", length = 200)
-    private String issuingAuthority;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ISSUING_COUNTRY_ID", referencedColumnName = "COUNTRY_ID",
-            foreignKey = @ForeignKey(name = "PARTY_IDENTIFIER_FK_COUNTRY"))
-    private CountryEntity issuingCountry;
-
     @Column(name = "ISSUE_DATE")
     private Date issueDate;
 
@@ -78,7 +70,7 @@ public class PartyIdentifierEntity extends TenantAwareEntity {
     @Enumerated(EnumType.STRING)
     private VerificationMethod verificationMethod;
 
-    @Column(name = "VERIFICATION_SOURCE", length = 100)
+    @Column(name = "VERIFICATION_SOURCE_CODE", length = 30)
     private String verificationSource;
 
     @Column(name = "VERIFIED_AT")

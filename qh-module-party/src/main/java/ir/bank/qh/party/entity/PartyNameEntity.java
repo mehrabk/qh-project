@@ -3,8 +3,6 @@ package ir.bank.qh.party.entity;
 import ir.bank.qh.common.entity.TenantAwareEntity;
 
 import ir.bank.qh.party.converter.YesNoConverter;
-import ir.bank.qh.party.enums.NameType;
-import ir.bank.qh.party.enums.VerificationStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
@@ -39,10 +37,6 @@ public class PartyNameEntity extends TenantAwareEntity {
             foreignKey = @ForeignKey(name = "PARTY_NAME_FK_PARTY"))
     private PartyEntity party;
 
-    @Column(name = "NAME_TYPE_CODE", nullable = false, length = 30)
-    @Enumerated(EnumType.STRING)
-    private NameType nameType;
-
     @Column(name = "GIVEN_NAME", length = 150)
     private String givenName;
 
@@ -52,16 +46,6 @@ public class PartyNameEntity extends TenantAwareEntity {
     /** Full display name - required for organizations, derived/optional for persons. */
     @Column(name = "FULL_NAME", nullable = false, length = 500)
     private String fullName;
-
-    @Column(name = "LANGUAGE_CODE", length = 10)
-    private String languageCode;
-
-    @Column(name = "SCRIPT_CODE", length = 20)
-    private String scriptCode;
-
-    @Column(name = "VERIFICATION_STATUS_CODE", length = 30)
-    @Enumerated(EnumType.STRING)
-    private VerificationStatus verificationStatus = VerificationStatus.UNVERIFIED;
 
     @Convert(converter = YesNoConverter.class)
     @Column(name = "IS_PRIMARY", nullable = false, length = 1, columnDefinition = "char(1) default 'N'")

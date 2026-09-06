@@ -25,18 +25,17 @@ public class OrganizationEntity extends PartyEntity {
     @Column(name = "REGISTRATION_NO", length = 80)
     private String registrationNo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "REGISTRATION_PLACE_ID", referencedColumnName = "CITY_ID",
-            foreignKey = @ForeignKey(name = "ORGANIZATION_FK_CITY"))
-    private CityEntity registrationPlace;
+    @Column(name = "REGISTRATION_PLACE_CODE", length = 30)
+    private String registrationPlaceCode;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "REGISTRATION_COUNTRY_ID", referencedColumnName = "COUNTRY_ID",
-            foreignKey = @ForeignKey(name = "ORGANIZATION_FK_COUNTRY"))
-    private CountryEntity registrationCountry;
+    @Column(name = "REGISTRATION_COUNTRY_CODE", length = 3)
+    private String registrationCountryCode;
 
     @Column(name = "INCORPORATION_DATE")
     private Date incorporationDate;
+
+    @Column(name = "DISSOLUTION_DATE")
+    private Date dissolutionDate;
 
     @Convert(converter = ir.bank.qh.party.converter.YesNoConverter.class)
     @Column(name = "LISTED_COMPANY_FLAG", length = 1, columnDefinition = "char(1) default 'N'")
@@ -49,13 +48,6 @@ public class OrganizationEntity extends PartyEntity {
     @Column(name = "MAIN_ACTIVITY_DESCRIPTION", length = 1000)
     private String mainActivityDescription;
 
-    /** ISIC (International Standard Industrial Classification) activity code. */
-    @Column(name = "ISIC_ACTIVITY_CODE", length = 30)
-    private String isicActivityCode;
-
-    @Column(name = "ECONOMIC_SECTOR_CODE", length = 30)
-    private String economicSectorCode;
-
     @Column(name = "EMPLOYEE_COUNT")
     private Integer employeeCount;
 
@@ -66,10 +58,6 @@ public class OrganizationEntity extends PartyEntity {
     @Column(name = "OWNERSHIP_TYPE_CODE", length = 30)
     @Enumerated(EnumType.STRING)
     private OwnershipType ownershipType;
-
-    @Column(name = "LEGAL_FORM_CODE", length = 30)
-    @Enumerated(EnumType.STRING)
-    private LegalForm legalForm;
 
     @Override
     public PartyType getPartyType() {

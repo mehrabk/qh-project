@@ -43,10 +43,6 @@ public abstract class PartyEntity extends TenantAwareEntity {
     @EqualsAndHashCode.Include
     private Long id;
 
-    /** BIAN "Directory Entry Reference" - stable, human-referenceable business key. */
-    @Column(name = "PARTY_REFERENCE", nullable = false, unique = true, length = 50)
-    private String partyReference;
-
     @Column(name = "VERIFICATION_STATUS_CODE", nullable = false, length = 30)
     @Enumerated(EnumType.STRING)
     private VerificationStatus verificationStatus = VerificationStatus.UNVERIFIED;

@@ -4,7 +4,6 @@ import ir.bank.qh.common.entity.TenantAwareEntity;
 
 import ir.bank.qh.party.enums.GroupStatus;
 import ir.bank.qh.party.enums.GroupType;
-import ir.bank.qh.party.enums.WorkflowStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
@@ -45,10 +44,6 @@ public class PartyGroupEntity extends TenantAwareEntity {
     @Column(name = "STATUS_CODE", nullable = false, length = 30)
     @Enumerated(EnumType.STRING)
     private GroupStatus status = GroupStatus.ACTIVE;
-
-    @Column(name = "WORKFLOW_STATUS_CODE", length = 30)
-    @Enumerated(EnumType.STRING)
-    private WorkflowStatus workflowStatus;
 
     @Column(name = "EFFECTIVE_FROM")
     private Date effectiveFrom;

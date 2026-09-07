@@ -1,11 +1,7 @@
 package ir.bank.qh.party.entity;
 
-import ir.bank.qh.common.entity.TenantAwareEntity;
-
+import ir.bank.qh.common.entity.BaseEntity;
 import ir.bank.qh.party.converter.YesNoConverter;
-import ir.bank.qh.party.enums.IdentifierType;
-import ir.bank.qh.party.enums.VerificationMethod;
-import ir.bank.qh.party.enums.VerificationStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
@@ -15,19 +11,23 @@ import lombok.Setter;
 import java.util.Date;
 
 /**
+ * شناسه‌های هویتی Party در هسته مرکزی و یکتا - دسترسی صندوق به این جدول مستقیم نیست؛
+ * Resolve/Dedup فقط از طریق سرویس مرکزی انجام می‌شود و IDENTIFIER_MATCH_KEY هرگز به کانال
+ * صندوق بازگردانده نمی‌شود.
+ * <p>
  * A government/authority-issued identifier held by a Party (national ID, passport,
  * tax ID, company registration number, ...), including its independent verification
- * lifecycle - central to KYC/AML compliance.
+ * lifecycle - central to KYC/AML compliance. Tenant-independent (no TENANT_ID column).
  */
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @Entity
 @Table(schema = "PARTY", name = "PARTY_IDENTIFIER",
         uniqueConstraints = @UniqueConstraint(name = "UQ_PARTY_IDENTIFIER_TYPE_VALUE",
-                columnNames = {"INSTITUTION_ID", "IDENTIFIER_TYPE_CODE", "IDENTIFIER_VALUE"}))
+                columnNames = {"IDENTIFIER_TYPE_CODE", "IDENTIFIER_VALUE"}))
 @SequenceGenerator(name = "PARTY_IDENTIFIER_ID_SEQ", schema = "PARTY", sequenceName = "PARTY_IDENTIFIER_ID_SEQ", allocationSize = 1)
 @Getter
 @Setter
-public class PartyIdentifierEntity extends TenantAwareEntity {
+public class PartyIdentifierEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PARTY_IDENTIFIER_ID_SEQ")
@@ -41,9 +41,10 @@ public class PartyIdentifierEntity extends TenantAwareEntity {
             foreignKey = @ForeignKey(name = "PARTY_IDENTIFIER_FK_PARTY"))
     private PartyEntity party;
 
-    @Column(name = "IDENTIFIER_TYPE_CODE", nullable = false, length = 30)
-    @Enumerated(EnumType.STRING)
-    private IdentifierType identifierType;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "IDENTIFIER_TYPE_CODE", referencedColumnName = "IDENTIFIER_TYPE_CODE", nullable = false,
+            foreignKey = @ForeignKey(name = "PARTY_IDENTIFIER_FK_TYPE"))
+    private RefIdentifierTypeEntity identifierType;
 
     @Column(name = "IDENTIFIER_VALUE", nullable = false, length = 200)
     private String identifierValue;
@@ -62,17 +63,34 @@ public class PartyIdentifierEntity extends TenantAwareEntity {
     @Column(name = "IS_ACTIVE", nullable = false, length = 1, columnDefinition = "char(1) default 'Y'")
     private Boolean active = Boolean.TRUE;
 
-    @Column(name = "VERIFICATION_STATUS_CODE", nullable = false, length = 30)
-    @Enumerated(EnumType.STRING)
-    private VerificationStatus verificationStatus = VerificationStatus.UNVERIFIED;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "VERIFICATION_STATUS_CODE", referencedColumnName = "VERIFICATION_STATUS_CODE", nullable = false,
+            foreignKey = @ForeignKey(name = "PARTY_IDENTIFIER_FK_VERIF_STATUS"))
+    private RefVerificationStatusEntity verificationStatus;
 
-    @Column(name = "VERIFICATION_METHOD_CODE", length = 30)
-    @Enumerated(EnumType.STRING)
-    private VerificationMethod verificationMethod;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VERIFICATION_SOURCE_CODE", referencedColumnName = "DATA_SOURCE_CODE",
+            foreignKey = @ForeignKey(name = "PARTY_IDENTIFIER_FK_VERIF_SOURCE"))
+    private RefDataSourceEntity verificationSource;
 
-    @Column(name = "VERIFICATION_SOURCE_CODE", length = 30)
-    private String verificationSource;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VERIFICATION_METHOD_CODE", referencedColumnName = "VERIFICATION_METHOD_CODE",
+            foreignKey = @ForeignKey(name = "PARTY_IDENTIFIER_FK_VERIF_METHOD"))
+    private RefVerificationMethodEntity verificationMethod;
 
     @Column(name = "VERIFIED_AT")
     private Date verifiedAt;
+
+    @Column(name = "VALID_FROM", nullable = false)
+    private Date validFrom;
+
+    @Column(name = "VALID_TO")
+    private Date validTo;
+
+    /** Central-only dedup/match key - never surfaced back to a tenant channel by the real service layer. */
+    @Column(name = "IDENTIFIER_MATCH_KEY", nullable = false, length = 128)
+    private String identifierMatchKey;
+
+    @Column(name = "MATCH_KEY_VERSION", nullable = false, columnDefinition = "number default 1")
+    private Integer matchKeyVersion = 1;
 }

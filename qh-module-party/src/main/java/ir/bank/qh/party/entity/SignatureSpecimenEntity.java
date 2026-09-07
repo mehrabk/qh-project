@@ -1,11 +1,6 @@
 package ir.bank.qh.party.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
-
-import ir.bank.qh.party.enums.CaptureChannel;
-import ir.bank.qh.party.enums.SignatureStatus;
-import ir.bank.qh.party.enums.SigningRule;
-import ir.bank.qh.party.enums.VerificationStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
@@ -15,9 +10,8 @@ import lombok.Setter;
 import java.util.Date;
 
 /**
- * A captured signature specimen for a Party, used by branch staff / signature
- * verification systems to validate physical instructions (cheques, withdrawal slips,
- * mandate changes).
+ * نمونه امضای ثبت‌شده برای عضویت پارتی در یک صندوق - نمونه امضا می‌تواند بین صندوق‌های
+ * مختلف متفاوت باشد.
  */
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @Entity
@@ -35,58 +29,70 @@ public class SignatureSpecimenEntity extends TenantAwareEntity {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "PARTY_ID", referencedColumnName = "PARTY_ID", nullable = false,
-            foreignKey = @ForeignKey(name = "SIGNATURE_SPECIMEN_FK_PARTY"))
-    private PartyEntity party;
+    @JoinColumn(name = "PARTY_MEMBERSHIP_ID", referencedColumnName = "PARTY_MEMBERSHIP_ID", nullable = false,
+            foreignKey = @ForeignKey(name = "SIGNATURE_FK_MEMBERSHIP"))
+    private PartyMembershipEntity partyMembership;
 
     /**
      * Identifies who is signing when a mandate involves several signatories on
-     * behalf of the same Party (e.g. one of several company directors) - distinct
-     * from {@code party}, which is always the account/mandate owner.
+     * behalf of the same membership (e.g. one of several company directors) -
+     * distinct from {@code partyMembership}, which is always the account/mandate
+     * owner.
      */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "SIGNATORY_ID", referencedColumnName = "PARTY_ID",
-            foreignKey = @ForeignKey(name = "FK_SIGNATURE_SIGNATORY_PARTY"))
-    private PartyEntity signatoryParty;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "SIGNATORY_MEMBERSHIP_ID", referencedColumnName = "PARTY_MEMBERSHIP_ID", nullable = false,
+            foreignKey = @ForeignKey(name = "SIGNATURE_FK_SIGNATORY_MEMBERSHIP"))
+    private PartyMembershipEntity signatoryMembership;
 
-    @Column(name = "SPECIMEN_TYPE_CODE", length = 50)
-    private String specimenType;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "SPECIMEN_TYPE_CODE", referencedColumnName = "SPECIMEN_TYPE_CODE", nullable = false,
+            foreignKey = @ForeignKey(name = "SIGNATURE_FK_SPECIMEN_TYPE"))
+    private RefSpecimenTypeEntity specimenType;
 
     @Lob
-    @Column(name = "SIGNATURE_IMAGE")
+    @Column(name = "SIGNATURE_IMAGE", nullable = false)
     private byte[] signatureImage;
 
-    @Column(name = "EFFECTIVE_FROM")
+    @Column(name = "EFFECTIVE_FROM", nullable = false)
     private Date effectiveFrom;
 
     @Column(name = "EFFECTIVE_TO")
     private Date effectiveTo;
 
-    @Column(name = "STATUS_CODE", nullable = false, length = 30)
-    @Enumerated(EnumType.STRING)
-    private SignatureStatus status = SignatureStatus.PENDING_VERIFICATION;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "STATUS_CODE", referencedColumnName = "STATUS_CODE", nullable = false,
+            foreignKey = @ForeignKey(name = "SIGNATURE_FK_STATUS"))
+    private RefWorkflowStatusEntity status;
 
-    @Column(name = "SIGNING_RULE_CODE", length = 30)
-    @Enumerated(EnumType.STRING)
-    private SigningRule signingRule;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "SIGNING_RULE_CODE", referencedColumnName = "SIGNING_RULE_CODE", nullable = false,
+            foreignKey = @ForeignKey(name = "SIGNATURE_FK_SIGNING_RULE"))
+    private RefSigningRuleEntity signingRule;
 
-    @Column(name = "VERIFICATION_STATUS_CODE", length = 30)
-    @Enumerated(EnumType.STRING)
-    private VerificationStatus verificationStatus = VerificationStatus.UNVERIFIED;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "VERIFICATION_STATUS_CODE", referencedColumnName = "VERIFICATION_STATUS_CODE", nullable = false,
+            foreignKey = @ForeignKey(name = "SIGNATURE_FK_VERIFICATION_STATUS"))
+    private RefVerificationStatusEntity verificationStatus;
 
-    @Column(name = "CAPTURE_CHANNEL_CODE", length = 30)
-    @Enumerated(EnumType.STRING)
-    private CaptureChannel captureChannel;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "CAPTURE_CHANNEL_CODE", referencedColumnName = "CHANNEL_CODE", nullable = false,
+            foreignKey = @ForeignKey(name = "SIGNATURE_FK_CAPTURE_CHANNEL"))
+    private RefChannelEntity captureChannel;
 
+    /** Reference to a document-management record; no dedicated document catalog in this model. */
     @Column(name = "DOCUMENT_ID")
     private Long documentId;
 
-    @Column(name = "CAPTURED_BY", length = 100)
+    /** Reference to a branch record; no dedicated branch catalog in this model. */
+    @Column(name = "BRANCH_ID")
+    private Long branchId;
+
+    @Column(name = "CAPTURED_BY", nullable = false, length = 100)
     private String capturedBy;
 
     @Column(name = "REVOKED_AT")
     private Date revokedAt;
 
-    @Column(name = "REVOCATION_REASON", length = 500)
+    @Column(name = "REVOCATION_REASON", length = 200)
     private String revocationReason;
 }

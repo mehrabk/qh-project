@@ -19,9 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * REST endpoints for ContactPointEntity. Every method is written out explicitly here
- * (no AbstractCrudController base), delegating to ContactPointEntityService.
- * Base path: /api/v1/party/contact-points
+ * REST endpoints for ContactPointEntity. Base path: /api/v1/party/contact-points
  */
 @RestController
 @RequiredArgsConstructor

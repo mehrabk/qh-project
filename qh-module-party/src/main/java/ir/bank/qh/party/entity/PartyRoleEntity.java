@@ -1,10 +1,6 @@
 package ir.bank.qh.party.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
-
-import ir.bank.qh.party.enums.ContextType;
-import ir.bank.qh.party.enums.RoleType;
-import ir.bank.qh.party.enums.WorkflowStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
@@ -14,12 +10,12 @@ import lombok.Setter;
 import java.util.Date;
 
 /**
- * The single most important extensibility point in a Party model: a generic,
- * context-scoped role that any Party can play against any business object
- * (an account, a contract, a facility, a case, a group, a product) without needing
- * a bespoke join table per scenario - e.g. "Party X is SIGNATORY on Account 123 with
- * ANY_TWO signing authority" or "Party Y is LEGAL_REPRESENTATIVE of Party Z (the
- * {@code principalParty}) under power-of-attorney document #456".
+ * نقش‌های یک Party در هر صندوق، از جمله مشتری، وکیل، فروشنده، ضامن، نماینده و سایر نقش‌ها.
+ * <p>
+ * The single most important extensibility point in the Party model: a generic,
+ * context-scoped role that any party membership can play against any business
+ * object, optionally on behalf of another membership (e.g. a legal representative
+ * acting for an organization under a power of attorney).
  */
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @Entity
@@ -37,37 +33,54 @@ public class PartyRoleEntity extends TenantAwareEntity {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "PARTY_ID", referencedColumnName = "PARTY_ID", nullable = false,
-            foreignKey = @ForeignKey(name = "PARTY_ROLE_FK_PARTY"))
-    private PartyEntity party;
+    @JoinColumn(name = "PARTY_MEMBERSHIP_ID", referencedColumnName = "PARTY_MEMBERSHIP_ID", nullable = false,
+            foreignKey = @ForeignKey(name = "PARTY_ROLE_FK_MEMBERSHIP"))
+    private PartyMembershipEntity partyMembership;
 
-    @Column(name = "ROLE_TYPE_CODE", nullable = false, length = 40)
-    @Enumerated(EnumType.STRING)
-    private RoleType roleType;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "ROLE_TYPE_CODE", referencedColumnName = "ROLE_TYPE_CODE", nullable = false,
+            foreignKey = @ForeignKey(name = "PARTY_ROLE_FK_ROLE_TYPE"))
+    private RefRoleTypeEntity roleType;
 
-    @Column(name = "CONTEXT_TYPE_CODE", nullable = false, length = 40)
-    @Enumerated(EnumType.STRING)
-    private ContextType contextType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CONTEXT_TYPE_CODE", referencedColumnName = "CONTEXT_TYPE_CODE",
+            foreignKey = @ForeignKey(name = "PARTY_ROLE_FK_CONTEXT_TYPE"))
+    private RefContextTypeEntity contextType;
 
     /** Polymorphic reference to the business object id (account id, contract id, case id, ...). */
-    @Column(name = "CONTEXT_ID", nullable = false, length = 100)
+    @Column(name = "CONTEXT_ID", length = 100)
     private String contextId;
 
+    @Column(name = "VALID_FROM", nullable = false)
+    private Date validFrom;
+
+    @Column(name = "VALID_TO")
+    private Date validTo;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "STATUS_CODE", referencedColumnName = "STATUS_CODE", nullable = false,
+            foreignKey = @ForeignKey(name = "PARTY_ROLE_FK_STATUS"))
+    private RefWorkflowStatusEntity status;
+
     /**
-     * The other Party this role is exercised on behalf of, e.g. the company being
-     * represented when {@code roleType = LEGAL_REPRESENTATIVE}. Null for roles that
-     * are not representative in nature (e.g. plain CUSTOMER, SIGNATORY).
+     * The other membership this role is exercised on behalf of, e.g. the
+     * organization being represented when {@code roleType = LEGAL_REPRESENTATIVE}.
+     * Null for roles that are not representative in nature (e.g. plain CUSTOMER).
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PRINCIPAL_PARTY_ID", referencedColumnName = "PARTY_ID",
-            foreignKey = @ForeignKey(name = "PARTY_ROLE_FK_PRINCIPAL"))
-    private PartyEntity principalParty;
+    @JoinColumn(name = "PRINCIPAL_MEMBERSHIP_ID", referencedColumnName = "PARTY_MEMBERSHIP_ID",
+            foreignKey = @ForeignKey(name = "PARTY_ROLE_FK_PRINCIPAL_MEMBERSHIP"))
+    private PartyMembershipEntity principalMembership;
 
-    @Column(name = "RELATIONSHIP_TYPE_CODE", length = 40)
-    private String relationshipTypeCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "RELATIONSHIP_TYPE_CODE", referencedColumnName = "RELATIONSHIP_TYPE_CODE",
+            foreignKey = @ForeignKey(name = "PARTY_ROLE_FK_RELATIONSHIP_TYPE"))
+    private RefRelationshipTypeEntity relationshipType;
 
-    @Column(name = "AUTHORITY_BASIS_CODE", length = 30)
-    private String authorityBasisCode;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "AUTHORITY_BASIS_CODE", referencedColumnName = "AUTHORITY_BASIS_CODE",
+            foreignKey = @ForeignKey(name = "PARTY_ROLE_FK_AUTHORITY_BASIS"))
+    private RefAuthorityBasisEntity authorityBasis;
 
     @Column(name = "AUTHORITY_DOCUMENT_NO", length = 100)
     private String authorityDocumentNo;
@@ -83,14 +96,4 @@ public class PartyRoleEntity extends TenantAwareEntity {
 
     @Column(name = "DESCRIPTION_TEXT", length = 500)
     private String descriptionText;
-
-    @Column(name = "VALID_FROM")
-    private Date validFrom;
-
-    @Column(name = "VALID_TO")
-    private Date validTo;
-
-    @Column(name = "WORKFLOW_STATUS_CODE", nullable = false, length = 30)
-    @Enumerated(EnumType.STRING)
-    private WorkflowStatus status = WorkflowStatus.ACTIVE;
 }

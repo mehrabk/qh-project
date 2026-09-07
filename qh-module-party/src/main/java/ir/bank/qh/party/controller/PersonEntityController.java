@@ -19,9 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * REST endpoints for PersonEntity. Every method is written out explicitly here
- * (no AbstractCrudController base), delegating to PersonEntityService.
- * Base path: /api/v1/party/persons
+ * REST endpoints for PersonEntity. Base path: /api/v1/party/persons
  */
 @RestController
 @RequiredArgsConstructor

@@ -104,60 +104,32 @@ export const scenarios = [
     id: 'party-onboarding',
     title: 'سناریوی ثبت شخص حقیقی جدید (Party Onboarding)',
     description:
-      'مطابق مدل EA بازنویسی‌شده Party: ابتدا هسته مرکزی PartyEntity ساخته می‌شود، سپس PersonEntity با FK به آن متصل می‌شود (PERSON دیگر زیرکلاس ارث‌بری‌شده از Party نیست - جدول جزئیات مستقلی با FK یک‌به‌یک است)، آنگاه PARTY_MEMBERSHIP مرز صندوق را می‌سازد که آدرس و شماره تماس روی آن تعریف می‌شوند: Party → Person, Party → PartyMembership → PartyAddress / ContactPoint.',
+      'یک PersonEntity جدید می‌سازد (که به‌صورت خودکار هم ردیف PARTY و هم ردیف PERSON را با ارث‌بری JOINED می‌سازد)، یک آدرس موجود را به او متصل می‌کند و یک شماره تماس برایش ثبت می‌کند.',
     boundedContext: 'party',
     steps: [
       {
-        label: 'ایجاد هسته مرکزی پارتی (PartyEntity)',
-        saveAs: 'party',
-        entity: 'PartyEntity',
-        build: () => autoPayload('PartyEntity', {
-          partyType: { id: 'PERSON' },
-          verificationStatus: { id: 'PENDING' },
-          dataSource: { id: 'DIGITAL_ONBOARDING' },
-        }),
-      },
-      {
-        label: 'ثبت جزئیات شخص حقیقی (PersonEntity)',
+        label: 'ایجاد شخص حقیقی (PersonEntity)',
         saveAs: 'person',
         entity: 'PersonEntity',
-        build: (ctx) => autoPayload('PersonEntity', {
-          party: { id: ctx.party.id },
-          gender: { id: 'MALE' },
-          maritalStatus: { id: 'SINGLE' },
-          residenceStatus: { id: 'RESIDENT' },
-          birthCountry: { id: 'IRN' },
-          birthPlace: null,
-        }),
+        build: () => autoPayload('PersonEntity'),
       },
       {
-        label: 'ایجاد عضویت صندوقی (PartyMembershipEntity)',
-        saveAs: 'membership',
-        entity: 'PartyMembershipEntity',
-        build: (ctx) => autoPayload('PartyMembershipEntity', { party: { id: ctx.party.id } }),
-      },
-      {
-        label: 'اتصال آدرس موجود به عضویت (PartyAddressEntity)',
+        label: 'اتصال آدرس موجود به شخص (PartyAddressEntity)',
         saveAs: 'partyAddress',
         entity: 'PartyAddressEntity',
         build: async (ctx, { first }) => {
           const address = await first('AddressEntity');
           return autoPayload('PartyAddressEntity', {
-            partyMembership: { id: ctx.membership.id },
+            party: { id: ctx.person.id },
             address: { id: address.id },
-            addressType: { id: 'RESIDENTIAL' },
           });
         },
       },
       {
-        label: 'ثبت شماره تماس برای عضویت (ContactPointEntity)',
+        label: 'ثبت شماره تماس برای شخص (ContactPointEntity)',
         saveAs: 'contactPoint',
         entity: 'ContactPointEntity',
-        build: (ctx) => autoPayload('ContactPointEntity', {
-          partyMembership: { id: ctx.membership.id },
-          contactType: { id: 'MOBILE_PHONE' },
-          purpose: { id: 'PERSONAL' },
-        }),
+        build: (ctx) => autoPayload('ContactPointEntity', { party: { id: ctx.person.id } }),
       },
     ],
   },

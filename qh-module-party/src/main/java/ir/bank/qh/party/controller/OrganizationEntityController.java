@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * REST endpoints for OrganizationEntity. Base path: /api/v1/party/organizations
+ * REST endpoints for OrganizationEntity. Every method is written out explicitly here
+ * (no AbstractCrudController base), delegating to OrganizationEntityService.
+ * Base path: /api/v1/party/organizations
  */
 @RestController
 @RequiredArgsConstructor

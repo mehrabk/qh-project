@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * REST endpoints for CustomerEntity. Base path: /api/v1/party/customers
+ * REST endpoints for CustomerEntity. Every method is written out explicitly here
+ * (no AbstractCrudController base), delegating to CustomerEntityService.
+ * Base path: /api/v1/party/customers
  */
 @RestController
 @RequiredArgsConstructor

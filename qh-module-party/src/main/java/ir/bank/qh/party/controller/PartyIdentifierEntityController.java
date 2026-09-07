@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * REST endpoints for PartyIdentifierEntity. Base path: /api/v1/party/party-identifiers
+ * REST endpoints for PartyIdentifierEntity. Every method is written out explicitly here
+ * (no AbstractCrudController base), delegating to PartyIdentifierEntityService.
+ * Base path: /api/v1/party/party-identifiers
  */
 @RestController
 @RequiredArgsConstructor

@@ -1,6 +1,7 @@
 package ir.bank.qh.party.entity;
 
-import ir.bank.qh.common.entity.BaseEntity;
+import ir.bank.qh.common.entity.TenantAwareEntity;
+
 import ir.bank.qh.party.converter.YesNoConverter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -11,11 +12,10 @@ import lombok.Setter;
 import java.util.Date;
 
 /**
- * نام و نام خانوادگی/نام ثبتی پارتی در هسته مرکزی - این اطلاعات مستقل از صندوق نگهداری می‌شود.
- * <p>
- * Kept as its own entity - rather than plain fields on PERSON/ORGANIZATION - so a
- * Party can carry several names over time (legal name, alias, previous registered
- * name), each independently time-boxed. Tenant-independent (no TENANT_ID column).
+ * A name held by a Party. Kept as its own entity - rather than plain fields on
+ * PERSON/ORGANIZATION - so a Party can carry several names over time (legal name,
+ * alias, maiden name, trade name, previous registered name), each independently
+ * verifiable and time-boxed.
  */
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @Entity
@@ -23,7 +23,7 @@ import java.util.Date;
 @SequenceGenerator(name = "PARTY_NAME_ID_SEQ", schema = "PARTY", sequenceName = "PARTY_NAME_ID_SEQ", allocationSize = 1)
 @Getter
 @Setter
-public class PartyNameEntity extends BaseEntity {
+public class PartyNameEntity extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PARTY_NAME_ID_SEQ")
@@ -51,7 +51,7 @@ public class PartyNameEntity extends BaseEntity {
     @Column(name = "IS_PRIMARY", nullable = false, length = 1, columnDefinition = "char(1) default 'N'")
     private Boolean primary = Boolean.FALSE;
 
-    @Column(name = "VALID_FROM", nullable = false)
+    @Column(name = "VALID_FROM")
     private Date validFrom;
 
     @Column(name = "VALID_TO")

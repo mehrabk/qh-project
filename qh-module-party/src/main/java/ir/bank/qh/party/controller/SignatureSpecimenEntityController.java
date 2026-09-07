@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * REST endpoints for SignatureSpecimenEntity. Base path: /api/v1/party/signature-specimens
+ * REST endpoints for SignatureSpecimenEntity. Every method is written out explicitly here
+ * (no AbstractCrudController base), delegating to SignatureSpecimenEntityService.
+ * Base path: /api/v1/party/signature-specimens
  */
 @RestController
 @RequiredArgsConstructor

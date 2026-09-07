@@ -1,15 +1,19 @@
 package ir.bank.qh.party.entity;
 
 import ir.bank.qh.common.entity.TenantAwareEntity;
+
 import ir.bank.qh.party.converter.YesNoConverter;
+import ir.bank.qh.party.enums.ContactPointAddressAssociationType;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
-
-/** ارتباط راه تماس و نشانی برای همان PARTY_MEMBERSHIP و همان صندوق. */
+/**
+ * Associates a CONTACT_POINT (e.g. a landline number) with the PARTY_ADDRESS it is
+ * physically located at - useful for channels tied to a place, such as a work phone
+ * tied to a business address.
+ */
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @Entity
 @Table(schema = "PARTY", name = "CONTACT_POINT_ADDRESS",
@@ -27,11 +31,6 @@ public class ContactPointAddressEntity extends TenantAwareEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "PARTY_MEMBERSHIP_ID", referencedColumnName = "PARTY_MEMBERSHIP_ID", nullable = false,
-            foreignKey = @ForeignKey(name = "CPA_FK_MEMBERSHIP"))
-    private PartyMembershipEntity partyMembership;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "CONTACT_POINT_ID", referencedColumnName = "CONTACT_POINT_ID", nullable = false,
             foreignKey = @ForeignKey(name = "CPA_FK_CONTACT_POINT"))
     private ContactPointEntity contactPoint;
@@ -41,18 +40,11 @@ public class ContactPointAddressEntity extends TenantAwareEntity {
             foreignKey = @ForeignKey(name = "CPA_FK_PARTY_ADDRESS"))
     private PartyAddressEntity partyAddress;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "ASSOCIATION_TYPE_CODE", referencedColumnName = "ASSOCIATION_TYPE_CODE", nullable = false,
-            foreignKey = @ForeignKey(name = "CPA_FK_ASSOC_TYPE"))
-    private RefContactAddressAssocTypeEntity associationType;
+    @Column(name = "ASSOCIATION_TYPE_CODE", nullable = false, length = 30)
+    @Enumerated(EnumType.STRING)
+    private ContactPointAddressAssociationType associationType = ContactPointAddressAssociationType.LOCATED_AT;
 
     @Convert(converter = YesNoConverter.class)
     @Column(name = "IS_PRIMARY_FOR_ADDRESS", nullable = false, length = 1, columnDefinition = "char(1) default 'N'")
     private Boolean primaryForAddress = Boolean.FALSE;
-
-    @Column(name = "VALID_FROM", nullable = false)
-    private Date validFrom;
-
-    @Column(name = "VALID_TO")
-    private Date validTo;
 }

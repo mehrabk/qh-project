@@ -15,7 +15,8 @@ import java.util.List;
 
 /**
  * Dedicated service for PartyMembershipEntity. Every operation is implemented directly
- * here (no shared AbstractCrudService base), matching every other Party service.
+ * here (no shared AbstractCrudService base), so this module stays fully
+ * self-contained and free to diverge with entity-specific business rules.
  */
 @Service
 @RequiredArgsConstructor

@@ -1,23 +1,38 @@
 package ir.bank.qh.party.entity;
 
+import ir.bank.qh.common.entity.BaseEntity;
+
 import ir.bank.qh.party.enums.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
 
 /**
- * Natural person - identity attributes that are independent of nationality/residence
- * (which live on {@link PartyEntity#getPartyType()} via {@link ResidencyStatus}).
+ * Natural person - identity attributes that are independent of nationality/residence.
+ * Shares its primary key with PARTY (1:1, {@code PARTY_ID}), not a JOINED-inheritance
+ * subtype - see {@link PartyEntity} for why.
  */
+@EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @Entity
 @Table(schema = "PARTY", name = "PERSON")
-@PrimaryKeyJoinColumn(name = "PARTY_ID", foreignKey = @ForeignKey(name = "PERSON_FK_PARTY"))
-@DiscriminatorValue("PERSON")
 @Getter
 @Setter
-public class PersonEntity extends PartyEntity {
+public class PersonEntity extends BaseEntity {
+
+    @Id
+    @Column(name = "PARTY_ID")
+    @EqualsAndHashCode.Include
+    private Long id;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @MapsId
+    @JoinColumn(name = "PARTY_ID", foreignKey = @ForeignKey(name = "PERSON_FK_PARTY"))
+    private PartyEntity party;
 
     @Column(name = "BIRTH_DATE", nullable = false)
     private Date birthDate;
@@ -54,9 +69,4 @@ public class PersonEntity extends PartyEntity {
 
     @Column(name = "PHYSICAL_ABILITY", length = 15)
     private String physicalAbility;
-
-    @Override
-    public PartyType getPartyType() {
-        return PartyType.PERSON;
-    }
 }

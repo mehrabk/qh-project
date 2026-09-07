@@ -52,4 +52,17 @@ public class ContactPointEntity extends TenantAwareEntity {
     @Convert(converter = YesNoConverter.class)
     @Column(name = "IS_PRIMARY", nullable = false, length = 1, columnDefinition = "char(1) default 'N'")
     private Boolean primary = Boolean.FALSE;
+
+    @Convert(converter = YesNoConverter.class)
+    @Column(name = "IS_VERIFIED", nullable = false, length = 1, columnDefinition = "char(1) default 'N'")
+    private Boolean verified = Boolean.FALSE;
+
+    @Column(name = "VERIFIED_AT")
+    private java.util.Date verifiedAt;
+
+    @Column(name = "VALID_FROM")
+    private java.util.Date validFrom;
+
+    @Column(name = "VALID_TO")
+    private java.util.Date validTo;
 }

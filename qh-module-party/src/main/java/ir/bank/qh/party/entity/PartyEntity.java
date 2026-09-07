@@ -1,7 +1,6 @@
 package ir.bank.qh.party.entity;
 
 import ir.bank.qh.common.entity.BaseEntity;
-import ir.bank.qh.common.entity.TenantAwareEntity;
 
 import ir.bank.qh.party.converter.YesNoConverter;
 import ir.bank.qh.party.enums.PartyDataSource;
@@ -17,32 +16,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Root of the Party hierarchy - the single BIAN-style "Directory Entry" that every
- * PERSON and ORGANIZATION row joins back to on the shared {@code PARTY_ID} primary
- * key (JOINED inheritance, discriminated by {@code PARTY_TYPE}).
+ * Root of the Party hierarchy - the single BIAN-style "Directory Entry" every
+ * PERSON/ORGANIZATION detail row and every reusable sub-feature (addresses,
+ * contact points, identifiers, names, roles, group memberships, signature
+ * specimens) links back to via PARTY_ID.
  * <p>
- * Every reusable sub-feature the bank needs regardless of whether the Party is a
- * natural person or an organization - addresses, contact points, identifiers, names,
- * roles, group memberships, signature specimens, compliance inquiries - hangs off
- * this root rather than being duplicated per subtype.
+ * A concrete entity, not a JPA JOINED-inheritance root: the corrected physical
+ * model gives ORGANIZATION its own surrogate ORGANIZATION_ID (distinct from
+ * PARTY_ID, with just a unique FK back to PARTY), which a shared-primary-key
+ * inheritance mapping cannot express, so {@code partyType} is a plain checked
+ * column here rather than a Hibernate discriminator. PERSON still shares
+ * PARTY_ID as its own PK (see {@link PersonEntity}).
  *
  * @author core-banking-party-model
  */
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @Entity
 @Table(schema = "PARTY", name = "PARTY")
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "PARTY_TYPE_CODE", discriminatorType = DiscriminatorType.STRING, length = 30)
 @SequenceGenerator(name = "PARTY_ID_SEQ", schema = "PARTY", sequenceName = "PARTY_ID_SEQ", allocationSize = 1)
 @Getter
 @Setter
-public abstract class PartyEntity extends BaseEntity {
+public class PartyEntity extends BaseEntity {
 
     @Id
     @Column(name = "PARTY_ID", columnDefinition = "number(19,0)")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PARTY_ID_SEQ")
     @EqualsAndHashCode.Include
     private Long id;
+
+    @Column(name = "PARTY_TYPE_CODE", nullable = false, length = 30)
+    @Enumerated(EnumType.STRING)
+    private PartyType partyType;
 
     @Column(name = "VERIFICATION_STATUS_CODE", nullable = false, length = 30)
     @Enumerated(EnumType.STRING)
@@ -91,10 +95,6 @@ public abstract class PartyEntity extends BaseEntity {
     @JsonIgnoreProperties("party")
     @OneToOne(mappedBy = "party", cascade = CascadeType.ALL, orphanRemoval = true)
     private PartyDemographicEntity demographic;
-
-    /** Backed by the {@code PARTY_TYPE_CODE} discriminator itself - never a separately stored column. */
-    @Transient
-    public abstract PartyType getPartyType();
 
     public void addAddress(PartyAddressEntity address) {
         address.setParty(this);

@@ -45,7 +45,7 @@ public class SignatureSpecimenEntity extends TenantAwareEntity {
      * from {@code party}, which is always the account/mandate owner.
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "SIGNATORY_ID", referencedColumnName = "PARTY_ID",
+    @JoinColumn(name = "SIGNATORY_PARTY_ID", referencedColumnName = "PARTY_ID",
             foreignKey = @ForeignKey(name = "FK_SIGNATURE_SIGNATORY_PARTY"))
     private PartyEntity signatoryParty;
 

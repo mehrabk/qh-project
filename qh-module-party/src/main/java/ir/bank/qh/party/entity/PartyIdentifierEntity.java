@@ -1,6 +1,6 @@
 package ir.bank.qh.party.entity;
 
-import ir.bank.qh.common.entity.TenantAwareEntity;
+import ir.bank.qh.common.entity.BaseEntity;
 
 import ir.bank.qh.party.converter.YesNoConverter;
 import ir.bank.qh.party.enums.IdentifierType;
@@ -17,17 +17,18 @@ import java.util.Date;
 /**
  * A government/authority-issued identifier held by a Party (national ID, passport,
  * tax ID, company registration number, ...), including its independent verification
- * lifecycle - central to KYC/AML compliance.
+ * lifecycle - central to KYC/AML compliance. Tenant-independent: the same identifier
+ * (e.g. national ID) identifies the Party regardless of which institution looks it up.
  */
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @Entity
 @Table(schema = "PARTY", name = "PARTY_IDENTIFIER",
-        uniqueConstraints = @UniqueConstraint(name = "UQ_PARTY_IDENTIFIER_TYPE_VALUE",
-                columnNames = {"INSTITUTION_ID", "IDENTIFIER_TYPE_CODE", "IDENTIFIER_VALUE"}))
+        uniqueConstraints = @UniqueConstraint(name = "UQ_IDENTIFIER_TYPE_VALUE",
+                columnNames = {"IDENTIFIER_TYPE_CODE", "IDENTIFIER_VALUE"}))
 @SequenceGenerator(name = "PARTY_IDENTIFIER_ID_SEQ", schema = "PARTY", sequenceName = "PARTY_IDENTIFIER_ID_SEQ", allocationSize = 1)
 @Getter
 @Setter
-public class PartyIdentifierEntity extends TenantAwareEntity {
+public class PartyIdentifierEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PARTY_IDENTIFIER_ID_SEQ")
@@ -75,4 +76,18 @@ public class PartyIdentifierEntity extends TenantAwareEntity {
 
     @Column(name = "VERIFIED_AT")
     private Date verifiedAt;
+
+    /** Normalized match key (e.g. digits-only, uppercased) used for fuzzy/duplicate matching across identifiers. */
+    @Column(name = "IDENTIFIER_MATCH_KEY", length = 128)
+    private String identifierMatchKey;
+
+    /** Version of the match-key normalization algorithm that produced {@link #identifierMatchKey}. */
+    @Column(name = "MATCH_KEY_VERSION")
+    private Integer matchKeyVersion = 1;
+
+    @Column(name = "VALID_FROM")
+    private Date validFrom;
+
+    @Column(name = "VALID_TO")
+    private Date validTo;
 }

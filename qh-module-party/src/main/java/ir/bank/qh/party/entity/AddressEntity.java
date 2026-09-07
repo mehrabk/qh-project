@@ -1,6 +1,6 @@
 package ir.bank.qh.party.entity;
 
-import ir.bank.qh.common.entity.BaseEntity;
+import ir.bank.qh.common.entity.TenantAwareEntity;
 
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
@@ -20,7 +20,7 @@ import lombok.Setter;
 @SequenceGenerator(name = "ADDRESS_ID_SEQ", schema = "PARTY", sequenceName = "ADDRESS_ID_SEQ", allocationSize = 1)
 @Getter
 @Setter
-public class AddressEntity extends BaseEntity {
+public class AddressEntity extends TenantAwareEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ADDRESS_ID_SEQ")

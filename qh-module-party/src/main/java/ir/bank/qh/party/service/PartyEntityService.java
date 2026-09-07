@@ -3,31 +3,57 @@ package ir.bank.qh.party.service;
 import ir.bank.qh.party.entity.PartyEntity;
 import ir.bank.qh.party.repository.PartyEntityRepository;
 import ir.bank.qh.common.exception.ResourceNotFoundException;
+import ir.bank.qh.common.service.JpaReferenceResolver;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
- * Read-only service for PartyEntity: PARTY is the abstract JOINED-inheritance
- * root of PERSON/ORGANIZATION, so it is never created/updated/deleted directly
- * - do that through PersonService / OrganizationService instead. This service
- * only exposes polymorphic read access across the whole Party hierarchy.
+ * Dedicated service for PartyEntity. PARTY is now a plain, concrete identity
+ * root (not a JOINED-inheritance superclass) - creating a PERSON or
+ * ORGANIZATION is a two-step flow: create the PARTY row here first, then
+ * create the PERSON/ORGANIZATION row referencing it by id.
  */
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true, transactionManager = "partyTransactionManager")
+@Transactional("partyTransactionManager")
 public class PartyEntityService {
 
     private final PartyEntityRepository repository;
 
+    @PersistenceContext(unitName = "party")
+    private EntityManager entityManager;
+
+    @Transactional(readOnly = true, transactionManager = "partyTransactionManager")
     public List<PartyEntity> findAll() {
         return repository.findAll();
     }
 
+    @Transactional(readOnly = true, transactionManager = "partyTransactionManager")
     public PartyEntity findById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("PartyEntity", id));
+    }
+
+    public PartyEntity create(PartyEntity entity) {
+        JpaReferenceResolver.resolveManyToOneReferences(entity, entityManager);
+        return repository.save(entity);
+    }
+
+    public PartyEntity update(Long id, PartyEntity incoming) {
+        JpaReferenceResolver.resolveManyToOneReferences(incoming, entityManager);
+        PartyEntity existing = findById(id);
+        BeanUtils.copyProperties(incoming, existing, JpaReferenceResolver.updateIgnoredProperties(PartyEntity.class));
+        return repository.save(existing);
+    }
+
+    public void delete(Long id) {
+        PartyEntity existing = findById(id);
+        repository.delete(existing);
     }
 }

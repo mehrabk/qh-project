@@ -104,14 +104,20 @@ export const scenarios = [
     id: 'party-onboarding',
     title: 'سناریوی ثبت شخص حقیقی جدید (Party Onboarding)',
     description:
-      'یک PersonEntity جدید می‌سازد (که به‌صورت خودکار هم ردیف PARTY و هم ردیف PERSON را با ارث‌بری JOINED می‌سازد)، یک آدرس موجود را به او متصل می‌کند و یک شماره تماس برایش ثبت می‌کند.',
+      'ابتدا ردیف هویتی PARTY را می‌سازد، سپس یک PersonEntity متناظر با آن ایجاد می‌کند (اکنون یک موجودیت خواهر با PARTY_ID مشترک است، نه زیرکلاس ارث‌بری JOINED)، یک آدرس موجود را به او متصل می‌کند و یک شماره تماس برایش ثبت می‌کند.',
     boundedContext: 'party',
     steps: [
+      {
+        label: 'ایجاد ردیف هویتی شخص (PartyEntity)',
+        saveAs: 'party',
+        entity: 'PartyEntity',
+        build: () => autoPayload('PartyEntity', { partyType: 'PERSON' }),
+      },
       {
         label: 'ایجاد شخص حقیقی (PersonEntity)',
         saveAs: 'person',
         entity: 'PersonEntity',
-        build: () => autoPayload('PersonEntity'),
+        build: (ctx) => autoPayload('PersonEntity', { party: { id: ctx.party.id } }),
       },
       {
         label: 'اتصال آدرس موجود به شخص (PartyAddressEntity)',
@@ -120,7 +126,7 @@ export const scenarios = [
         build: async (ctx, { first }) => {
           const address = await first('AddressEntity');
           return autoPayload('PartyAddressEntity', {
-            party: { id: ctx.person.id },
+            party: { id: ctx.party.id },
             address: { id: address.id },
           });
         },
@@ -129,7 +135,7 @@ export const scenarios = [
         label: 'ثبت شماره تماس برای شخص (ContactPointEntity)',
         saveAs: 'contactPoint',
         entity: 'ContactPointEntity',
-        build: (ctx) => autoPayload('ContactPointEntity', { party: { id: ctx.person.id } }),
+        build: (ctx) => autoPayload('ContactPointEntity', { party: { id: ctx.party.id } }),
       },
     ],
   },

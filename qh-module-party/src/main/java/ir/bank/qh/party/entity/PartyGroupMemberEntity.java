@@ -48,7 +48,7 @@ public class PartyGroupMemberEntity extends TenantAwareEntity {
     private MemberRole memberRole;
 
     /** Ownership percentage, relevant for OWNERSHIP / CORPORATE_STRUCTURE groups (UBO tracking). */
-    @Column(name = "OWNERSHIP_PERCENT", precision = 6, scale = 3)
+    @Column(name = "OWNERSHIP_PERCENT", precision = 9, scale = 6)
     private BigDecimal ownershipPercent;
 
     @Column(name = "VALID_FROM")

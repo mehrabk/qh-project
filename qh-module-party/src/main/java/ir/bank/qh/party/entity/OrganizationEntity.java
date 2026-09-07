@@ -1,7 +1,11 @@
 package ir.bank.qh.party.entity;
 
+import ir.bank.qh.common.entity.BaseEntity;
+
 import ir.bank.qh.party.enums.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,14 +14,30 @@ import java.util.Date;
 /**
  * Legal entity / organization - identity, incorporation and firmographic attributes
  * used for corporate KYC (registration, activity, ownership structure, size).
+ * <p>
+ * Unlike {@link PersonEntity}, this has its own surrogate {@code ORGANIZATION_ID}
+ * primary key (not shared with PARTY_ID) with a unique FK back to {@link PartyEntity}
+ * - see {@link PartyEntity} for why.
  */
+@EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 @Entity
 @Table(schema = "PARTY", name = "ORGANIZATION")
-@PrimaryKeyJoinColumn(name = "PARTY_ID", foreignKey = @ForeignKey(name = "ORGANIZATION_FK_PARTY"))
-@DiscriminatorValue("ORGANIZATION")
+@SequenceGenerator(name = "ORGANIZATION_ID_SEQ", schema = "PARTY", sequenceName = "ORGANIZATION_ID_SEQ", allocationSize = 1)
 @Getter
 @Setter
-public class OrganizationEntity extends PartyEntity {
+public class OrganizationEntity extends BaseEntity {
+
+    @Id
+    @Column(name = "ORGANIZATION_ID")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ORGANIZATION_ID_SEQ")
+    @EqualsAndHashCode.Include
+    private Long id;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "PARTY_ID", nullable = false, unique = true,
+            foreignKey = @ForeignKey(name = "ORGANIZATION_FK_PARTY"))
+    private PartyEntity party;
 
     @Column(name = "REGISTERED_NAME", nullable = false, length = 300)
     private String registeredName;
@@ -58,9 +78,4 @@ public class OrganizationEntity extends PartyEntity {
     @Column(name = "OWNERSHIP_TYPE_CODE", length = 30)
     @Enumerated(EnumType.STRING)
     private OwnershipType ownershipType;
-
-    @Override
-    public PartyType getPartyType() {
-        return PartyType.ORGANIZATION;
-    }
 }

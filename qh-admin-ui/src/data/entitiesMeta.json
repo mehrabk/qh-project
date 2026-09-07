@@ -10097,7 +10097,7 @@
     "entity": "PartyEntity",
     "boundedContext": "party",
     "domain": "party",
-    "readonly": true,
+    "readonly": false,
     "schema": "PARTY",
     "table": "PARTY",
     "fields": [
@@ -10177,6 +10177,22 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
+        "default": null
+      },
+      {
+        "field": "partyType",
+        "column": "PARTY_TYPE_CODE",
+        "javaType": "PartyType",
+        "nullable": false,
+        "length": 30,
+        "unique": false,
+        "isId": false,
+        "widget": "select",
+        "fkTarget": null,
+        "enumValues": [
+          "PERSON",
+          "ORGANIZATION"
+        ],
         "default": null
       },
       {
@@ -10537,19 +10553,6 @@
         "default": null
       },
       {
-        "field": "institutionId",
-        "column": "INSTITUTION_ID",
-        "javaType": "Long",
-        "nullable": true,
-        "length": null,
-        "unique": false,
-        "isId": false,
-        "widget": "number",
-        "fkTarget": null,
-        "enumValues": null,
-        "default": null
-      },
-      {
         "field": "id",
         "column": "PARTY_IDENTIFIER_ID",
         "javaType": "Long",
@@ -10717,6 +10720,58 @@
       {
         "field": "verifiedAt",
         "column": "VERIFIED_AT",
+        "javaType": "Date",
+        "nullable": true,
+        "length": null,
+        "unique": false,
+        "isId": false,
+        "widget": "date",
+        "fkTarget": null,
+        "enumValues": null,
+        "default": null
+      },
+      {
+        "field": "identifierMatchKey",
+        "column": "IDENTIFIER_MATCH_KEY",
+        "javaType": "String",
+        "nullable": true,
+        "length": 128,
+        "unique": false,
+        "isId": false,
+        "widget": "text",
+        "fkTarget": null,
+        "enumValues": null,
+        "default": null
+      },
+      {
+        "field": "matchKeyVersion",
+        "column": "MATCH_KEY_VERSION",
+        "javaType": "Integer",
+        "nullable": true,
+        "length": null,
+        "unique": false,
+        "isId": false,
+        "widget": "number",
+        "fkTarget": null,
+        "enumValues": null,
+        "default": "1"
+      },
+      {
+        "field": "validFrom",
+        "column": "VALID_FROM",
+        "javaType": "Date",
+        "nullable": true,
+        "length": null,
+        "unique": false,
+        "isId": false,
+        "widget": "date",
+        "fkTarget": null,
+        "enumValues": null,
+        "default": null
+      },
+      {
+        "field": "validTo",
+        "column": "VALID_TO",
         "javaType": "Date",
         "nullable": true,
         "length": null,
@@ -11066,7 +11121,7 @@
       },
       {
         "field": "id",
-        "column": "PARTY_ID",
+        "column": "ORGANIZATION_ID",
         "javaType": "Long",
         "nullable": true,
         "length": null,
@@ -11078,55 +11133,17 @@
         "default": null
       },
       {
-        "field": "verificationStatus",
-        "column": "VERIFICATION_STATUS_CODE",
-        "javaType": "VerificationStatus",
+        "field": "party",
+        "column": "PARTY_ID",
+        "javaType": "PartyEntity",
         "nullable": false,
-        "length": 30,
-        "unique": false,
+        "length": null,
+        "unique": true,
         "isId": false,
-        "widget": "select",
-        "fkTarget": null,
-        "enumValues": [
-          "UNVERIFIED",
-          "PENDING",
-          "VERIFIED",
-          "REJECTED",
-          "EXPIRED"
-        ],
-        "default": "VerificationStatus.UNVERIFIED"
-      },
-      {
-        "field": "dataSource",
-        "column": "CREATION_SOURCE_CODE",
-        "javaType": "PartyDataSource",
-        "nullable": true,
-        "length": 50,
-        "unique": false,
-        "isId": false,
-        "widget": "select",
-        "fkTarget": null,
-        "enumValues": [
-          "BRANCH_ENTRY",
-          "DIGITAL_ONBOARDING",
-          "THIRD_PARTY_FEED",
-          "DATA_MIGRATION",
-          "API_INTEGRATION"
-        ],
-        "default": null
-      },
-      {
-        "field": "current",
-        "column": "IS_CURRENT",
-        "javaType": "Boolean",
-        "nullable": false,
-        "length": 1,
-        "unique": false,
-        "isId": false,
-        "widget": "checkbox",
-        "fkTarget": null,
+        "widget": "fk",
+        "fkTarget": "PartyEntity",
         "enumValues": null,
-        "default": "Boolean.TRUE"
+        "default": null
       },
       {
         "field": "registeredName",
@@ -11803,7 +11820,7 @@
       },
       {
         "field": "status",
-        "column": "WORKFLOW_STATUS_CODE",
+        "column": "STATUS_CODE",
         "javaType": "WorkflowStatus",
         "nullable": false,
         "length": 30,
@@ -11917,55 +11934,17 @@
         "default": null
       },
       {
-        "field": "verificationStatus",
-        "column": "VERIFICATION_STATUS_CODE",
-        "javaType": "VerificationStatus",
+        "field": "party",
+        "column": "PARTY_ID",
+        "javaType": "PartyEntity",
         "nullable": false,
-        "length": 30,
+        "length": null,
         "unique": false,
         "isId": false,
-        "widget": "select",
-        "fkTarget": null,
-        "enumValues": [
-          "UNVERIFIED",
-          "PENDING",
-          "VERIFIED",
-          "REJECTED",
-          "EXPIRED"
-        ],
-        "default": "VerificationStatus.UNVERIFIED"
-      },
-      {
-        "field": "dataSource",
-        "column": "CREATION_SOURCE_CODE",
-        "javaType": "PartyDataSource",
-        "nullable": true,
-        "length": 50,
-        "unique": false,
-        "isId": false,
-        "widget": "select",
-        "fkTarget": null,
-        "enumValues": [
-          "BRANCH_ENTRY",
-          "DIGITAL_ONBOARDING",
-          "THIRD_PARTY_FEED",
-          "DATA_MIGRATION",
-          "API_INTEGRATION"
-        ],
-        "default": null
-      },
-      {
-        "field": "current",
-        "column": "IS_CURRENT",
-        "javaType": "Boolean",
-        "nullable": false,
-        "length": 1,
-        "unique": false,
-        "isId": false,
-        "widget": "checkbox",
-        "fkTarget": null,
+        "widget": "fk",
+        "fkTarget": "PartyEntity",
         "enumValues": null,
-        "default": "Boolean.TRUE"
+        "default": null
       },
       {
         "field": "birthDate",
@@ -12184,6 +12163,19 @@
       {
         "field": "version",
         "column": "RECORD_VERSION",
+        "javaType": "Long",
+        "nullable": true,
+        "length": null,
+        "unique": false,
+        "isId": false,
+        "widget": "number",
+        "fkTarget": null,
+        "enumValues": null,
+        "default": null
+      },
+      {
+        "field": "institutionId",
+        "column": "INSTITUTION_ID",
         "javaType": "Long",
         "nullable": true,
         "length": null,
@@ -12724,7 +12716,7 @@
       },
       {
         "field": "signatoryParty",
-        "column": "SIGNATORY_ID",
+        "column": "SIGNATORY_PARTY_ID",
         "javaType": "PartyEntity",
         "nullable": true,
         "length": null,
@@ -13123,6 +13115,58 @@
         "fkTarget": null,
         "enumValues": null,
         "default": "Boolean.FALSE"
+      },
+      {
+        "field": "verified",
+        "column": "IS_VERIFIED",
+        "javaType": "Boolean",
+        "nullable": false,
+        "length": 1,
+        "unique": false,
+        "isId": false,
+        "widget": "checkbox",
+        "fkTarget": null,
+        "enumValues": null,
+        "default": "Boolean.FALSE"
+      },
+      {
+        "field": "verifiedAt",
+        "column": "VERIFIED_AT",
+        "javaType": "Date",
+        "nullable": true,
+        "length": null,
+        "unique": false,
+        "isId": false,
+        "widget": "date",
+        "fkTarget": null,
+        "enumValues": null,
+        "default": null
+      },
+      {
+        "field": "validFrom",
+        "column": "VALID_FROM",
+        "javaType": "Date",
+        "nullable": true,
+        "length": null,
+        "unique": false,
+        "isId": false,
+        "widget": "date",
+        "fkTarget": null,
+        "enumValues": null,
+        "default": null
+      },
+      {
+        "field": "validTo",
+        "column": "VALID_TO",
+        "javaType": "Date",
+        "nullable": true,
+        "length": null,
+        "unique": false,
+        "isId": false,
+        "widget": "date",
+        "fkTarget": null,
+        "enumValues": null,
+        "default": null
       }
     ],
     "labelField": "areaCode",

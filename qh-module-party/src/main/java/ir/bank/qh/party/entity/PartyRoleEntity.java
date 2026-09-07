@@ -90,7 +90,7 @@ public class PartyRoleEntity extends TenantAwareEntity {
     @Column(name = "VALID_TO")
     private Date validTo;
 
-    @Column(name = "WORKFLOW_STATUS_CODE", nullable = false, length = 30)
+    @Column(name = "STATUS_CODE", nullable = false, length = 30)
     @Enumerated(EnumType.STRING)
     private WorkflowStatus status = WorkflowStatus.ACTIVE;
 }

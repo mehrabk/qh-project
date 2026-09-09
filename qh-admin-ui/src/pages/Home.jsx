@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { navigation, entities } from '../data/meta';
 import { scenarios } from '../data/scenarios';
 import { wizards } from '../data/wizards';
+import { productBuilderWizards } from '../data/productBuilderWizards';
 import ScenarioRunner from '../components/ScenarioRunner';
 import Wizard from '../components/Wizard';
 
@@ -49,6 +50,20 @@ export default function Home() {
         </p>
         <div className="scenario-grid">
           {wizards.map((w) => (
+            <Wizard key={w.id} wizard={w} />
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2>ویزارد طراحی محصول (Product Builder)</h2>
+        <p className="muted">
+          مسیر واقعی طراحی یک محصول بانکی طبق چرخه حیات BIAN: محصول → نسخه → پروفایل و قواعد → تصویب →
+          فعال‌سازی. همان قواعد کسب‌وکاری که بک‌اند اجرا می‌کند (مثلاً «افتتاح فقط برای نسخه تصویب‌شده
+          فعال می‌شود» یا «حداقل نباید از حداکثر بیشتر باشد») همین‌جا هم پیش از ارسال بررسی می‌شود.
+        </p>
+        <div className="scenario-grid">
+          {productBuilderWizards.map((w) => (
             <Wizard key={w.id} wizard={w} />
           ))}
         </div>

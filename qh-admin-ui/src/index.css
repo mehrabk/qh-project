@@ -333,6 +333,10 @@ thead th { background: rgba(127,127,127,0.06); position: sticky; top: 0; font-we
   padding: 4px 10px; border-radius: 20px;
 }
 .wizard-actions { display: flex; justify-content: flex-end; gap: 8px; padding: 14px 0 0; }
+.wizard-action-summary {
+  background: rgba(47,111,235,0.08); border: 1px solid var(--border); border-radius: 8px;
+  padding: 10px 14px; font-size: 13.5px; margin: 0;
+}
 .wizard-review { border-top: 1px solid var(--border); padding-top: 14px; }
 .wizard-review-list { padding-inline-start: 20px; font-size: 13.5px; }
 .wizard-review-list li { margin-bottom: 6px; }

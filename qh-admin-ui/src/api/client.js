@@ -34,4 +34,7 @@ export const api = {
   create: (path, entity) => request(path, { method: 'POST', body: JSON.stringify(entity) }),
   update: (path, id, entity) => request(`${path}/${id}`, { method: 'PUT', body: JSON.stringify(entity) }),
   remove: (path, id) => request(`${path}/${id}`, { method: 'DELETE' }),
+  // Fires a lifecycle-transition endpoint (e.g. POST .../{id}/approve) that
+  // isn't a plain create/update - no body, just the action itself.
+  action: (path) => request(path, { method: 'POST' }),
 };

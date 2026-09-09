@@ -55,3 +55,22 @@ const AUDIT_FIELDS = new Set([
 export function isAuditField(fieldName) {
   return AUDIT_FIELDS.has(fieldName);
 }
+
+// A field's `default` (captured from its Java initializer) shows up in two
+// shapes depending on which generator produced entitiesMeta.json's entry for
+// it: the Party entities normalize it down to a bare 'true'/'false'/'"..."'
+// literal, but productbuilder's (hand-authored, no committed generator) kept
+// the qualified Java form for booleans (e.g. 'Boolean.FALSE') on some
+// entries. Normalizing here - once, at the single place every form reads a
+// field's initial value from - means a form checkbox/select always starts at
+// the entity's real Java default instead of silently falling through to
+// null (which then gets submitted as an explicit null, not "unset", and can
+// violate a NOT NULL/CHECK constraint the actual default would have satisfied).
+export function normalizeFieldDefault(raw) {
+  if (raw == null) return null;
+  const dot = raw.lastIndexOf('.');
+  const bare = dot >= 0 && /^[A-Za-z_][A-Za-z0-9_]*$/.test(raw.slice(dot + 1)) ? raw.slice(dot + 1) : raw;
+  if (/^true$/i.test(bare)) return 'true';
+  if (/^false$/i.test(bare)) return 'false';
+  return raw;
+}

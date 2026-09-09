@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import FieldInput, { fieldLabel } from './FieldInput';
-import { isAuditField } from '../data/meta';
+import { isAuditField, normalizeFieldDefault } from '../data/meta';
 import { buildExampleValue } from '../data/exampleValues';
 import { getCachedFkOptions } from '../hooks/useFkOptions';
 
@@ -9,9 +9,10 @@ function initialValues(entity, item) {
   const v = {};
   for (const f of entity.fields) {
     if (f.isId) continue;
-    if (f.default === 'false') v[f.field] = false;
-    else if (f.default === 'true') v[f.field] = true;
-    else if (f.default && /^"/.test(f.default)) v[f.field] = f.default.replace(/^"|"$/g, '');
+    const def = normalizeFieldDefault(f.default);
+    if (def === 'false') v[f.field] = false;
+    else if (def === 'true') v[f.field] = true;
+    else if (def && /^"/.test(def)) v[f.field] = def.replace(/^"|"$/g, '');
     else v[f.field] = null;
   }
   return v;

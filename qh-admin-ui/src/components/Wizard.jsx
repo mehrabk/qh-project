@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '../api/client';
-import { byEntityName, isAuditField, displayValue } from '../data/meta';
+import { byEntityName, isAuditField, displayValue, normalizeFieldDefault } from '../data/meta';
 import { buildExampleValue } from '../data/exampleValues';
 import { invalidateFkCache } from '../hooks/useFkOptions';
 import FieldInput, { fieldLabel } from './FieldInput';
@@ -10,9 +10,10 @@ function initialStepValues(entity) {
   const v = {};
   for (const f of entity.fields) {
     if (f.isId) continue;
-    if (f.default === 'false') v[f.field] = false;
-    else if (f.default === 'true') v[f.field] = true;
-    else if (f.default && /^"/.test(f.default)) v[f.field] = f.default.replace(/^"|"$/g, '');
+    const def = normalizeFieldDefault(f.default);
+    if (def === 'false') v[f.field] = false;
+    else if (def === 'true') v[f.field] = true;
+    else if (def && /^"/.test(def)) v[f.field] = def.replace(/^"|"$/g, '');
     else v[f.field] = null;
   }
   return v;
@@ -133,6 +134,13 @@ export default function Wizard({ wizard }) {
   }
 
   async function submitStep(advance) {
+    if (step.validate) {
+      const message = step.validate(values, fixed, ctx);
+      if (message) {
+        setError(message);
+        return;
+      }
+    }
     setSaving(true);
     setError(null);
     try {
@@ -154,6 +162,21 @@ export default function Wizard({ wizard }) {
       } else {
         goToStep(stepIndex + 1, { ...ctx, [step.key]: created });
       }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function runAction() {
+    setSaving(true);
+    setError(null);
+    try {
+      const result = await step.run(ctx);
+      invalidateFkCache(step.entity);
+      setCtx((prev) => ({ ...prev, [step.key]: result }));
+      goToStep(stepIndex + 1, { ...ctx, [step.key]: result });
     } catch (err) {
       setError(err.message);
     } finally {
@@ -206,7 +229,26 @@ export default function Wizard({ wizard }) {
         ))}
       </ol>
 
-      {!finished && step && (
+      {!finished && step && step.kind === 'action' && (
+        <div className="wizard-step-body">
+          <h4>{step.label}</h4>
+          {step.help && <p className="muted wizard-step-help">{step.help}</p>}
+          {step.summary && <p className="wizard-action-summary">{step.summary(ctx)}</p>}
+          {error && <p className="field-error">{error}</p>}
+          <div className="wizard-actions">
+            {step.optional && (
+              <button type="button" className="btn btn-ghost" onClick={skipStep} disabled={saving}>
+                رد کردن این مرحله
+              </button>
+            )}
+            <button type="button" className="btn btn-primary" onClick={runAction} disabled={saving}>
+              {saving ? 'در حال انجام...' : 'انجام این مرحله ▶'}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {!finished && step && step.kind !== 'action' && (
         <div className="wizard-step-body">
           <h4>{step.label}</h4>
           {step.help && <p className="muted wizard-step-help">{step.help}</p>}

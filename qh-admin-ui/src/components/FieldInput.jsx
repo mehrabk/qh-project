@@ -14,17 +14,23 @@ export function fieldLabel(field) {
 
 function FkSelect({ field, value, onChange }) {
   const { loading, error, items, targetEntity } = useFkOptions(field.fkTarget);
+  // The target's own PK can be a Long surrogate id (most entities) or a String
+  // natural key (every REF_* catalog, e.g. GENDER_CODE 'MALE') - only cast to
+  // Number for the former, or a string id like 'VERIFIED' becomes NaN and the
+  // FK silently resolves to null.
+  const idField = targetEntity?.fields.find((f) => f.isId);
+  const idIsNumeric = idField ? idField.javaType !== 'String' : true;
   return (
     <div className="fk-field">
       <select
         value={value ?? ''}
-        onChange={(e) => onChange(e.target.value ? Number(e.target.value) : null)}
+        onChange={(e) => onChange(e.target.value ? (idIsNumeric ? Number(e.target.value) : e.target.value) : null)}
         required={!field.nullable}
       >
         <option value="">{loading ? 'در حال بارگذاری...' : '— انتخاب کنید —'}</option>
         {items.map((item) => (
           <option key={item.id} value={item.id}>
-            #{item.id} — {targetEntity ? displayValue(targetEntity, item) : ''}
+            {typeof item.id === 'number' ? `#${item.id}` : item.id} — {targetEntity ? displayValue(targetEntity, item) : ''}
           </option>
         ))}
       </select>

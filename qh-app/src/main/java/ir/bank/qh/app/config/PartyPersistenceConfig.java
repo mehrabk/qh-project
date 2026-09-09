@@ -23,10 +23,15 @@ import java.util.List;
  * Wires the "Party" persistence unit - its own {@code PARTY} schema on its own database, the one
  * boundary in this system actually designed to move onto a separate server (see
  * {@link ProductBuilderPersistenceConfig}'s note on the real bounded-context boundary).
+ * <p>
+ * Scans the whole {@code ir.bank.qh.party} package rather than a single sub-package, the same way
+ * {@link ProductBuilderPersistenceConfig} scans {@code ir.bank.qh.productbuilder} as a whole - Party
+ * is itself split into two Maven sub-modules (qh-module-party-reference, qh-module-party-core) that
+ * always deploy together as one persistence unit.
  */
 @Configuration
 @EnableJpaRepositories(
-        basePackages = "ir.bank.qh.party.repository",
+        basePackages = "ir.bank.qh.party",
         entityManagerFactoryRef = "partyEntityManagerFactory",
         transactionManagerRef = "partyTransactionManager")
 public class PartyPersistenceConfig {
@@ -48,7 +53,7 @@ public class PartyPersistenceConfig {
             EntityManagerFactoryBuilder builder,
             @Qualifier("partyDataSource") DataSource dataSource) {
         return builder.dataSource(dataSource)
-                .packages("ir.bank.qh.party.entity")
+                .packages("ir.bank.qh.party")
                 .persistenceUnit("party")
                 .build();
     }

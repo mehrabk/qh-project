@@ -1,0 +1,5783 @@
+{
+  "tables": {
+    "SIGNATURE_SPECIMEN": {
+      "doc": "نمونه امضای ثبت‌شده برای عضویت پارتی در یک صندوق. نمونه امضا می‌تواند بین صندوق‌های مختلف متفاوت باشد.",
+      "columns": [
+        {
+          "name": "SIGNATURE_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه نمونه امضاء"
+        },
+        {
+          "name": "PARTY_MEMBERSHIP_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه عضویت پارتی در صندوق که نمونه امضا برای آن ثبت شده است"
+        },
+        {
+          "name": "SIGNATORY_MEMBERSHIP_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه عضویت امضاکننده در همان صندوق؛ برای اشخاص حقوقی می‌تواند با صاحب رکورد متفاوت باشد"
+        },
+        {
+          "name": "SPECIMEN_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "نوع نمونه امضا"
+        },
+        {
+          "name": "SIGNATURE_IMAGE",
+          "kind": "column",
+          "type": "BLOB",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "تصویر نمونه امضا"
+        },
+        {
+          "name": "EFFECTIVE_FROM",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "تاریخ شروع اعتبار"
+        },
+        {
+          "name": "EFFECTIVE_TO",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "تاریخ پایان اعتبار"
+        },
+        {
+          "name": "STATUS_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "فعال، منقضی، لغوشده"
+        },
+        {
+          "name": "SIGNING_RULE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "قاعده امضا؛ منفرد یا مشترک"
+        },
+        {
+          "name": "VERIFICATION_STATUS_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "وضعیت تأیید نمونه"
+        },
+        {
+          "name": "CAPTURE_CHANNEL_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شعبه، موبایل، اینترنت‌بانک"
+        },
+        {
+          "name": "DOCUMENT_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "مدرک یا فرم دریافت نمونه"
+        },
+        {
+          "name": "BRANCH_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "4",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شعبه ثبت‌کننده"
+        },
+        {
+          "name": "CAPTURED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کاربر دریافت‌کننده"
+        },
+        {
+          "name": "REVOKED_AT",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "تاریخ ابطال"
+        },
+        {
+          "name": "REVOCATION_REASON",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "علت ابطال"
+        },
+        {
+          "name": "CREATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "SYSTIMESTAMP",
+          "doc": "زمان ایجاد رکورد نمونه امضا"
+        },
+        {
+          "name": "CREATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه ایجادکننده"
+        },
+        {
+          "name": "UPDATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "زمان آخرین ویرایش رکورد"
+        },
+        {
+          "name": "UPDATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه آخرین ویرایش‌کننده"
+        },
+        {
+          "name": "RECORD_VERSION",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "10",
+          "scale": "0",
+          "nullable": false,
+          "default": "1",
+          "doc": "شماره نسخه رکورد برای کنترل همزمانی"
+        },
+        {
+          "name": "TENANT_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه صندوق قرض‌الحسنه (Tenant)؛ شناسه دامنه مستقل داده برای یک شعبه/صندوق"
+        }
+      ]
+    },
+    "PARTY_GROUP": {
+      "doc": "گروه پارتی‌ها در دامنه یک صندوق مشخص.",
+      "columns": [
+        {
+          "name": "GROUP_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه یکتای گروه پارتی‌ها"
+        },
+        {
+          "name": "GROUP_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "40",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "نوع گروه؛ خانوار، گروه اقتصادی یا ذی‌نفع واحد"
+        },
+        {
+          "name": "GROUP_NAME",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "300",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "نام گروه"
+        },
+        {
+          "name": "STATUS_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'ACTIVE'",
+          "doc": "وضعیت گروه"
+        },
+        {
+          "name": "EFFECTIVE_FROM",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "تاریخ شروع اعتبار گروه"
+        },
+        {
+          "name": "EFFECTIVE_TO",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "تاریخ پایان اعتبار گروه؛ در صورت فعال بودن بدون تاریخ پایان، تهی است"
+        },
+        {
+          "name": "CREATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "SYSTIMESTAMP",
+          "doc": "زمان ایجاد رکورد"
+        },
+        {
+          "name": "CREATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه ایجادکننده"
+        },
+        {
+          "name": "UPDATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "زمان آخرین ویرایش رکورد"
+        },
+        {
+          "name": "UPDATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه آخرین ویرایش‌کننده"
+        },
+        {
+          "name": "RECORD_VERSION",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "10",
+          "scale": "0",
+          "nullable": false,
+          "default": "1",
+          "doc": "شماره نسخه رکورد برای کنترل همزمانی"
+        },
+        {
+          "name": "TENANT_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه صندوق قرض‌الحسنه (Tenant)؛ شناسه دامنه مستقل داده برای یک شعبه/صندوق"
+        }
+      ]
+    },
+    "PARTY_MEMBERSHIP": {
+      "doc": "مرز اصلی جداسازی داده صندوق‌ها. هر PARTY_ID در هر TENANT_ID حداکثر یک عضویت دارد و تمام اطلاعات صندوقی از طریق PARTY_MEMBERSHIP_ID به این رکورد متصل می‌شود.",
+      "columns": [
+        {
+          "name": "PARTY_MEMBERSHIP_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه یکتای عضویت Party در یک صندوق؛ کلید مرجع تمام اطلاعات اختصاصی همان صندوق"
+        },
+        {
+          "name": "PARTY_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه Party در هسته مرکزی و یکتا"
+        },
+        {
+          "name": "TENANT_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه صندوق قرض‌الحسنه (Tenant)؛ شناسه دامنه مستقل داده برای یک شعبه/صندوق"
+        },
+        {
+          "name": "CREATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "SYSTIMESTAMP",
+          "doc": "زمان ایجاد رکورد عضویت"
+        },
+        {
+          "name": "CREATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه ایجادکننده رکورد عضویت"
+        },
+        {
+          "name": "UPDATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "زمان آخرین ویرایش رکورد عضویت"
+        },
+        {
+          "name": "UPDATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه آخرین ویرایش‌کننده رکورد عضویت"
+        },
+        {
+          "name": "RECORD_VERSION",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "10",
+          "scale": "0",
+          "nullable": false,
+          "default": "1",
+          "doc": "شماره نسخه رکورد برای کنترل هم‌زمانی"
+        }
+      ]
+    },
+    "CONTACT_POINT": {
+      "doc": "راه‌های تماس اختصاصی یک عضویت پارتی در صندوق؛ ممکن است برای همان Party در صندوق دیگر متفاوت باشد.",
+      "columns": [
+        {
+          "name": "CONTACT_POINT_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه یکتای راه تماس"
+        },
+        {
+          "name": "PARTY_MEMBERSHIP_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه عضویت پارتی در صندوق که این راه تماس برای آن ثبت شده است"
+        },
+        {
+          "name": "CONTACT_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد نوع راه تماس مانند موبایل، تلفن ثابت، نمابر یا ایمیل"
+        },
+        {
+          "name": "CONTACT_VALUE",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "مقدار ثبت‌شده راه تماس در قالب قابل نمایش"
+        },
+        {
+          "name": "PURPOSE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد کاربرد راه تماس مانند شخصی، کاری، اضطراری یا مکاتباتی"
+        },
+        {
+          "name": "AREA_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "10",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "پیش‌شماره شهر"
+        },
+        {
+          "name": "EXTENSION_NO",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "10",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شماره داخلی تلفن برای نقطه تماس سازمانی یا محل کار"
+        },
+        {
+          "name": "IS_PRIMARY",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'N'",
+          "doc": "نشانگر اصلی بودن راه تماس برای پارتی در صندوق مربوطه"
+        },
+        {
+          "name": "CREATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "SYSTIMESTAMP",
+          "doc": "زمان ایجاد رکورد"
+        },
+        {
+          "name": "CREATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه ایجادکننده"
+        },
+        {
+          "name": "UPDATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "زمان آخرین ویرایش رکورد"
+        },
+        {
+          "name": "UPDATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه آخرین ویرایش‌کننده"
+        },
+        {
+          "name": "RECORD_VERSION",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "10",
+          "scale": "0",
+          "nullable": false,
+          "default": "1",
+          "doc": "شماره نسخه رکورد برای کنترل هم‌زمانی"
+        },
+        {
+          "name": "IS_VERIFIED",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'N'",
+          "doc": "نشانگر تأیید و صحت‌سنجی راه تماس"
+        },
+        {
+          "name": "VERIFIED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "زمان تأیید یا صحت‌سنجی راه تماس"
+        },
+        {
+          "name": "VALID_FROM",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "TRUNC(SYSDATE)",
+          "doc": "تاریخ شروع اعتبار راه تماس"
+        },
+        {
+          "name": "VALID_TO",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "تاریخ پایان اعتبار راه تماس"
+        },
+        {
+          "name": "TENANT_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه صندوق قرض‌الحسنه (Tenant)؛ شناسه دامنه مستقل داده برای یک شعبه/صندوق"
+        }
+      ]
+    },
+    "PARTY_ROLE": {
+      "doc": "نقش‌های یک Party در هر صندوق، از جمله مشتری، وکیل، فروشنده، ضامن، نماینده و سایر نقش‌ها.",
+      "columns": [
+        {
+          "name": "PARTY_ROLE_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه یکتای نقش"
+        },
+        {
+          "name": "PARTY_MEMBERSHIP_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه عضویت پارتی در صندوق که نقش برای آن تعریف شده است"
+        },
+        {
+          "name": "ROLE_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "40",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "نوع نقش؛ مشتری، ضامن، وکیل، نماینده یا ذی‌نفع"
+        },
+        {
+          "name": "CONTEXT_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "40",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "نوع زمینه نقش؛ حساب، قرارداد، پرونده یا محصول"
+        },
+        {
+          "name": "CONTEXT_ID",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شناسه زمینه نقش در سامانه مربوطه"
+        },
+        {
+          "name": "VALID_FROM",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "تاریخ شروع نقش"
+        },
+        {
+          "name": "VALID_TO",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "تاریخ پایان نقش"
+        },
+        {
+          "name": "STATUS_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "وضعیت نقش"
+        },
+        {
+          "name": "CREATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "SYSTIMESTAMP",
+          "doc": "زمان ایجاد رکورد"
+        },
+        {
+          "name": "CREATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه ایجادکننده"
+        },
+        {
+          "name": "UPDATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "زمان آخرین ویرایش رکورد"
+        },
+        {
+          "name": "UPDATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه آخرین ویرایش‌کننده"
+        },
+        {
+          "name": "RECORD_VERSION",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "10",
+          "scale": "0",
+          "nullable": false,
+          "default": "1",
+          "doc": "شماره نسخه رکورد برای کنترل همزمانی"
+        },
+        {
+          "name": "PRINCIPAL_MEMBERSHIP_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شناسه عضویت پارتی اصیل/موکل/ذی‌نفع در همان صندوق؛ در نقش‌های وابسته مانند وکالت استفاده می‌شود"
+        },
+        {
+          "name": "RELATIONSHIP_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "نوع رابطه"
+        },
+        {
+          "name": "AUTHORITY_BASIS_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "مبنای اختیار"
+        },
+        {
+          "name": "AUTHORITY_DOCUMENT_NO",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شماره و نوع سند اختیار"
+        },
+        {
+          "name": "AUTHORITY_ISSUER",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "مرجع صادرکننده سند"
+        },
+        {
+          "name": "AUTHORITY_SCOPE_TEXT",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "دامنه اختیار"
+        },
+        {
+          "name": "ASSIGNMENT_REASON_TEXT",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "دلیل تخصیص نقش"
+        },
+        {
+          "name": "DESCRIPTION_TEXT",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی نقش، دامنه و شرایط تخصیص آن به پارتی"
+        },
+        {
+          "name": "TENANT_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه صندوق قرض‌الحسنه (Tenant)؛ شناسه دامنه مستقل داده برای یک شعبه/صندوق"
+        }
+      ]
+    },
+    "PARTY_IDENTIFIER": {
+      "doc": "شناسه‌های هویتی Party در هسته مرکزی و یکتا. دسترسی صندوق به این جدول مستقیم نیست؛ Resolve/Dedup فقط از طریق سرویس مرکزی انجام می‌شود و IDENTIFIER_MATCH_KEY هرگز به کانال صندوق بازگردانده نمی‌شود.",
+      "columns": [
+        {
+          "name": "PARTY_IDENTIFIER_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه یکتای رکورد شناسه هویتی"
+        },
+        {
+          "name": "PARTY_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه پارتی"
+        },
+        {
+          "name": "IDENTIFIER_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "40",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "نوع شناسه؛ مانند کد ملی، گذرنامه، شناسه ملی یا شهاب"
+        },
+        {
+          "name": "IDENTIFIER_VALUE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "مقدار شناسه"
+        },
+        {
+          "name": "ISSUE_DATE",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "تاریخ صدور"
+        },
+        {
+          "name": "EXPIRY_DATE",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "تاریخ انقضا"
+        },
+        {
+          "name": "IS_PRIMARY",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'N'",
+          "doc": "نشانگر شناسه اصلی"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشانگر فعال بودن شناسه هویتی پارتی در بازه اعتبار"
+        },
+        {
+          "name": "VERIFICATION_STATUS_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'PENDING'",
+          "doc": "وضعیت اعتبارسنجی شناسه\nUNVERIFIED/PENDING/FORMAT_VALID/VERIFIED/VERIFIED/REVOKED"
+        },
+        {
+          "name": "VERIFICATION_SOURCE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "منبع اعتبارسنجی"
+        },
+        {
+          "name": "VERIFICATION_METHOD_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "روش اعتبارسنجی"
+        },
+        {
+          "name": "VERIFIED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "زمان اعتبارسنجی شناسه"
+        },
+        {
+          "name": "VALID_FROM",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "تاریخ شروع اعتبار"
+        },
+        {
+          "name": "VALID_TO",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "تاریخ پایان اعتبار"
+        },
+        {
+          "name": "CREATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "SYSTIMESTAMP",
+          "doc": "زمان ایجاد رکورد"
+        },
+        {
+          "name": "CREATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه ایجادکننده"
+        },
+        {
+          "name": "UPDATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "زمان آخرین ویرایش رکورد"
+        },
+        {
+          "name": "UPDATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه آخرین ویرایش‌کننده"
+        },
+        {
+          "name": "RECORD_VERSION",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "10",
+          "scale": "0",
+          "nullable": false,
+          "default": "1",
+          "doc": "شماره نسخه رکورد برای کنترل همزمانی"
+        },
+        {
+          "name": "IDENTIFIER_MATCH_KEY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "128",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کلید تطبیق داخلی و غیرقابل نمایش که فقط توسط سرویس مرکزی با HMAC و قواعد نرمال‌سازی نوع شناسه تولید می‌شود؛ صندوق به این مقدار دسترسی ندارد"
+        },
+        {
+          "name": "MATCH_KEY_VERSION",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "4",
+          "scale": "0",
+          "nullable": false,
+          "default": "1",
+          "doc": "نسخه الگوریتم/کلید مورد استفاده برای تولید IDENTIFIER_MATCH_KEY؛ برای چرخش کلید و مهاجرت کنترل‌شده"
+        }
+      ]
+    },
+    "PARTY_NAME": {
+      "doc": "نام و نام خانوادگی/نام ثبتی پارتی در هسته مرکزی. این اطلاعات مستقل از صندوق نگهداری می‌شود.",
+      "columns": [
+        {
+          "name": "PARTY_NAME_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه یکتای نام پارتی"
+        },
+        {
+          "name": "PARTY_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه پارتی"
+        },
+        {
+          "name": "GIVEN_NAME",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "150",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "نام شخص حقیقی"
+        },
+        {
+          "name": "FAMILY_NAME",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "150",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "نام خانوادگی"
+        },
+        {
+          "name": "FULL_NAME",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "نام کامل عیناً مطابق منبع معتبر"
+        },
+        {
+          "name": "CREATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "SYSTIMESTAMP",
+          "doc": "زمان ایجاد رکورد"
+        },
+        {
+          "name": "CREATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کاربر یا سامانه ایجادکننده"
+        },
+        {
+          "name": "UPDATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "زمان آخرین ویرایش"
+        },
+        {
+          "name": "UPDATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "کاربر یا سامانه آخرین ویرایش"
+        },
+        {
+          "name": "RECORD_VERSION",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "10",
+          "scale": "0",
+          "nullable": false,
+          "default": "1",
+          "doc": "شماره نسخه رکورد"
+        },
+        {
+          "name": "IS_PRIMARY",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'N'",
+          "doc": "نشانگر اصلی بودن نام معتبر/نمایشی پارتی"
+        },
+        {
+          "name": "VALID_FROM",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "TRUNC(SYSDATE)",
+          "doc": "تاریخ شروع اعتبار نام پارتی"
+        },
+        {
+          "name": "VALID_TO",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "تاریخ پایان اعتبار نام پارتی"
+        }
+      ]
+    },
+    "PARTY_GROUP_MEMBER": {
+      "doc": "عضویت یک PARTY_MEMBERSHIP در یک گروه متعلق به همان صندوق.",
+      "columns": [
+        {
+          "name": "GROUP_MEMBER_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه یکتای عضویت"
+        },
+        {
+          "name": "GROUP_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه گروه"
+        },
+        {
+          "name": "TENANT_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه صندوق قرض‌الحسنه؛ باید با گروه و Membership یکسان باشد"
+        },
+        {
+          "name": "PARTY_MEMBERSHIP_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه عضویت پارتی در صندوق که عضو گروه است"
+        },
+        {
+          "name": "MEMBER_ROLE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "40",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "نقش عضو در گروه"
+        },
+        {
+          "name": "OWNERSHIP_PERCENT",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "9",
+          "scale": "6",
+          "nullable": true,
+          "default": null,
+          "doc": "درصد مالکیت عضو در صورت کاربرد"
+        },
+        {
+          "name": "VALID_FROM",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "تاریخ شروع عضویت"
+        },
+        {
+          "name": "VALID_TO",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "تاریخ پایان عضویت"
+        },
+        {
+          "name": "CREATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "SYSTIMESTAMP",
+          "doc": "زمان ایجاد رکورد"
+        },
+        {
+          "name": "CREATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه ایجادکننده"
+        },
+        {
+          "name": "UPDATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "زمان آخرین ویرایش رکورد"
+        },
+        {
+          "name": "UPDATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه آخرین ویرایش‌کننده"
+        },
+        {
+          "name": "RECORD_VERSION",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "10",
+          "scale": "0",
+          "nullable": false,
+          "default": "1",
+          "doc": "شماره نسخه رکورد برای کنترل همزمانی"
+        }
+      ]
+    },
+    "ADDRESS": {
+      "doc": "جزئیات نشانی ثبت‌شده در دامنه یک صندوق. یک Party می‌تواند در صندوق‌های مختلف نشانی‌های متفاوت داشته باشد.",
+      "columns": [
+        {
+          "name": "ADDRESS_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه یکتای نشانی"
+        },
+        {
+          "name": "COUNTRY_CODE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "3",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد کشور محل نشانی"
+        },
+        {
+          "name": "PROVINCE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "کد استان یا ایالت؛ برای کشورهایی که این سطح تقسیمات را دارند"
+        },
+        {
+          "name": "CITY_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "کد شهر محل نشانی"
+        },
+        {
+          "name": "DISTRICT_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "20",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "کد منطقه، بخش یا ناحیه شهری"
+        },
+        {
+          "name": "POSTAL_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "20",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "کد پستی نشانی با حفظ صفرهای ابتدایی"
+        },
+        {
+          "name": "ADDRESS_LINE1",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "سطر اصلی نشانی شامل معبر اصلی، معبر فرعی و بخش نخست نشانی"
+        },
+        {
+          "name": "ADDRESS_LINE2",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "سطر تکمیلی نشانی شامل کوچه، پلاک، ساختمان، طبقه، واحد یا توضیحات تکمیلی"
+        },
+        {
+          "name": "CREATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "SYSTIMESTAMP",
+          "doc": "زمان ایجاد رکورد"
+        },
+        {
+          "name": "CREATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه ایجادکننده"
+        },
+        {
+          "name": "UPDATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "زمان آخرین ویرایش رکورد"
+        },
+        {
+          "name": "UPDATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه آخرین ویرایش‌کننده"
+        },
+        {
+          "name": "RECORD_VERSION",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "10",
+          "scale": "0",
+          "nullable": false,
+          "default": "1",
+          "doc": "شماره نسخه رکورد برای کنترل هم‌زمانی"
+        },
+        {
+          "name": "COUNTY_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "20",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "کد شهرستان نشانی بر اساس تقسیمات جغرافیایی مرجع"
+        },
+        {
+          "name": "NEIGHBORHOOD_TEXT",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "نام محله یا ناحیه محلی نشانی"
+        },
+        {
+          "name": "MAIN_STREET_TEXT",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "خیابان اصلی"
+        },
+        {
+          "name": "SIDE_STREET_TEXT",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "خیابان فرعی یا کوچه"
+        },
+        {
+          "name": "PLAQUE_NO",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شماره پلاک ساختمان یا محل در نشانی"
+        },
+        {
+          "name": "FLOOR_NO",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "20",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شماره یا عنوان طبقه ساختمان در نشانی"
+        },
+        {
+          "name": "UNIT_NO",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "20",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شماره واحد ساختمان در نشانی"
+        },
+        {
+          "name": "ADDRESS_DETAIL",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی نشانی"
+        },
+        {
+          "name": "TENANT_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه صندوق قرض‌الحسنه (Tenant)؛ شناسه دامنه مستقل داده برای یک شعبه/صندوق"
+        }
+      ]
+    },
+    "PARTY": {
+      "doc": "هسته مرکزی و یکتای هویت پارتی در کل سامانه. هر شخص حقیقی یا حقوقی فقط یک PARTY_ID دارد و این رکورد به صندوق خاصی وابسته نیست.",
+      "columns": [
+        {
+          "name": "PARTY_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه فنی و یکتای پارتی"
+        },
+        {
+          "name": "PARTY_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "نوع پارتی: شخص حقیقی یا سازمان"
+        },
+        {
+          "name": "VERIFICATION_STATUS_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'PENDING'",
+          "doc": "وضعیت کلی اعتبارسنجی پارتی"
+        },
+        {
+          "name": "CREATION_SOURCE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "سامانه یا کانال ایجادکننده پارتی"
+        },
+        {
+          "name": "IS_CURRENT",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشانگر نسخه جاری"
+        },
+        {
+          "name": "CREATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "SYSTIMESTAMP",
+          "doc": "زمان ایجاد رکورد"
+        },
+        {
+          "name": "CREATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کاربر یا سامانه ایجادکننده"
+        },
+        {
+          "name": "UPDATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "زمان آخرین ویرایش"
+        },
+        {
+          "name": "UPDATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "کاربر یا سامانه آخرین ویرایش"
+        },
+        {
+          "name": "RECORD_VERSION",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "10",
+          "scale": "0",
+          "nullable": false,
+          "default": "1",
+          "doc": "شماره نسخه برای کنترل همزمانی"
+        }
+      ]
+    },
+    "CUSTOMER": {
+      "doc": "اطلاعات مشتری بودن یک پارتی در یک صندوق مشخص. CUSTOMER به PARTY_MEMBERSHIP وابسته است و مستقل از هویت مرکزی Party نگهداری می‌شود.",
+      "columns": [
+        {
+          "name": "CUSTOMER_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه یکتای رکورد مشتری صندوق"
+        },
+        {
+          "name": "PARTY_MEMBERSHIP_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه عضویت پارتی در صندوق؛ مشتری فقط در دامنه همین عضویت تعریف می‌شود"
+        },
+        {
+          "name": "TENANT_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه صندوق قرض‌الحسنه (Tenant)؛ شناسه دامنه مستقل داده برای یک شعبه/صندوق"
+        },
+        {
+          "name": "CUSTOMER_NO",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شماره مشتری در همان صندوق؛ یکتایی آن در سطح TENANT کنترل می‌شود"
+        },
+        {
+          "name": "CUSTOMER_STATUS_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'ACTIVE'",
+          "doc": "کد وضعیت چرخه عمر مشتری؛ مانند فعال، تعلیق‌شده یا بسته"
+        },
+        {
+          "name": "ONBOARDING_DATE",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "TRUNC(SYSDATE)",
+          "doc": "تاریخ شروع رابطه و پذیرش مشتری"
+        },
+        {
+          "name": "CLOSURE_DATE",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "تاریخ خاتمه رابطه مشتری در صورت بسته‌شدن"
+        },
+        {
+          "name": "KYC_STATUS_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'NOT_STARTED'",
+          "doc": "کد وضعیت شناخت و احراز هویت مشتری"
+        },
+        {
+          "name": "HOME_BRANCH_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "کد شعبه اصلی مرتبط با مشتری"
+        },
+        {
+          "name": "CREATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "SYSTIMESTAMP",
+          "doc": "زمان ایجاد پروفایل مشتری"
+        },
+        {
+          "name": "CREATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه ایجادکننده پروفایل مشتری"
+        },
+        {
+          "name": "UPDATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "زمان آخرین ویرایش پروفایل مشتری"
+        },
+        {
+          "name": "UPDATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه آخرین ویرایش‌کننده پروفایل مشتری"
+        },
+        {
+          "name": "RECORD_VERSION",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "10",
+          "scale": "0",
+          "nullable": false,
+          "default": "1",
+          "doc": "شماره نسخه رکورد برای کنترل هم‌زمانی و جلوگیری از بازنویسی ناخواسته"
+        }
+      ]
+    },
+    "PARTY_ADDRESS": {
+      "doc": "رابطه عضویت پارتی در صندوق با نشانی، نوع نشانی، اصلی بودن و دوره اعتبار.",
+      "columns": [
+        {
+          "name": "PARTY_ADDRESS_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه یکتای ارتباط پارتی با نشانی"
+        },
+        {
+          "name": "PARTY_MEMBERSHIP_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه عضویت پارتی در صندوق که این نشانی به آن مرتبط است"
+        },
+        {
+          "name": "TENANT_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه صندوق قرض‌الحسنه (Tenant)؛ باید با Membership و Address یکسان باشد"
+        },
+        {
+          "name": "ADDRESS_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه نشانی مرتبط"
+        },
+        {
+          "name": "ADDRESS_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "نوع کاربرد نشانی مانند محل سکونت، محل کار، ثبتی یا مکاتباتی"
+        },
+        {
+          "name": "IS_PRIMARY",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'N'",
+          "doc": "نشانگر اصلی بودن این نشانی برای پارتی و نوع نشانی مربوطه"
+        },
+        {
+          "name": "VALID_FROM",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "TRUNC(SYSDATE)",
+          "doc": "تاریخ شروع اعتبار ارتباط پارتی و نشانی"
+        },
+        {
+          "name": "VALID_TO",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "تاریخ پایان اعتبار ارتباط؛ در صورت فعال بودن تهی است"
+        },
+        {
+          "name": "CREATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "SYSTIMESTAMP",
+          "doc": "زمان ایجاد رکورد"
+        },
+        {
+          "name": "CREATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه ایجادکننده"
+        },
+        {
+          "name": "UPDATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "زمان آخرین ویرایش رکورد"
+        },
+        {
+          "name": "UPDATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه آخرین ویرایش‌کننده"
+        },
+        {
+          "name": "RECORD_VERSION",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "10",
+          "scale": "0",
+          "nullable": false,
+          "default": "1",
+          "doc": "شماره نسخه رکورد برای کنترل هم‌زمانی و جلوگیری از بازنویسی ناخواسته"
+        }
+      ]
+    },
+    "ORGANIZATION_OFFICER": {
+      "doc": "رابطه یک شخص حقوقی و صاحب سمت/نماینده در دامنه همان صندوق، بر مبنای عضویت‌های صندوقی.",
+      "columns": [
+        {
+          "name": "ORGANIZATION_OFFICER_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه یکتای رابطه سازمان و مقام یا صاحب سمت"
+        },
+        {
+          "name": "ORGANIZATION_MEMBERSHIP_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه عضویت شخص حقوقی در همان صندوق"
+        },
+        {
+          "name": "OFFICER_MEMBERSHIP_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه عضویت صاحب سمت/نماینده در همان صندوق"
+        },
+        {
+          "name": "TENANT_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه صندوق قرض‌الحسنه؛ برای هر دو Membership یکسان است"
+        },
+        {
+          "name": "OFFICER_ROLE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "40",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد نوع سمت یا نقش شخص در سازمان"
+        },
+        {
+          "name": "VALID_FROM",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "تاریخ شروع اعتبار سمت سازمانی"
+        },
+        {
+          "name": "VALID_TO",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "تاریخ پایان اعتبار سمت؛ در صورت فعال بودن تهی است"
+        },
+        {
+          "name": "CREATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "SYSTIMESTAMP",
+          "doc": "زمان ایجاد رکورد سمت سازمانی"
+        },
+        {
+          "name": "CREATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه ایجادکننده"
+        },
+        {
+          "name": "UPDATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "زمان آخرین ویرایش رکورد سمت سازمانی"
+        },
+        {
+          "name": "UPDATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه آخرین ویرایش‌کننده رکورد سمت سازمانی"
+        },
+        {
+          "name": "RECORD_VERSION",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "10",
+          "scale": "0",
+          "nullable": false,
+          "default": "1",
+          "doc": "شماره نسخه رکورد برای کنترل هم‌زمانی"
+        }
+      ]
+    },
+    "CONTACT_POINT_ADDRESS": {
+      "doc": "ارتباط راه تماس و نشانی برای همان PARTY_MEMBERSHIP و همان صندوق.",
+      "columns": [
+        {
+          "name": "CONTACT_POINT_ADDRESS_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه یکتای ارتباط راه تماس با نشانی"
+        },
+        {
+          "name": "PARTY_MEMBERSHIP_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه عضویت پارتی در صندوق؛ راه تماس و نشانی باید متعلق به همین Membership باشند"
+        },
+        {
+          "name": "TENANT_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه صندوق قرض‌الحسنه؛ باید با Membership، راه تماس و نشانی یکسان باشد"
+        },
+        {
+          "name": "CONTACT_POINT_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه راه تماس مانند تلفن ثابت، نمابر یا شماره واحد"
+        },
+        {
+          "name": "PARTY_ADDRESS_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه ارتباط پارتی و نشانی که راه تماس به آن وابسته است"
+        },
+        {
+          "name": "ASSOCIATION_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'RESIDES_AT'",
+          "doc": "کد نوع ارتباط راه تماس با نشانی مانند تلفن محل، تلفن شعبه یا نمابر محل"
+        },
+        {
+          "name": "IS_PRIMARY_FOR_ADDRESS",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'N'",
+          "doc": "نشانگر اصلی بودن راه تماس برای این نشانی"
+        },
+        {
+          "name": "CREATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "SYSTIMESTAMP",
+          "doc": "زمان ایجاد رکورد"
+        },
+        {
+          "name": "CREATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه ایجادکننده"
+        },
+        {
+          "name": "UPDATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "زمان آخرین ویرایش رکورد"
+        },
+        {
+          "name": "UPDATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه آخرین ویرایش‌کننده"
+        },
+        {
+          "name": "RECORD_VERSION",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "10",
+          "scale": "0",
+          "nullable": false,
+          "default": "1",
+          "doc": "شماره نسخه رکورد برای کنترل هم‌زمانی"
+        },
+        {
+          "name": "VALID_FROM",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "TRUNC(SYSDATE)",
+          "doc": "تاریخ شروع اعتبار ارتباط راه تماس با نشانی"
+        },
+        {
+          "name": "VALID_TO",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "تاریخ پایان اعتبار ارتباط راه تماس با نشانی"
+        }
+      ]
+    },
+    "PERSON": {
+      "doc": "مشخصات هویتی پایه شخص حقیقی در هسته مرکزی. اطلاعات این جدول بین صندوق‌ها تکرار نمی‌شود.",
+      "columns": [
+        {
+          "name": "PARTY_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه پارتی شخص حقیقی"
+        },
+        {
+          "name": "BIRTH_DATE",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "تاریخ تولد شخص حقیقی برای شناسایی و کنترل هویتی"
+        },
+        {
+          "name": "GENDER_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "20",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "کد جنسیت"
+        },
+        {
+          "name": "BIRTH_COUNTRY_CODE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "3",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "کد کشور محل تولد شخص بر اساس جدول مرجع کشورها"
+        },
+        {
+          "name": "BIRTH_PLACE_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "کد محل تولد"
+        },
+        {
+          "name": "BIRTH_PLACE_TEXT",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح متنی محل تولد در مواردی که محل تولد ساختاریافته یا کد مرجع در دسترس نیست"
+        },
+        {
+          "name": "FATHER_GIVEN_NAME",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "نام پدر شخص برای شناسایی و تطبیق هویتی"
+        },
+        {
+          "name": "MARITAL_STATUS_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "کد وضعیت تأهل"
+        },
+        {
+          "name": "RESIDENCE_STATUS_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "کد وضعیت اقامت شخص"
+        },
+        {
+          "name": "PHYSICAL_ABILITY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "15",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "وضعیت یا توضیح توانایی جسمانی شخص در صورت نیاز عملیاتی"
+        },
+        {
+          "name": "CREATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "SYSTIMESTAMP",
+          "doc": "زمان ایجاد رکورد"
+        },
+        {
+          "name": "CREATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه ایجادکننده"
+        },
+        {
+          "name": "UPDATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "زمان آخرین ویرایش رکورد"
+        },
+        {
+          "name": "UPDATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه آخرین ویرایش‌کننده"
+        },
+        {
+          "name": "RECORD_VERSION",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "10",
+          "scale": "0",
+          "nullable": false,
+          "default": "1",
+          "doc": "شماره نسخه رکورد برای کنترل هم‌زمانی و جلوگیری از بازنویسی ناخواسته"
+        },
+        {
+          "name": "DEATH_DATE",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "تاریخ فوت شخص حقیقی در صورت کاربرد"
+        }
+      ]
+    },
+    "ORGANIZATION": {
+      "doc": "مشخصات هویتی پایه شخص حقوقی در هسته مرکزی. اطلاعات این جدول بین صندوق‌ها تکرار نمی‌شود.",
+      "columns": [
+        {
+          "name": "ORGANIZATION_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه یکتای رکورد سازمان"
+        },
+        {
+          "name": "PARTY_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه پارتی سازمان"
+        },
+        {
+          "name": "REGISTERED_NAME",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "300",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "نام ثبتی سازمان"
+        },
+        {
+          "name": "REGISTRATION_NO",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "80",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شماره ثبت یا شناسه رسمی شخص حقوقی/سازمان"
+        },
+        {
+          "name": "REGISTRATION_PLACE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "کد محل ثبت قانونی سازمان بر اساس مرجع جغرافیایی یا ثبتی"
+        },
+        {
+          "name": "INCORPORATION_DATE",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "تاریخ تأسیس یا ثبت قانونی سازمان"
+        },
+        {
+          "name": "LISTED_COMPANY_FLAG",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'N'",
+          "doc": "نشانگر بورسی بودن شرکت"
+        },
+        {
+          "name": "REGISTRATION_COUNTRY_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "3",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کشور ثبت"
+        },
+        {
+          "name": "ACTIVITY_STATUS_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "وضعیت فعالیت"
+        },
+        {
+          "name": "MAIN_ACTIVITY_DESCRIPTION",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "1000",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شرح فعالیت اصلی"
+        },
+        {
+          "name": "EMPLOYEE_COUNT",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "تعداد کارکنان"
+        },
+        {
+          "name": "ENTERPRISE_SIZE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "اندازه بنگاه"
+        },
+        {
+          "name": "OWNERSHIP_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "نوع مالکیت"
+        },
+        {
+          "name": "CREATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "SYSTIMESTAMP",
+          "doc": "زمان ایجاد رکورد"
+        },
+        {
+          "name": "CREATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه ایجادکننده"
+        },
+        {
+          "name": "UPDATED_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "زمان آخرین ویرایش رکورد"
+        },
+        {
+          "name": "UPDATED_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شناسه کاربر یا سامانه آخرین ویرایش‌کننده"
+        },
+        {
+          "name": "RECORD_VERSION",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "10",
+          "scale": "0",
+          "nullable": false,
+          "default": "1",
+          "doc": "شماره نسخه رکورد برای کنترل هم‌زمانی"
+        },
+        {
+          "name": "DISSOLUTION_DATE",
+          "kind": "column",
+          "type": "DATE",
+          "length": "0",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "تاریخ انحلال قانونی سازمان در صورت کاربرد"
+        }
+      ]
+    },
+    "AUDIT_EVENT": {
+      "doc": "رویداد غیرقابل‌ویرایش برای ثبت هر تغییر در هسته Party یا اطلاعات اختصاصی صندوق. هر عملیات کسب‌وکاری یک Correlation ID مشترک می‌تواند داشته باشد.",
+      "columns": [
+        {
+          "name": "AUDIT_EVENT_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه یکتای رویداد ممیزی"
+        },
+        {
+          "name": "AUDIT_SCOPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "20",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "دامنه ممیزی؛ CORE برای هسته مرکزی و TENANT برای اطلاعات صندوقی"
+        },
+        {
+          "name": "ENTITY_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "نوع جدول/موجودیت تغییر یافته"
+        },
+        {
+          "name": "ENTITY_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه رکورد تغییر یافته در موجودیت مبدا"
+        },
+        {
+          "name": "PARTY_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شناسه Party مرتبط؛ در رخدادهای مرتبط با Party برای جستجو و گزارش‌گیری"
+        },
+        {
+          "name": "PARTY_MEMBERSHIP_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شناسه عضویت Party در صندوق؛ فقط برای رخدادهای صندوقی و در صورت وجود"
+        },
+        {
+          "name": "TENANT_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شناسه صندوق؛ برای رخدادهای TENANT اجباری و برای CORE خالی است"
+        },
+        {
+          "name": "ACTION_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "30",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "نوع عملیات انجام‌شده مانند CREATE یا UPDATE"
+        },
+        {
+          "name": "EVENT_AT",
+          "kind": "column",
+          "type": "TIMESTAMP",
+          "length": "6",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "SYSTIMESTAMP",
+          "doc": "زمان قطعی ثبت رویداد ممیزی"
+        },
+        {
+          "name": "EVENT_BY",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه کاربر یا سرویس انجام‌دهنده عملیات"
+        },
+        {
+          "name": "SOURCE_CHANNEL_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "کانال انجام عملیات مانند شعبه، API یا اینترنت‌بانک"
+        },
+        {
+          "name": "SOURCE_SYSTEM_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "کد سامانه یا زیرسامانه مبدا تغییر"
+        },
+        {
+          "name": "CORRELATION_ID",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "64",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه مشترک برای گروه کردن چند تغییر ناشی از یک عملیات کسب‌وکاری"
+        },
+        {
+          "name": "SESSION_ID",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "100",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شناسه نشست یا تراکنش کاربر برای ردیابی فنی"
+        },
+        {
+          "name": "CHANGE_REASON",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "علت یا توضیح کسب‌وکاری ویرایش در صورت نیاز"
+        },
+        {
+          "name": "RECORD_VERSION_BEFORE",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "10",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شماره نسخه رکورد قبل از تغییر"
+        },
+        {
+          "name": "RECORD_VERSION_AFTER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "10",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شماره نسخه رکورد بعد از تغییر"
+        },
+        {
+          "name": "CLIENT_IP",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "45",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "نشانی IP کلاینت در صورت ثبت توسط سامانه"
+        },
+        {
+          "name": "EVENT_HASH",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "64",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "هش SHA-256 از محتوای استانداردشده رویداد برای کنترل تمامیت"
+        },
+        {
+          "name": "ORIGIN_TENANT_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شناسه صندوق آغازکننده عملیات؛ در رویدادهای CORE نیز می‌تواند مقدار داشته باشد ولی فقط برای Audit مرکزی است. این فیلد با TENANT_ID که دامنه مشاهده رویداد را تعیین می‌کند متفاوت است."
+        }
+      ]
+    },
+    "AUDIT_FIELD_CHANGE": {
+      "doc": "جزئیات فیلدهای تغییر یافته برای هر AUDIT_EVENT. برای داده‌های حساس یا باینری مقدار خام ذخیره نمی‌شود و فقط مرجع یا هش نگهداری می‌شود.",
+      "columns": [
+        {
+          "name": "AUDIT_FIELD_CHANGE_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه یکتای جزئیات تغییر"
+        },
+        {
+          "name": "AUDIT_EVENT_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه رویداد ممیزی والد"
+        },
+        {
+          "name": "FIELD_NAME",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "128",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "نام فیلد تغییر یافته در جدول مبدا"
+        },
+        {
+          "name": "VALUE_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "20",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "نوع مقدار جهت نمایش و مقایسه"
+        },
+        {
+          "name": "OLD_VALUE",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "2000",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "مقدار قبلی؛ برای داده حساس ممکن است Mask یا خالی باشد"
+        },
+        {
+          "name": "NEW_VALUE",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "2000",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "مقدار جدید؛ برای داده حساس ممکن است Mask یا خالی باشد"
+        },
+        {
+          "name": "OLD_VALUE_HASH",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "64",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "هش SHA-256 مقدار قبلی برای داده حساس/باینری"
+        },
+        {
+          "name": "NEW_VALUE_HASH",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "64",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "هش SHA-256 مقدار جدید برای داده حساس/باینری"
+        },
+        {
+          "name": "OLD_OBJECT_REF",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شناسه/مرجع شیء قبلی مانند SIGNATURE_ID یا DOCUMENT_ID"
+        },
+        {
+          "name": "NEW_OBJECT_REF",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شناسه/مرجع شیء جدید مانند SIGNATURE_ID یا DOCUMENT_ID"
+        },
+        {
+          "name": "IS_SENSITIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'N'",
+          "doc": "مشخص می‌کند مقدار فیلد حساس است"
+        },
+        {
+          "name": "IS_REDACTED",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'N'",
+          "doc": "مشخص می‌کند مقدار خام در Audit ذخیره نشده یا Mask شده است"
+        }
+      ]
+    },
+    "REF_PARTY_TYPE": {
+      "doc": "انواع هویت Party در هسته مرکزی.",
+      "columns": [
+        {
+          "name": "PARTY_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای نوع پارتی"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی نوع پارتی"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی نوع پارتی"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_GENDER": {
+      "doc": "کدهای جنسیت برای شخص حقیقی.",
+      "columns": [
+        {
+          "name": "GENDER_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای جنسیت"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی جنسیت"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی جنسیت"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_IDENTIFIER_TYPE": {
+      "doc": "انواع شناسه‌های هویتی اشخاص حقیقی و حقوقی.",
+      "columns": [
+        {
+          "name": "IDENTIFIER_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای نوع شناسه هویتی"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی نوع شناسه هویتی"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی نوع شناسه هویتی"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_VERIFICATION_STATUS": {
+      "doc": "وضعیت اعتبارسنجی یا تأیید داده.",
+      "columns": [
+        {
+          "name": "VERIFICATION_STATUS_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای وضعیت راستی‌آزمایی"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی وضعیت راستی‌آزمایی"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی وضعیت راستی‌آزمایی"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_VERIFICATION_METHOD": {
+      "doc": "روش بررسی و تأیید اطلاعات.",
+      "columns": [
+        {
+          "name": "VERIFICATION_METHOD_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای روش راستی‌آزمایی"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی روش راستی‌آزمایی"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی روش راستی‌آزمایی"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_DATA_SOURCE": {
+      "doc": "منبع ایجاد یا راستی‌آزمایی اطلاعات.",
+      "columns": [
+        {
+          "name": "DATA_SOURCE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای منبع داده"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی منبع داده"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی منبع داده"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_MARITAL_STATUS": {
+      "doc": "وضعیت تأهل شخص حقیقی.",
+      "columns": [
+        {
+          "name": "MARITAL_STATUS_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای وضعیت تأهل"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی وضعیت تأهل"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی وضعیت تأهل"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_RESIDENCE_STATUS": {
+      "doc": "وضعیت اقامت شخص.",
+      "columns": [
+        {
+          "name": "RESIDENCE_STATUS_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای وضعیت اقامت"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی وضعیت اقامت"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی وضعیت اقامت"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_COUNTRY": {
+      "doc": "کشورها برای محل تولد، نشانی و ثبت اشخاص حقوقی.",
+      "columns": [
+        {
+          "name": "COUNTRY_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای کشور"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی کشور"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی کشور"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_PROVINCE": {
+      "doc": "استان‌های کشور برای نشانی.",
+      "columns": [
+        {
+          "name": "PROVINCE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای استان"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی استان"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی استان"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        },
+        {
+          "name": "COUNTRY_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "3",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد کشور والد"
+        }
+      ]
+    },
+    "REF_COUNTY": {
+      "doc": "شهرستان‌های مورد استفاده در نشانی.",
+      "columns": [
+        {
+          "name": "COUNTY_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای شهرستان"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی شهرستان"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی شهرستان"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        },
+        {
+          "name": "PROVINCE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "20",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد استان والد"
+        }
+      ]
+    },
+    "REF_CITY": {
+      "doc": "شهرهای مورد استفاده در نشانی و محل ثبت.",
+      "columns": [
+        {
+          "name": "CITY_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای شهر"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی شهر"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی شهر"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        },
+        {
+          "name": "PROVINCE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "20",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد استان والد"
+        },
+        {
+          "name": "COUNTY_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "20",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "کد شهرستان والد"
+        }
+      ]
+    },
+    "REF_DISTRICT": {
+      "doc": "منطقه یا ناحیه شهری نشانی.",
+      "columns": [
+        {
+          "name": "DISTRICT_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای منطقه"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی منطقه"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی منطقه"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        },
+        {
+          "name": "CITY_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "20",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد شهر والد"
+        }
+      ]
+    },
+    "GEOGRAPHIC_LOCATION": {
+      "doc": "موقعیت جغرافیایی مرجع برای محل تولد یا سایر نقاط مکانی.",
+      "columns": [
+        {
+          "name": "LOCATION_ID",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "19",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "شناسه یکتای موقعیت جغرافیایی"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی موقعیت جغرافیایی"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی موقعیت جغرافیایی"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_ADDRESS_TYPE": {
+      "doc": "نوع رابطه Party با نشانی در هر صندوق.",
+      "columns": [
+        {
+          "name": "ADDRESS_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای نوع نشانی"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی نوع نشانی"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی نوع نشانی"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_CONTACT_TYPE": {
+      "doc": "انواع راه تماس صندوقی Party.",
+      "columns": [
+        {
+          "name": "CONTACT_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای نوع راه تماس"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی نوع راه تماس"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی نوع راه تماس"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_CONTACT_PURPOSE": {
+      "doc": "کاربرد یا هدف راه تماس.",
+      "columns": [
+        {
+          "name": "CONTACT_PURPOSE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای کاربرد راه تماس"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی کاربرد راه تماس"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی کاربرد راه تماس"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_ROLE_TYPE": {
+      "doc": "نقش‌هایی که Party در یک صندوق می‌تواند داشته باشد.",
+      "columns": [
+        {
+          "name": "ROLE_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای نوع نقش پارتی"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی نوع نقش پارتی"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی نوع نقش پارتی"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_CONTEXT_TYPE": {
+      "doc": "زمینه‌ای که نقش Party در آن اعمال می‌شود.",
+      "columns": [
+        {
+          "name": "CONTEXT_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای زمینه نقش"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی زمینه نقش"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی زمینه نقش"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_RELATIONSHIP_TYPE": {
+      "doc": "نوع رابطه بین Party دارای نقش و Party اصلی در همان صندوق.",
+      "columns": [
+        {
+          "name": "RELATIONSHIP_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای نوع رابطه پارتی"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی نوع رابطه پارتی"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی نوع رابطه پارتی"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_AUTHORITY_BASIS": {
+      "doc": "مبنای قانونی یا قراردادی اختیار نقش.",
+      "columns": [
+        {
+          "name": "AUTHORITY_BASIS_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای مبنای اختیار"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی مبنای اختیار"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی مبنای اختیار"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_WORKFLOW_STATUS": {
+      "doc": "وضعیت عمومی رکوردهای زمان‌مند.",
+      "columns": [
+        {
+          "name": "STATUS_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای وضعیت گردش کار"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی وضعیت گردش کار"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی وضعیت گردش کار"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_GROUP_TYPE": {
+      "doc": "نوع گروه Party در یک صندوق.",
+      "columns": [
+        {
+          "name": "GROUP_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای نوع گروه پارتی"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی نوع گروه پارتی"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی نوع گروه پارتی"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_GROUP_MEMBER_ROLE": {
+      "doc": "نقش Party در یک گروه.",
+      "columns": [
+        {
+          "name": "MEMBER_ROLE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای نقش عضو گروه"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی نقش عضو گروه"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی نقش عضو گروه"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_OFFICER_ROLE": {
+      "doc": "سمت فرد در شخص حقوقی در همان صندوق.",
+      "columns": [
+        {
+          "name": "OFFICER_ROLE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای سمت شخص حقوقی"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی سمت شخص حقوقی"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی سمت شخص حقوقی"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_CHANNEL": {
+      "doc": "کانال ثبت یا دریافت اطلاعات.",
+      "columns": [
+        {
+          "name": "CHANNEL_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای کانال"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی کانال"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی کانال"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_SPECIMEN_TYPE": {
+      "doc": "نوع نمونه امضای ثبت‌شده.",
+      "columns": [
+        {
+          "name": "SPECIMEN_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای نوع نمونه امضا"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی نوع نمونه امضا"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی نوع نمونه امضا"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_SIGNING_RULE": {
+      "doc": "قاعده معتبر بودن امضا.",
+      "columns": [
+        {
+          "name": "SIGNING_RULE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای قاعده امضا"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی قاعده امضا"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی قاعده امضا"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_CUSTOMER_STATUS": {
+      "doc": "وضعیت رابطه مشتری با صندوق.",
+      "columns": [
+        {
+          "name": "CUSTOMER_STATUS_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای وضعیت مشتری صندوق"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی وضعیت مشتری صندوق"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی وضعیت مشتری صندوق"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_KYC_STATUS": {
+      "doc": "وضعیت شناسایی و شناخت مشتری در صندوق.",
+      "columns": [
+        {
+          "name": "KYC_STATUS_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای وضعیت KYC"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی وضعیت KYC"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی وضعیت KYC"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_CONTACT_ADDRESS_ASSOC_TYPE": {
+      "doc": "نحوه ارتباط یک راه تماس با یک نشانی.",
+      "columns": [
+        {
+          "name": "ASSOCIATION_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای نوع ارتباط تماس و نشانی"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی نوع ارتباط تماس و نشانی"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی نوع ارتباط تماس و نشانی"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_ORG_ACTIVITY_STATUS": {
+      "doc": "وضعیت فعالیت سازمان یا شرکت.",
+      "columns": [
+        {
+          "name": "ACTIVITY_STATUS_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای وضعیت فعالیت شخص حقوقی"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی وضعیت فعالیت شخص حقوقی"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی وضعیت فعالیت شخص حقوقی"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_ENTERPRISE_SIZE": {
+      "doc": "طبقه‌بندی اندازه شخص حقوقی.",
+      "columns": [
+        {
+          "name": "ENTERPRISE_SIZE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای اندازه بنگاه"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی اندازه بنگاه"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی اندازه بنگاه"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_OWNERSHIP_TYPE": {
+      "doc": "نوع مالکیت شخص حقوقی.",
+      "columns": [
+        {
+          "name": "OWNERSHIP_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای نوع مالکیت"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی نوع مالکیت"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی نوع مالکیت"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_AUDIT_SCOPE": {
+      "doc": "تعیین می‌کند تغییر مربوط به هسته مرکزی است یا اطلاعات صندوق.",
+      "columns": [
+        {
+          "name": "AUDIT_SCOPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای دامنه ممیزی"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی دامنه ممیزی"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی دامنه ممیزی"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_AUDIT_ACTION": {
+      "doc": "نوع عملیاتی که رویداد Audit برای آن ثبت می‌شود.",
+      "columns": [
+        {
+          "name": "ACTION_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای نوع عملیات ممیزی"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی نوع عملیات ممیزی"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی نوع عملیات ممیزی"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_AUDIT_VALUE_TYPE": {
+      "doc": "نوع نمایش و مقایسه مقدار تغییر یافته.",
+      "columns": [
+        {
+          "name": "VALUE_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای نوع مقدار ممیزی"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی نوع مقدار ممیزی"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی نوع مقدار ممیزی"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    },
+    "REF_AUDIT_ENTITY_TYPE": {
+      "doc": "فهرست موجودیت‌های Party/Customer که تغییر آنها ممیزی می‌شود.",
+      "columns": [
+        {
+          "name": "ENTITY_TYPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "50",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "کد یکتای نوع موجودیت ممیزی"
+        },
+        {
+          "name": "TITLE_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "200",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "عنوان فارسی نوع موجودیت ممیزی"
+        },
+        {
+          "name": "DEFAULT_SCOPE_CODE",
+          "kind": "column",
+          "type": "VARCHAR2",
+          "length": "20",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": null,
+          "doc": "دامنه پیش‌فرض ممیزی برای این موجودیت"
+        },
+        {
+          "name": "DESCRIPTION_FA",
+          "kind": "column",
+          "type": "NVARCHAR2",
+          "length": "500",
+          "precision": "0",
+          "scale": "0",
+          "nullable": true,
+          "default": null,
+          "doc": "شرح تکمیلی نوع موجودیت ممیزی"
+        },
+        {
+          "name": "DISPLAY_ORDER",
+          "kind": "column",
+          "type": "NUMBER",
+          "length": "0",
+          "precision": "5",
+          "scale": "0",
+          "nullable": false,
+          "default": "0",
+          "doc": "ترتیب نمایش در رابط کاربری"
+        },
+        {
+          "name": "IS_ACTIVE",
+          "kind": "column",
+          "type": "CHAR",
+          "length": "1",
+          "precision": "0",
+          "scale": "0",
+          "nullable": false,
+          "default": "'Y'",
+          "doc": "نشان می‌دهد مقدار مرجع فعال و قابل انتخاب است"
+        }
+      ]
+    }
+  },
+  "fk_edges": [
+    {
+      "name": "(SIGNATORY_MEMBERSHIP_ID = PARTY_MEMBERSHIP_ID \nTENANT_ID = TENANT_ID)",
+      "from": "SIGNATURE_SPECIMEN",
+      "to": "PARTY_MEMBERSHIP"
+    },
+    {
+      "name": "(PARTY_MEMBERSHIP_ID = PARTY_MEMBERSHIP_ID \nTENANT_ID = TENANT_ID)",
+      "from": "SIGNATURE_SPECIMEN",
+      "to": "PARTY_MEMBERSHIP"
+    },
+    {
+      "name": "(GROUP_ID = GROUP_ID \nTENANT_ID = TENANT_ID)",
+      "from": "PARTY_GROUP_MEMBER",
+      "to": "PARTY_GROUP"
+    },
+    {
+      "name": "(PARTY_MEMBERSHIP_ID = PARTY_MEMBERSHIP_ID \nTENANT_ID = TENANT_ID)",
+      "from": "CONTACT_POINT",
+      "to": "PARTY_MEMBERSHIP"
+    },
+    {
+      "name": "(OFFICER_MEMBERSHIP_ID = PARTY_MEMBERSHIP_ID \nTENANT_ID = TENANT_ID)",
+      "from": "ORGANIZATION_OFFICER",
+      "to": "PARTY_MEMBERSHIP"
+    },
+    {
+      "name": "(PARTY_MEMBERSHIP_ID = PARTY_MEMBERSHIP_ID \nTENANT_ID = TENANT_ID)",
+      "from": "CUSTOMER",
+      "to": "PARTY_MEMBERSHIP"
+    },
+    {
+      "name": "(PARTY_ID = PARTY_ID)",
+      "from": "PARTY_MEMBERSHIP",
+      "to": "PARTY"
+    },
+    {
+      "name": "(CUSTOMER_NO = CUSTOMER_NO)",
+      "from": "PARTY_MEMBERSHIP",
+      "to": "CUSTOMER"
+    },
+    {
+      "name": "(PARTY_MEMBERSHIP_ID = PARTY_MEMBERSHIP_ID \nTENANT_ID = TENANT_ID)",
+      "from": "PARTY_ROLE",
+      "to": "PARTY_MEMBERSHIP"
+    },
+    {
+      "name": "(PARTY_MEMBERSHIP_ID = PARTY_MEMBERSHIP_ID \nTENANT_ID = TENANT_ID)",
+      "from": "PARTY_ADDRESS",
+      "to": "PARTY_MEMBERSHIP"
+    },
+    {
+      "name": "(PARTY_MEMBERSHIP_ID = PARTY_MEMBERSHIP_ID \nTENANT_ID = TENANT_ID)",
+      "from": "CONTACT_POINT_ADDRESS",
+      "to": "PARTY_MEMBERSHIP"
+    },
+    {
+      "name": "(PARTY_MEMBERSHIP_ID = PARTY_MEMBERSHIP_ID \nTENANT_ID = TENANT_ID)",
+      "from": "PARTY_GROUP_MEMBER",
+      "to": "PARTY_MEMBERSHIP"
+    },
+    {
+      "name": "(ORGANIZATION_MEMBERSHIP_ID = PARTY_MEMBERSHIP_ID \nTENANT_ID = TENANT_ID)",
+      "from": "ORGANIZATION_OFFICER",
+      "to": "PARTY_MEMBERSHIP"
+    },
+    {
+      "name": "(PRINCIPAL_MEMBERSHIP_ID = PARTY_MEMBERSHIP_ID \nTENANT_ID = TENANT_ID)",
+      "from": "PARTY_ROLE",
+      "to": "PARTY_MEMBERSHIP"
+    },
+    {
+      "name": "(CONTACT_POINT_ID = CONTACT_POINT_ID \nPARTY_MEMBERSHIP_ID = PARTY_MEMBERSHIP_ID \nTENANT_ID = TENANT_ID)",
+      "from": "CONTACT_POINT_ADDRESS",
+      "to": "CONTACT_POINT"
+    },
+    {
+      "name": "(PARTY_ID = PARTY_ID)",
+      "from": "PARTY_IDENTIFIER",
+      "to": "PARTY"
+    },
+    {
+      "name": "(PARTY_ID = PARTY_ID)",
+      "from": "PARTY_NAME",
+      "to": "PARTY"
+    },
+    {
+      "name": "(ADDRESS_ID = ADDRESS_ID \nTENANT_ID = TENANT_ID)",
+      "from": "PARTY_ADDRESS",
+      "to": "ADDRESS"
+    },
+    {
+      "name": "(PARTY_ID = PARTY_ID)",
+      "from": "ORGANIZATION",
+      "to": "PARTY"
+    },
+    {
+      "name": "(PARTY_ID = PARTY_ID)",
+      "from": "PERSON",
+      "to": "PARTY"
+    },
+    {
+      "name": "(PARTY_ADDRESS_ID = PARTY_ADDRESS_ID \nPARTY_MEMBERSHIP_ID = PARTY_MEMBERSHIP_ID \nTENANT_ID = TENANT_ID)",
+      "from": "CONTACT_POINT_ADDRESS",
+      "to": "PARTY_ADDRESS"
+    },
+    {
+      "name": "(AUDIT_SCOPE_CODE = AUDIT_SCOPE_CODE)",
+      "from": "AUDIT_EVENT",
+      "to": "REF_AUDIT_SCOPE"
+    },
+    {
+      "name": "(ENTITY_TYPE_CODE = ENTITY_TYPE_CODE)",
+      "from": "AUDIT_EVENT",
+      "to": "REF_AUDIT_ENTITY_TYPE"
+    },
+    {
+      "name": "(ACTION_CODE = ACTION_CODE)",
+      "from": "AUDIT_EVENT",
+      "to": "REF_AUDIT_ACTION"
+    },
+    {
+      "name": "(SOURCE_CHANNEL_CODE = CHANNEL_CODE)",
+      "from": "AUDIT_EVENT",
+      "to": "REF_CHANNEL"
+    },
+    {
+      "name": "(PARTY_ID = PARTY_ID)",
+      "from": "AUDIT_EVENT",
+      "to": "PARTY"
+    },
+    {
+      "name": "(PARTY_MEMBERSHIP_ID = PARTY_MEMBERSHIP_ID\nTENANT_ID = TENANT_ID)",
+      "from": "AUDIT_EVENT",
+      "to": "PARTY_MEMBERSHIP"
+    },
+    {
+      "name": "(AUDIT_EVENT_ID = AUDIT_EVENT_ID)",
+      "from": "AUDIT_FIELD_CHANGE",
+      "to": "AUDIT_EVENT"
+    },
+    {
+      "name": "(VALUE_TYPE_CODE = VALUE_TYPE_CODE)",
+      "from": "AUDIT_FIELD_CHANGE",
+      "to": "REF_AUDIT_VALUE_TYPE"
+    },
+    {
+      "name": "(DEFAULT_SCOPE_CODE = AUDIT_SCOPE_CODE)",
+      "from": "REF_AUDIT_ENTITY_TYPE",
+      "to": "REF_AUDIT_SCOPE"
+    },
+    {
+      "name": "(COUNTRY_CODE = COUNTRY_CODE)",
+      "from": "REF_PROVINCE",
+      "to": "REF_COUNTRY"
+    },
+    {
+      "name": "(PROVINCE_CODE = PROVINCE_CODE)",
+      "from": "REF_COUNTY",
+      "to": "REF_PROVINCE"
+    },
+    {
+      "name": "(PROVINCE_CODE = PROVINCE_CODE)",
+      "from": "REF_CITY",
+      "to": "REF_PROVINCE"
+    },
+    {
+      "name": "(COUNTY_CODE = COUNTY_CODE)",
+      "from": "REF_CITY",
+      "to": "REF_COUNTY"
+    },
+    {
+      "name": "(CITY_CODE = CITY_CODE)",
+      "from": "REF_DISTRICT",
+      "to": "REF_CITY"
+    },
+    {
+      "name": "(RELATIONSHIP_TYPE_CODE = RELATIONSHIP_TYPE_CODE)",
+      "from": "PARTY_ROLE",
+      "to": "REF_RELATIONSHIP_TYPE"
+    },
+    {
+      "name": "(AUTHORITY_BASIS_CODE = AUTHORITY_BASIS_CODE)",
+      "from": "PARTY_ROLE",
+      "to": "REF_AUTHORITY_BASIS"
+    },
+    {
+      "name": "(COUNTY_CODE = COUNTY_CODE)",
+      "from": "ADDRESS",
+      "to": "REF_COUNTY"
+    },
+    {
+      "name": "(CUSTOMER_STATUS_CODE = CUSTOMER_STATUS_CODE)",
+      "from": "CUSTOMER",
+      "to": "REF_CUSTOMER_STATUS"
+    },
+    {
+      "name": "(KYC_STATUS_CODE = KYC_STATUS_CODE)",
+      "from": "CUSTOMER",
+      "to": "REF_KYC_STATUS"
+    },
+    {
+      "name": "(ASSOCIATION_TYPE_CODE = ASSOCIATION_TYPE_CODE)",
+      "from": "CONTACT_POINT_ADDRESS",
+      "to": "REF_CONTACT_ADDRESS_ASSOC_TYPE"
+    },
+    {
+      "name": "(REGISTRATION_COUNTRY_CODE = COUNTRY_CODE)",
+      "from": "ORGANIZATION",
+      "to": "REF_COUNTRY"
+    },
+    {
+      "name": "(ACTIVITY_STATUS_CODE = ACTIVITY_STATUS_CODE)",
+      "from": "ORGANIZATION",
+      "to": "REF_ORG_ACTIVITY_STATUS"
+    },
+    {
+      "name": "(ENTERPRISE_SIZE_CODE = ENTERPRISE_SIZE_CODE)",
+      "from": "ORGANIZATION",
+      "to": "REF_ENTERPRISE_SIZE"
+    },
+    {
+      "name": "(OWNERSHIP_TYPE_CODE = OWNERSHIP_TYPE_CODE)",
+      "from": "ORGANIZATION",
+      "to": "REF_OWNERSHIP_TYPE"
+    },
+    {
+      "name": "(BIRTH_PLACE_ID = LOCATION_ID)",
+      "from": "PERSON",
+      "to": "GEOGRAPHIC_LOCATION"
+    },
+    {
+      "name": "(PARTY_ID = PARTY_ID)",
+      "from": "PARTY_IDENTITY_REVIEW",
+      "to": "PARTY"
+    },
+    {
+      "name": "(PARTY_MEMBERSHIP_ID = PARTY_MEMBERSHIP_ID\nSOURCE_TENANT_ID = TENANT_ID)",
+      "from": "PARTY_IDENTITY_REVIEW",
+      "to": "PARTY_MEMBERSHIP"
+    },
+    {
+      "name": "(REVIEW_STATUS_CODE = REVIEW_STATUS_CODE)",
+      "from": "PARTY_IDENTITY_REVIEW",
+      "to": "REF_IDENTITY_REVIEW_STATUS"
+    },
+    {
+      "name": "(REVIEW_REASON_CODE = REVIEW_REASON_CODE)",
+      "from": "PARTY_IDENTITY_REVIEW",
+      "to": "REF_IDENTITY_REVIEW_REASON"
+    }
+  ]
+}

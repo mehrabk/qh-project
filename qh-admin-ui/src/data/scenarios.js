@@ -100,43 +100,10 @@ export const scenarios = [
       },
     ],
   },
-  {
-    id: 'party-onboarding',
-    title: 'سناریوی ثبت شخص حقیقی جدید (Party Onboarding)',
-    description:
-      'ابتدا ردیف هویتی PARTY را می‌سازد، سپس یک PersonEntity متناظر با آن ایجاد می‌کند (اکنون یک موجودیت خواهر با PARTY_ID مشترک است، نه زیرکلاس ارث‌بری JOINED)، یک آدرس موجود را به او متصل می‌کند و یک شماره تماس برایش ثبت می‌کند.',
-    boundedContext: 'party',
-    steps: [
-      {
-        label: 'ایجاد ردیف هویتی شخص (PartyEntity)',
-        saveAs: 'party',
-        entity: 'PartyEntity',
-        build: () => autoPayload('PartyEntity', { partyType: 'PERSON' }),
-      },
-      {
-        label: 'ایجاد شخص حقیقی (PersonEntity)',
-        saveAs: 'person',
-        entity: 'PersonEntity',
-        build: (ctx) => autoPayload('PersonEntity', { party: { id: ctx.party.id } }),
-      },
-      {
-        label: 'اتصال آدرس موجود به شخص (PartyAddressEntity)',
-        saveAs: 'partyAddress',
-        entity: 'PartyAddressEntity',
-        build: async (ctx, { first }) => {
-          const address = await first('AddressEntity');
-          return autoPayload('PartyAddressEntity', {
-            party: { id: ctx.party.id },
-            address: { id: address.id },
-          });
-        },
-      },
-      {
-        label: 'ثبت شماره تماس برای شخص (ContactPointEntity)',
-        saveAs: 'contactPoint',
-        entity: 'ContactPointEntity',
-        build: (ctx) => autoPayload('ContactPointEntity', { party: { id: ctx.party.id } }),
-      },
-    ],
-  },
 ];
+
+// Party's own "run a flow" UI is the guided Wizard (see wizards.js /
+// components/Wizard.jsx) instead of this auto-payload scenario runner - the
+// Party model is now FK-heavy (every classification code is a real REF_*
+// reference, not a raw enum string), so a real, user-editable multi-step form
+// is far more useful there than mechanically-generated placeholder data.

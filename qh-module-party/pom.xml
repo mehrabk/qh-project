@@ -10,29 +10,26 @@
     </parent>
 
     <artifactId>qh-module-party</artifactId>
-    <packaging>jar</packaging>
-    <name>QH :: Module :: Party</name>
+    <packaging>pom</packaging>
+    <name>QH :: Module :: Party (parent)</name>
     <description>
-        BIAN-style Party subsystem: PARTY (abstract root, JOINED inheritance) with
-        PERSON and ORGANIZATION subtypes, plus addresses, contact points,
-        identifiers, names, roles, group/UBO memberships, signature specimens and
-        compliance inquiries. Intentionally independent of the product-builder
-        modules (core/commonrules/deposit/loan) - it only depends on qh-common,
-        matching the project's SOA-style module independence. Every table lives in
-        its own PARTY database schema and every tenant-scoped entity is isolated
-        per institution via Hibernate's @TenantId discriminator-based multi-tenancy
+        Parent/aggregator for the Party domain (56 tables, one bounded context, one PARTY
+        schema/database). BIAN-style Party subsystem: PARTY (concrete identity root) with
+        PERSON and ORGANIZATION detail tables, geographic/classification reference catalogs,
+        addresses, contact points, identifiers, names, roles, group/UBO memberships, signature
+        specimens, customer/officer relationships and a central audit trail. Intentionally
+        independent of the product-builder modules - it only depends on qh-common, matching
+        the project's SOA-style module independence. Split into two Maven sub-modules for
+        easier management (mirroring qh-module-productbuilder's reference/core split), while
+        both share one Java package root (ir.bank.qh.party.*) and deploy together as one
+        persistence unit (PartyPersistenceConfig in qh-app scans "ir.bank.qh.party" as a whole).
+        Every table lives in its own PARTY database schema and every tenant-scoped entity is
+        isolated per institution via Hibernate's @TenantId discriminator-based multi-tenancy
         (see ir.bank.qh.common.tenant in qh-common).
     </description>
 
-    <dependencies>
-        <dependency>
-            <groupId>ir.bank.qh</groupId>
-            <artifactId>qh-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-    </dependencies>
+    <modules>
+        <module>reference</module>
+        <module>core</module>
+    </modules>
 </project>

@@ -73,7 +73,12 @@
             </dependency>
             <dependency>
                 <groupId>ir.bank.qh</groupId>
-                <artifactId>qh-module-party</artifactId>
+                <artifactId>qh-module-party-reference</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ir.bank.qh</groupId>
+                <artifactId>qh-module-party-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

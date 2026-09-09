@@ -314,3 +314,27 @@ thead th { background: rgba(127,127,127,0.06); position: sticky; top: 0; font-we
 .toast-info { background: #374151; }
 .toast-success { background: var(--success); }
 .toast-error { background: var(--danger); }
+
+/* ---------- Wizard ---------- */
+.wizard-card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; }
+.wizard-card h3 { margin-top: 0; margin-bottom: 6px; }
+.wizard-card-active { grid-column: 1 / -1; }
+.wizard-header { display: flex; justify-content: space-between; align-items: flex-start; }
+.wizard-progress { padding-inline-start: 20px; margin: 14px 0; font-size: 13.5px; }
+.wizard-progress li { margin-bottom: 6px; color: var(--text-muted); }
+.wizard-progress li.wizard-step-current { color: var(--text); font-weight: 600; }
+.wizard-progress li.wizard-step-done { color: var(--success); }
+.wizard-step-body { border-top: 1px solid var(--border); padding-top: 14px; }
+.wizard-step-body h4 { margin: 0 0 4px; }
+.wizard-step-help { margin-top: 0; margin-bottom: 10px; }
+.wizard-locked-fields { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.wizard-locked-chip {
+  font-size: 12px; background: var(--success-bg); color: var(--success);
+  padding: 4px 10px; border-radius: 20px;
+}
+.wizard-actions { display: flex; justify-content: flex-end; gap: 8px; padding: 14px 0 0; }
+.wizard-review { border-top: 1px solid var(--border); padding-top: 14px; }
+.wizard-review-list { padding-inline-start: 20px; font-size: 13.5px; }
+.wizard-review-list li { margin-bottom: 6px; }
+.wizard-review-skipped { color: var(--text-muted); }
+.wizard-review .btn { margin-inline-end: 8px; }

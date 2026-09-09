@@ -165,6 +165,12 @@ export default function Wizard({ wizard }) {
     goToStep(stepIndex + 1, ctx);
   }
 
+  function handleStepSubmit(e) {
+    e.preventDefault();
+    const repeat = e.nativeEvent.submitter?.value === 'repeat';
+    submitStep(!repeat);
+  }
+
   if (!active) {
     return (
       <div className="wizard-card">
@@ -207,23 +213,25 @@ export default function Wizard({ wizard }) {
           {step.repeatable && memberCount > 0 && (
             <p className="wizard-step-help">تاکنون {memberCount} مورد اضافه شده - می‌توانید مورد دیگری اضافه کنید یا ادامه دهید.</p>
           )}
-          <StepForm step={step} entity={entity} fixed={fixed} values={values} onChange={(f, v) => setValues((old) => ({ ...old, [f]: v }))} onFillExample={fillExample} />
-          {error && <p className="field-error">{error}</p>}
-          <div className="wizard-actions">
-            {step.optional && (
-              <button type="button" className="btn btn-ghost" onClick={skipStep} disabled={saving}>
-                رد کردن این مرحله
+          <form onSubmit={handleStepSubmit}>
+            <StepForm step={step} entity={entity} fixed={fixed} values={values} onChange={(f, v) => setValues((old) => ({ ...old, [f]: v }))} onFillExample={fillExample} />
+            {error && <p className="field-error">{error}</p>}
+            <div className="wizard-actions">
+              {step.optional && (
+                <button type="button" className="btn btn-ghost" onClick={skipStep} disabled={saving}>
+                  رد کردن این مرحله
+                </button>
+              )}
+              {step.repeatable && (
+                <button type="submit" name="action" value="repeat" className="btn btn-ghost" disabled={saving}>
+                  {saving ? 'در حال ذخیره...' : '+ افزودن مورد دیگر'}
+                </button>
+              )}
+              <button type="submit" name="action" value="advance" className="btn btn-primary" disabled={saving}>
+                {saving ? 'در حال ذخیره...' : step.repeatable ? 'پایان و ادامه' : 'ثبت و مرحله بعد ▶'}
               </button>
-            )}
-            {step.repeatable && (
-              <button type="button" className="btn btn-ghost" onClick={() => submitStep(false)} disabled={saving}>
-                {saving ? 'در حال ذخیره...' : '+ افزودن مورد دیگر'}
-              </button>
-            )}
-            <button type="button" className="btn btn-primary" onClick={() => submitStep(true)} disabled={saving}>
-              {saving ? 'در حال ذخیره...' : step.repeatable ? 'پایان و ادامه' : 'ثبت و مرحله بعد ▶'}
-            </button>
-          </div>
+            </div>
+          </form>
         </div>
       )}
 

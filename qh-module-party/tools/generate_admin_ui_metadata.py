@@ -57,6 +57,30 @@ def strip_line_comments(src):
     return re.sub(r'//.*', '', src)
 
 
+# Normalizes a Java field initializer into the same lowercase/bare-literal
+# shape the admin UI's initialValues() logic already expects (matches the
+# hand-written productbuilder entries: 'true'/'false' for booleans, a plain
+# integer string for numbers, a quoted string for String literals) - a
+# qualified constant like `Boolean.TRUE` or `SomeEnum.ACTIVE` is reduced to
+# its bare name first.
+def normalize_default(initializer):
+    if initializer is None:
+        return None
+    value = initializer.strip()
+    dot = value.rfind('.')
+    if dot >= 0 and re.match(r'^[A-Za-z_][A-Za-z0-9_]*$', value[dot + 1:]):
+        value = value[dot + 1:]
+    if value in ('TRUE', 'true'):
+        return 'true'
+    if value in ('FALSE', 'false'):
+        return 'false'
+    if re.match(r'^-?\d+(\.\d+)?$', value):
+        return value
+    if re.match(r'^".*"$', value):
+        return value
+    return None
+
+
 def parse_entity(path):
     with open(path, encoding='utf-8') as f:
         src = f.read()
@@ -83,10 +107,10 @@ def parse_entity(path):
     # start of this one - i.e. this field's own annotations.
     body_m = re.search(r'\{(.*)\}\s*$', src, re.S)
     body = body_m.group(1)
-    field_matches = list(re.finditer(r'private\s+([\w<>\[\]]+)\s+(\w+)\s*(?:=\s*[^;]+)?;', body))
+    field_matches = list(re.finditer(r'private\s+([\w<>\[\]]+)\s+(\w+)\s*(?:=\s*([^;]+))?;', body))
     chunk_start = 0
     for fld_m in field_matches:
-        java_type_raw, field_name = fld_m.group(1), fld_m.group(2)
+        java_type_raw, field_name, initializer = fld_m.group(1), fld_m.group(2), fld_m.group(3)
         ann_text = body[chunk_start:fld_m.start()]
         chunk_start = fld_m.end()
         # A field-looking match inside a method body (there are none in these
@@ -125,6 +149,7 @@ def parse_entity(path):
             'isId': is_id,
             'isFk': is_fk,
             'isBool': is_bool,
+            'default': None if is_fk else normalize_default(initializer),
         })
 
     return {
@@ -212,7 +237,7 @@ def main():
                 'widget': widget,
                 'fkTarget': rf['javaType'] if is_fk else None,
                 'enumValues': None,
-                'default': None,
+                'default': rf.get('default'),
             })
 
         field_names = {f['field'] for f in fields_out}

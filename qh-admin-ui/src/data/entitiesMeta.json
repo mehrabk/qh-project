@@ -10436,7 +10436,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "false"
       },
       {
         "field": "redacted",
@@ -10449,7 +10449,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "false"
       }
     ],
     "labelField": "fieldName",
@@ -10621,7 +10621,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "false"
       },
       {
         "field": "validFrom",
@@ -10845,7 +10845,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "false"
       },
       {
         "field": "verified",
@@ -10858,7 +10858,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "false"
       },
       {
         "field": "verifiedAt",
@@ -11280,7 +11280,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "false"
       },
       {
         "field": "activityStatus",
@@ -11676,7 +11676,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "false"
       },
       {
         "field": "validFrom",
@@ -11848,7 +11848,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "createdBy",
@@ -12377,7 +12377,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "false"
       },
       {
         "field": "active",
@@ -12390,7 +12390,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       },
       {
         "field": "verificationStatus",
@@ -12494,7 +12494,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "1"
       }
     ],
     "labelField": "identifierValue",
@@ -12773,7 +12773,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "false"
       },
       {
         "field": "validFrom",
@@ -13747,7 +13747,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -13760,7 +13760,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -13893,7 +13893,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -13906,7 +13906,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -14039,7 +14039,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -14052,7 +14052,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -14185,7 +14185,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -14198,7 +14198,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       },
       {
         "field": "defaultScope",
@@ -14344,7 +14344,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -14357,7 +14357,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -14490,7 +14490,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -14503,7 +14503,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -14636,7 +14636,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -14649,7 +14649,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -14782,7 +14782,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -14795,7 +14795,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -14928,7 +14928,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -14941,7 +14941,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       },
       {
         "field": "province",
@@ -15100,7 +15100,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -15113,7 +15113,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -15246,7 +15246,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -15259,7 +15259,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -15392,7 +15392,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -15405,7 +15405,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -15538,7 +15538,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -15551,7 +15551,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -15684,7 +15684,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -15697,7 +15697,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -15830,7 +15830,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -15843,7 +15843,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       },
       {
         "field": "province",
@@ -15989,7 +15989,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -16002,7 +16002,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -16135,7 +16135,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -16148,7 +16148,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -16281,7 +16281,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -16294,7 +16294,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       },
       {
         "field": "city",
@@ -16440,7 +16440,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -16453,7 +16453,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -16586,7 +16586,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -16599,7 +16599,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -16732,7 +16732,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -16745,7 +16745,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -16878,7 +16878,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -16891,7 +16891,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -17024,7 +17024,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -17037,7 +17037,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -17170,7 +17170,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -17183,7 +17183,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -17316,7 +17316,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -17329,7 +17329,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -17462,7 +17462,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -17475,7 +17475,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -17608,7 +17608,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -17621,7 +17621,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -17754,7 +17754,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -17767,7 +17767,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -17900,7 +17900,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -17913,7 +17913,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -18046,7 +18046,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -18059,7 +18059,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       },
       {
         "field": "country",
@@ -18205,7 +18205,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -18218,7 +18218,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -18351,7 +18351,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -18364,7 +18364,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -18497,7 +18497,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -18510,7 +18510,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -18643,7 +18643,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -18656,7 +18656,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -18789,7 +18789,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -18802,7 +18802,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -18935,7 +18935,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -18948,7 +18948,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -19081,7 +19081,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -19094,7 +19094,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
@@ -19227,7 +19227,7 @@
         "widget": "number",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "0"
       },
       {
         "field": "active",
@@ -19240,7 +19240,7 @@
         "widget": "checkbox",
         "fkTarget": null,
         "enumValues": null,
-        "default": null
+        "default": "true"
       }
     ],
     "labelField": "titleFa",
